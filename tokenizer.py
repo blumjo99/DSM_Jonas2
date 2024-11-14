@@ -18,7 +18,7 @@ class SimpleTokenizer:
         tokens = []
         line_number = 0
 
-        reserved_list = ["EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
+        reserved_list = ["TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
         
         for line in self.lines:
             line_number += 1
@@ -49,6 +49,7 @@ class SimpleTokenizer:
        
             for part in parts:
 
+
                 if part == ':=':
                     tokens.append(Token(line_number, 'ASSIGN', part))
                 elif re.match(r'\d{4}-\d{2}-\d{2}', part) or re.match(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?', part):
@@ -76,7 +77,7 @@ class SimpleTokenizer:
                 elif part == '/':
                     tokens.append(Token(line_number, 'DIVIDE', part))
                 elif part == '&':
-                    tokens.append(Token(line_number, 'AMPERSA', part))
+                    tokens.append(Token(line_number, 'AMPERSAND', part))
                 elif part == '<':
                     tokens.append(Token(line_number, 'LT', part))    
                 elif part == '>':
@@ -93,8 +94,8 @@ class SimpleTokenizer:
                     tokens.append(Token(line_number, 'NUMTOKEN', part))
                 elif re.match(r'^".*"$', part):
                     tokens.append(Token(line_number, 'STRTOKEN', str(part).replace('"','')))
-                elif part in reserved_list:
-                     tokens.append(Token(line_number, part, part))
+                elif str(part).upper() in reserved_list:
+                     tokens.append(Token(line_number, str(part).upper(), part))
                 elif re.match(r'^[A-Z]\w*$', part):
                     tokens.append(Token(line_number, 'IDENTIFIER', part))
                 else:
@@ -107,7 +108,7 @@ class SimpleTokenizer:
 
 
 # Datei einlesen
-dateipfad = 'C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/input.txt'  # Geben Sie den Pfad zur Textdatei an
+dateipfad = 'C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/files/input.txt'  # Geben Sie den Pfad zur Textdatei an
 
 with open(dateipfad, 'r') as file:
     user_input = file.readlines()  # Liest alle Zeilen in eine Liste
@@ -122,7 +123,7 @@ for token in tokens:
     print(token)
     
 # Ausgabe in eine Textdatei speichern
-output_dateipfad = 'C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/token_output.txt'
+output_dateipfad = 'C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/files/token_output.txt'
 
 with open(output_dateipfad, 'w') as output_file:
     output_file.write("[\n")

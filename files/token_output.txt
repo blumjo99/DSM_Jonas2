@@ -1,5 +1,14 @@
 [
-    ["1", "ERROR", "trace"],
+    ["1", "TRACE", "trace"],
     ["1", "STRTOKEN", "Hallo Welt"],
-    ["1", "SEMICOLON", ";"]
+    ["1", "SEMICOLON", ";"],
+    ["2", "TRACE", "trace"],
+    ["2", "STRTOKEN", "Hallo "],
+    ["2", "AMPERSAND", "&"],
+    ["2", "STRTOKEN", "Welt"],
+    ["2", "SEMICOLON", ";"],
+    ["3", "ERROR", "x"],
+    ["3", "ASSIGN", ":="],
+    ["3", "NUMTOKEN", "4711"],
+    ["3", "SEMICOLON", ";"]
 ]

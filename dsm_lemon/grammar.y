@@ -116,6 +116,11 @@ int get_token_id (char *token) {
 	if (strcmp(token, "SEMICOLON") == 0) return SEMICOLON;
 	if (strcmp(token, "STRTOKEN") == 0) return STRTOKEN;
 	if (strcmp(token, "WRITE") == 0) return WRITE;
+
+	if (strcmp(token, "TRACE") == 0) return TRACE; 
+	if (strcmp(token, "AMPERSAND") == 0) return AMPERSAND;
+
+
 	
 	printf ("{\"error\" : true, \"message\": \"UNKNOWN TOKEN TYPE %s\"}\n", token);
 	exit(0);
@@ -236,6 +241,15 @@ statement(r) ::= WRITE ex(e) SEMICOLON .
 }
 
 
+statement(r) ::= TRACE(t) ex(e) SEMICOLON . //new 11.14.24
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "TRACE");
+	cJSON_AddStringToObject(res, "line", getLine(t));
+	cJSON_AddItemToObject(res, "arg", e);
+	r = res;
+}
+
 
 
 
@@ -306,8 +320,7 @@ ex(r) ::= ex(a) POWER ex(b) .
 {r = binary ("POWER", a, b); }
 
 
-
-
-
+ex(r) ::= ex(a) AMPERSAND ex(b) .
+{ r = binary ("STR_CONCAT", a, b); }
 
                                            

@@ -5,8 +5,10 @@
 #define POWER                            5
 #define WRITE                            6
 #define SEMICOLON                        7
-#define LPAR                             8
-#define RPAR                             9
-#define NUMTOKEN                        10
-#define STRTOKEN                        11
-#define IDENTIFIER                      12
+#define TRACE                            8
+#define LPAR                             9
+#define RPAR                            10
+#define NUMTOKEN                        11
+#define STRTOKEN                        12
+#define IDENTIFIER                      13
+#define AMPERSAND                       14
