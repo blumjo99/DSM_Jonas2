@@ -1,0 +1,5 @@
+[
+    ["1", "ERROR", "trace"],
+    ["1", "STRTOKEN", "Hallo Welt"],
+    ["1", "SEMICOLON", ";"]
+]

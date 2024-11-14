@@ -1,0 +1,11 @@
+greeting := "Hallo Welt" ;
+write greeting ;
+++
+//Hallo
+
+3.14
+2024-10-15T14:30:00
+x := [1,2,3,4];
+for i in x do
+    write i;
+enddo;
