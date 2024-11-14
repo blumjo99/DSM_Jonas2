@@ -1,0 +1,7 @@
+[
+    [1, "IDENTIFIER", "Var1"],
+[1, "ASSIGN", ":="],
+[1, "NUMTOKEN", "5"],
+[1, "NUMTOKEN", "5"],
+[1, "SEMICOLON", ";"]
+]

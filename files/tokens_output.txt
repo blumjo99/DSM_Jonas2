@@ -1,0 +1,7 @@
+[
+    [1, 'WRITE', 'WRITE'],
+    [1, 'NUMTOKEN', '1'],
+    [1, 'NUMTOKEN', '1'],
+    [1, 'NUMTOKEN', '5'],
+    [1, 'SEMICOLON', ';']
+]
