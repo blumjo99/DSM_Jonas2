@@ -107,7 +107,7 @@ class SimpleTokenizer:
 
 
 # Datei einlesen
-dateipfad = 'C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/input.txt'  # Geben Sie den Pfad zur Textdatei an
+dateipfad = 'C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/files/input.txt'  # Geben Sie den Pfad zur Textdatei an
 
 with open(dateipfad, 'r') as file:
     user_input = file.readlines()  # Liest alle Zeilen in eine Liste
