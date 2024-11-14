@@ -40,7 +40,7 @@ def compilerFunction(node):
 
 variables = {}
 
-with open('C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/parser_output.txt', 'r') as file:
+with open('C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/files/parser_output.txt', 'r') as file:
 
    
     node = json.load(file)  
