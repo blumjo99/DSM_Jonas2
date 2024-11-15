@@ -7,8 +7,11 @@
     ["2", "AMPERSAND", "&"],
     ["2", "STRTOKEN", "Welt"],
     ["2", "SEMICOLON", ";"],
-    ["3", "ERROR", "x"],
+    ["3", "IDENTIFIER", "X"],
     ["3", "ASSIGN", ":="],
-    ["3", "NUMTOKEN", "4711"],
-    ["3", "SEMICOLON", ";"]
+    ["3", "NUMTOKEN", "5"],
+    ["3", "SEMICOLON", ";"],
+    ["4", "TRACE", "trace"],
+    ["4", "IDENTIFIER", "X"],
+    ["4", "SEMICOLON", ";"]
 ]

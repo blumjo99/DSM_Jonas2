@@ -1,1 +1,39 @@
-{"error" : true, "message": "UNKNOWN TOKEN TYPE ERROR"}
+{
+	"type":	"STATEMENTBLOCK",
+	"statements":	[{
+			"type":	"TRACE",
+			"line":	"1",
+			"arg":	{
+				"type":	"STRTOKEN",
+				"value":	"Hallo Welt"
+			}
+		}, {
+			"type":	"TRACE",
+			"line":	"2",
+			"arg":	{
+				"type":	"STR_CONCAT",
+				"arg":	[{
+						"type":	"STRTOKEN",
+						"value":	"Hallo "
+					}, {
+						"type":	"STRTOKEN",
+						"value":	"Welt"
+					}]
+			}
+		}, {
+			"type":	"VARIABLE_ASSIGN",
+			"varname":	"X",
+			"arg":	{
+				"type":	"NUMBER",
+				"value":	"5"
+			}
+		}, {
+			"type":	"TRACE",
+			"line":	"4",
+			"arg":	{
+				"type":	"VARIABLE",
+				"name":	"X",
+				"line":	"4"
+			}
+		}]
+}

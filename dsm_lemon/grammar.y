@@ -119,7 +119,7 @@ int get_token_id (char *token) {
 
 	if (strcmp(token, "TRACE") == 0) return TRACE; 
 	if (strcmp(token, "AMPERSAND") == 0) return AMPERSAND;
-
+	if (strcmp(token, "ASSIGN") == 0) return ASSIGN;
 
 	
 	printf ("{\"error\" : true, \"message\": \"UNKNOWN TOKEN TYPE %s\"}\n", token);
@@ -229,7 +229,7 @@ statementblock(sb) ::= statementblock(a) statement(b) .
 
 
 ///////////////////////////
-// WRITE
+// STATEMENTS
 ///////////////////////////
 
 statement(r) ::= WRITE ex(e) SEMICOLON .
@@ -250,19 +250,14 @@ statement(r) ::= TRACE(t) ex(e) SEMICOLON . //new 11.14.24
 	r = res;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+statement(r) ::= IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "VARIABLE_ASSIGN");
+	cJSON_AddStringToObject(res, "varname", getValue(i));
+	cJSON_AddItemToObject(res, "arg", e);
+	r = res;
+}
 
 
 

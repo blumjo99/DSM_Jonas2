@@ -4,10 +4,29 @@ State 0:
           statementblock ::= * statementblock statement
 
                           code accept
-                statementblock shift        10     
+                statementblock shift        11     
                      {default} reduce       1      statementblock ::=
 
 State 1:
+          statement ::= IDENTIFIER ASSIGN * ex SEMICOLON
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        12     
+
+State 2:
           statement ::= TRACE * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -20,13 +39,13 @@ State 1:
           ex ::= * ex POWER ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        11     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        13     
 
-State 2:
+State 3:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
@@ -39,13 +58,13 @@ State 2:
           ex ::= * ex AMPERSAND ex
           ex ::= ex AMPERSAND * ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        14     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        16     
 
-State 3:
+State 4:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
@@ -58,13 +77,13 @@ State 3:
           ex ::= ex POWER * ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        17     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        19     
 
-State 4:
+State 5:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
@@ -77,13 +96,13 @@ State 4:
           ex ::= * ex POWER ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        18     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        20     
 
-State 5:
+State 6:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
@@ -96,13 +115,13 @@ State 5:
           ex ::= * ex POWER ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        19     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        21     
 
-State 6:
+State 7:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
@@ -115,13 +134,13 @@ State 6:
           ex ::= * ex POWER ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        16     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        18     
 
-State 7:
+State 8:
           ex ::= * LPAR ex RPAR
           ex ::= LPAR * ex RPAR
           ex ::= * NUMTOKEN
@@ -134,13 +153,13 @@ State 7:
           ex ::= * ex POWER ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        12     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        14     
 
-State 8:
+State 9:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
@@ -153,13 +172,13 @@ State 8:
           ex ::= * ex POWER ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        15     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        17     
 
-State 9:
+State 10:
           statement ::= WRITE * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -172,24 +191,43 @@ State 9:
           ex ::= * ex POWER ex
           ex ::= * ex AMPERSAND ex
 
-                          LPAR shift        7      
-                      NUMTOKEN shift-reduce 6      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 7      ex ::= STRTOKEN
-                    IDENTIFIER shift-reduce 8      ex ::= IDENTIFIER
-                            ex shift        13     
+                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
+                          LPAR shift        8      
+                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                            ex shift        15     
 
-State 10:
+State 11:
       (0) code ::= statementblock *
           statementblock ::= statementblock * statement
           statement ::= * WRITE ex SEMICOLON
           statement ::= * TRACE ex SEMICOLON
+          statement ::= * IDENTIFIER ASSIGN ex SEMICOLON
 
                              $ reduce       0      code ::= statementblock
-                         WRITE shift        9      
-                         TRACE shift        1      
+                         WRITE shift        10     
+                         TRACE shift        2      
+                    IDENTIFIER shift        22     
                      statement shift-reduce 2      statementblock ::= statementblock statement
 
-State 11:
+State 12:
+          statement ::= IDENTIFIER ASSIGN ex * SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+
+                          PLUS shift        9      
+                         MINUS shift        7      
+                         TIMES shift        6      
+                        DIVIDE shift        5      
+                         POWER shift        4      
+                     SEMICOLON shift-reduce 5      statement ::= IDENTIFIER ASSIGN ex SEMICOLON
+                     AMPERSAND shift        3      
+
+State 13:
           statement ::= TRACE ex * SEMICOLON
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -198,15 +236,15 @@ State 11:
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
 
-                          PLUS shift        8      
-                         MINUS shift        6      
-                         TIMES shift        5      
-                        DIVIDE shift        4      
-                         POWER shift        3      
+                          PLUS shift        9      
+                         MINUS shift        7      
+                         TIMES shift        6      
+                        DIVIDE shift        5      
+                         POWER shift        4      
                      SEMICOLON shift-reduce 4      statement ::= TRACE ex SEMICOLON
-                     AMPERSAND shift        2      
+                     AMPERSAND shift        3      
 
-State 12:
+State 14:
           ex ::= LPAR ex * RPAR
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -215,15 +253,15 @@ State 12:
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
 
-                          PLUS shift        8      
-                         MINUS shift        6      
-                         TIMES shift        5      
-                        DIVIDE shift        4      
-                         POWER shift        3      
-                          RPAR shift-reduce 5      ex ::= LPAR ex RPAR
-                     AMPERSAND shift        2      
+                          PLUS shift        9      
+                         MINUS shift        7      
+                         TIMES shift        6      
+                        DIVIDE shift        5      
+                         POWER shift        4      
+                          RPAR shift-reduce 6      ex ::= LPAR ex RPAR
+                     AMPERSAND shift        3      
 
-State 13:
+State 15:
           statement ::= WRITE ex * SEMICOLON
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -232,110 +270,115 @@ State 13:
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
 
-                          PLUS shift        8      
-                         MINUS shift        6      
-                         TIMES shift        5      
-                        DIVIDE shift        4      
-                         POWER shift        3      
+                          PLUS shift        9      
+                         MINUS shift        7      
+                         TIMES shift        6      
+                        DIVIDE shift        5      
+                         POWER shift        4      
                      SEMICOLON shift-reduce 3      statement ::= WRITE ex SEMICOLON
-                     AMPERSAND shift        2      
-
-State 14:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-     (14) ex ::= ex AMPERSAND ex *
-
-                          PLUS shift        8      
-                          PLUS reduce       14      ** Parsing conflict **
-                         MINUS shift        6      
-                         MINUS reduce       14      ** Parsing conflict **
-                         TIMES shift        5      
-                         TIMES reduce       14      ** Parsing conflict **
-                        DIVIDE shift        4      
-                        DIVIDE reduce       14      ** Parsing conflict **
-                         POWER shift        3      
-                         POWER reduce       14      ** Parsing conflict **
-                     AMPERSAND shift        2      
-                     AMPERSAND reduce       14      ** Parsing conflict **
-                     {default} reduce       14     ex ::= ex AMPERSAND ex
-
-State 15:
-          ex ::= ex * PLUS ex
-      (9) ex ::= ex PLUS ex *
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-
-                         TIMES shift        5      
-                        DIVIDE shift        4      
-                         POWER shift        3      
-                     AMPERSAND shift        2      
-                     AMPERSAND reduce       9       ** Parsing conflict **
-                     {default} reduce       9      ex ::= ex PLUS ex
+                     AMPERSAND shift        3      
 
 State 16:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
-     (10) ex ::= ex MINUS ex *
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
+     (15) ex ::= ex AMPERSAND ex *
 
-                         TIMES shift        5      
-                        DIVIDE shift        4      
-                         POWER shift        3      
-                     AMPERSAND shift        2      
-                     AMPERSAND reduce       10      ** Parsing conflict **
-                     {default} reduce       10     ex ::= ex MINUS ex
+                          PLUS shift        9      
+                          PLUS reduce       15      ** Parsing conflict **
+                         MINUS shift        7      
+                         MINUS reduce       15      ** Parsing conflict **
+                         TIMES shift        6      
+                         TIMES reduce       15      ** Parsing conflict **
+                        DIVIDE shift        5      
+                        DIVIDE reduce       15      ** Parsing conflict **
+                         POWER shift        4      
+                         POWER reduce       15      ** Parsing conflict **
+                     AMPERSAND shift        3      
+                     AMPERSAND reduce       15      ** Parsing conflict **
+                     {default} reduce       15     ex ::= ex AMPERSAND ex
 
 State 17:
           ex ::= ex * PLUS ex
+     (10) ex ::= ex PLUS ex *
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
-     (13) ex ::= ex POWER ex *
           ex ::= ex * AMPERSAND ex
 
-                         POWER shift        3      
-                     AMPERSAND shift        2      
-                     AMPERSAND reduce       13      ** Parsing conflict **
-                     {default} reduce       13     ex ::= ex POWER ex
+                         TIMES shift        6      
+                        DIVIDE shift        5      
+                         POWER shift        4      
+                     AMPERSAND shift        3      
+                     AMPERSAND reduce       10      ** Parsing conflict **
+                     {default} reduce       10     ex ::= ex PLUS ex
 
 State 18:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
+     (11) ex ::= ex MINUS ex *
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
-     (12) ex ::= ex DIVIDE ex *
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
 
-                         POWER shift        3      
-                     AMPERSAND shift        2      
-                     AMPERSAND reduce       12      ** Parsing conflict **
-                     {default} reduce       12     ex ::= ex DIVIDE ex
+                         TIMES shift        6      
+                        DIVIDE shift        5      
+                         POWER shift        4      
+                     AMPERSAND shift        3      
+                     AMPERSAND reduce       11      ** Parsing conflict **
+                     {default} reduce       11     ex ::= ex MINUS ex
 
 State 19:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
-     (11) ex ::= ex TIMES ex *
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+     (14) ex ::= ex POWER ex *
+          ex ::= ex * AMPERSAND ex
+
+                         POWER shift        4      
+                     AMPERSAND shift        3      
+                     AMPERSAND reduce       14      ** Parsing conflict **
+                     {default} reduce       14     ex ::= ex POWER ex
+
+State 20:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+     (13) ex ::= ex DIVIDE ex *
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+
+                         POWER shift        4      
+                     AMPERSAND shift        3      
+                     AMPERSAND reduce       13      ** Parsing conflict **
+                     {default} reduce       13     ex ::= ex DIVIDE ex
+
+State 21:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+     (12) ex ::= ex TIMES ex *
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
 
-                         POWER shift        3      
-                     AMPERSAND shift        2      
-                     AMPERSAND reduce       11      ** Parsing conflict **
-                     {default} reduce       11     ex ::= ex TIMES ex
+                         POWER shift        4      
+                     AMPERSAND shift        3      
+                     AMPERSAND reduce       12      ** Parsing conflict **
+                     {default} reduce       12     ex ::= ex TIMES ex
+
+State 22:
+          statement ::= IDENTIFIER * ASSIGN ex SEMICOLON
+
+                        ASSIGN shift        1      
 
 ----------------------------------------------------
 Symbols:
@@ -348,14 +391,15 @@ Symbols:
     6: WRITE
     7: SEMICOLON
     8: TRACE
-    9: LPAR
-   10: RPAR
-   11: NUMTOKEN
-   12: STRTOKEN
-   13: IDENTIFIER
-   14: AMPERSAND
-   15: error:
-   16: code: <lambda> WRITE TRACE
-   17: statementblock: <lambda> WRITE TRACE
-   18: statement: WRITE TRACE
-   19: ex: LPAR NUMTOKEN STRTOKEN IDENTIFIER
+    9: IDENTIFIER
+   10: ASSIGN
+   11: LPAR
+   12: RPAR
+   13: NUMTOKEN
+   14: STRTOKEN
+   15: AMPERSAND
+   16: error:
+   17: code: <lambda> WRITE TRACE IDENTIFIER
+   18: statementblock: <lambda> WRITE TRACE IDENTIFIER
+   19: statement: WRITE TRACE IDENTIFIER
+   20: ex: IDENTIFIER LPAR NUMTOKEN STRTOKEN

@@ -24,18 +24,19 @@ def compilerFunction(node):
 
 
         case "VARIABLE":
-            #print("variable")
-            name = node["value"]
-            return variables(node["value"])
+            print("variable")
+            return(variables[node["name"]])
 
         case "NUMTOKEN":
             #print("numtoken")
             return float(node["value"])
         
-        case "ASSIGN":
-            #print("assign")
-            varname = node["varname"]    
+        case "VARIABLE_ASSIGN":
+            print("assign")
+            varname = node["varname"]   
+            print("Varname: " + varname) 
             value = compilerFunction(node["arg"]) 
+            print("value: " +value)
             variables[varname] = value   
 
         case "PLUS":
@@ -50,6 +51,11 @@ def compilerFunction(node):
             arg2 = compilerFunction(node["arg"][1])
             return arg1 + arg2
         
+        case "NUMBER":
+            print("NUMBER")
+            #print(node)
+            #print(node["value"])
+            return node["value"]        
 
 variables = {}
 
