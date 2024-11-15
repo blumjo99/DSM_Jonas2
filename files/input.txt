@@ -2,3 +2,6 @@ trace "Hallo Welt";
 trace "Hallo " & "Welt" ;
 X := 5;
 trace X;
+
+trace 1 & true ;
+trace 1 + true;

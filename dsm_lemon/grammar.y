@@ -120,6 +120,10 @@ int get_token_id (char *token) {
 	if (strcmp(token, "TRACE") == 0) return TRACE; 
 	if (strcmp(token, "AMPERSAND") == 0) return AMPERSAND;
 	if (strcmp(token, "ASSIGN") == 0) return ASSIGN;
+	if (strcmp(token, "TRUE") == 0) return TRUE;
+	if (strcmp(token, "FALSE") == 0) return FALSE;
+
+
 
 	
 	printf ("{\"error\" : true, \"message\": \"UNKNOWN TOKEN TYPE %s\"}\n", token);
@@ -263,6 +267,7 @@ statement(r) ::= IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 
 
 
+
 ex(r) ::= LPAR ex(a) RPAR .    
 { 
 	r = a; 
@@ -296,7 +301,19 @@ ex(r) ::= IDENTIFIER(a) .
 	r = res; 
 }
 
+ex(r) ::= TRUE .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "TRUE");
+	r = res;
+}
 
+ex(r) ::= FALSE .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "FALSE");
+	r = res;
+}
 
 
 ex(r) ::= ex(a) PLUS ex(b) .                                

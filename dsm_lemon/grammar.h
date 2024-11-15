@@ -12,4 +12,6 @@
 #define RPAR                            12
 #define NUMTOKEN                        13
 #define STRTOKEN                        14
-#define AMPERSAND                       15
+#define TRUE                            15
+#define FALSE                           16
+#define AMPERSAND                       17

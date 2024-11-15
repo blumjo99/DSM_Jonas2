@@ -13,5 +13,14 @@
     ["3", "SEMICOLON", ";"],
     ["4", "TRACE", "trace"],
     ["4", "IDENTIFIER", "X"],
-    ["4", "SEMICOLON", ";"]
+    ["4", "SEMICOLON", ";"],
+    ["6", "TRACE", "trace"],
+    ["6", "NUMTOKEN", "1"],
+    ["6", "AMPERSAND", "&"],
+    ["6", "TRUE", "true"],
+    ["6", "SEMICOLON", ";"],
+    ["7", "TRACE", "trace"],
+    ["7", "NUMTOKEN", "1"],
+    ["7", "TRUE", "true"],
+    ["7", "SEMICOLON", ";"]
 ]

@@ -13,6 +13,8 @@ State 1:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -24,6 +26,8 @@ State 1:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        12     
 
 State 2:
@@ -32,6 +36,8 @@ State 2:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -43,6 +49,8 @@ State 2:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        13     
 
 State 3:
@@ -50,6 +58,8 @@ State 3:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -62,6 +72,8 @@ State 3:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        16     
 
 State 4:
@@ -69,6 +81,8 @@ State 4:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -81,6 +95,8 @@ State 4:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        19     
 
 State 5:
@@ -88,6 +104,8 @@ State 5:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -100,6 +118,8 @@ State 5:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        20     
 
 State 6:
@@ -107,6 +127,8 @@ State 6:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -119,6 +141,8 @@ State 6:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        21     
 
 State 7:
@@ -126,6 +150,8 @@ State 7:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= ex MINUS * ex
@@ -138,6 +164,8 @@ State 7:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        18     
 
 State 8:
@@ -146,6 +174,8 @@ State 8:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -157,6 +187,8 @@ State 8:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        14     
 
 State 9:
@@ -164,6 +196,8 @@ State 9:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= ex PLUS * ex
           ex ::= * ex MINUS ex
@@ -176,6 +210,8 @@ State 9:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        17     
 
 State 10:
@@ -184,6 +220,8 @@ State 10:
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
           ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
           ex ::= * ex PLUS ex
           ex ::= * ex MINUS ex
           ex ::= * ex TIMES ex
@@ -195,6 +233,8 @@ State 10:
                           LPAR shift        8      
                       NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
                       STRTOKEN shift-reduce 8      ex ::= STRTOKEN
+                          TRUE shift-reduce 10     ex ::= TRUE
+                         FALSE shift-reduce 11     ex ::= FALSE
                             ex shift        15     
 
 State 11:
@@ -285,25 +325,25 @@ State 16:
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
-     (15) ex ::= ex AMPERSAND ex *
+     (17) ex ::= ex AMPERSAND ex *
 
                           PLUS shift        9      
-                          PLUS reduce       15      ** Parsing conflict **
+                          PLUS reduce       17      ** Parsing conflict **
                          MINUS shift        7      
-                         MINUS reduce       15      ** Parsing conflict **
+                         MINUS reduce       17      ** Parsing conflict **
                          TIMES shift        6      
-                         TIMES reduce       15      ** Parsing conflict **
+                         TIMES reduce       17      ** Parsing conflict **
                         DIVIDE shift        5      
-                        DIVIDE reduce       15      ** Parsing conflict **
+                        DIVIDE reduce       17      ** Parsing conflict **
                          POWER shift        4      
-                         POWER reduce       15      ** Parsing conflict **
+                         POWER reduce       17      ** Parsing conflict **
                      AMPERSAND shift        3      
-                     AMPERSAND reduce       15      ** Parsing conflict **
-                     {default} reduce       15     ex ::= ex AMPERSAND ex
+                     AMPERSAND reduce       17      ** Parsing conflict **
+                     {default} reduce       17     ex ::= ex AMPERSAND ex
 
 State 17:
           ex ::= ex * PLUS ex
-     (10) ex ::= ex PLUS ex *
+     (12) ex ::= ex PLUS ex *
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
@@ -314,13 +354,13 @@ State 17:
                         DIVIDE shift        5      
                          POWER shift        4      
                      AMPERSAND shift        3      
-                     AMPERSAND reduce       10      ** Parsing conflict **
-                     {default} reduce       10     ex ::= ex PLUS ex
+                     AMPERSAND reduce       12      ** Parsing conflict **
+                     {default} reduce       12     ex ::= ex PLUS ex
 
 State 18:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
-     (11) ex ::= ex MINUS ex *
+     (13) ex ::= ex MINUS ex *
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
@@ -330,8 +370,8 @@ State 18:
                         DIVIDE shift        5      
                          POWER shift        4      
                      AMPERSAND shift        3      
-                     AMPERSAND reduce       11      ** Parsing conflict **
-                     {default} reduce       11     ex ::= ex MINUS ex
+                     AMPERSAND reduce       13      ** Parsing conflict **
+                     {default} reduce       13     ex ::= ex MINUS ex
 
 State 19:
           ex ::= ex * PLUS ex
@@ -339,41 +379,41 @@ State 19:
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
-     (14) ex ::= ex POWER ex *
+     (16) ex ::= ex POWER ex *
           ex ::= ex * AMPERSAND ex
 
                          POWER shift        4      
                      AMPERSAND shift        3      
-                     AMPERSAND reduce       14      ** Parsing conflict **
-                     {default} reduce       14     ex ::= ex POWER ex
+                     AMPERSAND reduce       16      ** Parsing conflict **
+                     {default} reduce       16     ex ::= ex POWER ex
 
 State 20:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
-     (13) ex ::= ex DIVIDE ex *
+     (15) ex ::= ex DIVIDE ex *
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
 
                          POWER shift        4      
                      AMPERSAND shift        3      
-                     AMPERSAND reduce       13      ** Parsing conflict **
-                     {default} reduce       13     ex ::= ex DIVIDE ex
+                     AMPERSAND reduce       15      ** Parsing conflict **
+                     {default} reduce       15     ex ::= ex DIVIDE ex
 
 State 21:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
-     (12) ex ::= ex TIMES ex *
+     (14) ex ::= ex TIMES ex *
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
 
                          POWER shift        4      
                      AMPERSAND shift        3      
-                     AMPERSAND reduce       12      ** Parsing conflict **
-                     {default} reduce       12     ex ::= ex TIMES ex
+                     AMPERSAND reduce       14      ** Parsing conflict **
+                     {default} reduce       14     ex ::= ex TIMES ex
 
 State 22:
           statement ::= IDENTIFIER * ASSIGN ex SEMICOLON
@@ -397,9 +437,11 @@ Symbols:
    12: RPAR
    13: NUMTOKEN
    14: STRTOKEN
-   15: AMPERSAND
-   16: error:
-   17: code: <lambda> WRITE TRACE IDENTIFIER
-   18: statementblock: <lambda> WRITE TRACE IDENTIFIER
-   19: statement: WRITE TRACE IDENTIFIER
-   20: ex: IDENTIFIER LPAR NUMTOKEN STRTOKEN
+   15: TRUE
+   16: FALSE
+   17: AMPERSAND
+   18: error:
+   19: code: <lambda> WRITE TRACE IDENTIFIER
+   20: statementblock: <lambda> WRITE TRACE IDENTIFIER
+   21: statement: WRITE TRACE IDENTIFIER
+   22: ex: IDENTIFIER LPAR NUMTOKEN STRTOKEN TRUE FALSE

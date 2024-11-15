@@ -49,13 +49,16 @@ def compilerFunction(node):
             #print("concat")
             arg1 = compilerFunction(node["arg"][0])
             arg2 = compilerFunction(node["arg"][1])
-            return arg1 + arg2
+            return str(arg1) + str(arg2)
         
         case "NUMBER":
             print("NUMBER")
             #print(node)
             #print(node["value"])
-            return node["value"]        
+            return node["value"] 
+
+        case "TRUE":
+            return node["type"]        
 
 variables = {}
 
