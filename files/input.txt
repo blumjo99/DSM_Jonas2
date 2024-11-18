@@ -3,5 +3,8 @@ trace "Hallo " & "Welt" ;
 X := 5;
 trace X;
 
-trace 1 & true ;
+trace 1 & "1" ;
+trace "1" & true;
+
+trace 1 + true;
 trace 1 + true;

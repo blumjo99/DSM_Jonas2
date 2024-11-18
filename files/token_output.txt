@@ -17,10 +17,19 @@
     ["6", "TRACE", "trace"],
     ["6", "NUMTOKEN", "1"],
     ["6", "AMPERSAND", "&"],
-    ["6", "TRUE", "true"],
+    ["6", "STRTOKEN", "1"],
     ["6", "SEMICOLON", ";"],
     ["7", "TRACE", "trace"],
-    ["7", "NUMTOKEN", "1"],
+    ["7", "STRTOKEN", "1"],
+    ["7", "AMPERSAND", "&"],
     ["7", "TRUE", "true"],
-    ["7", "SEMICOLON", ";"]
+    ["7", "SEMICOLON", ";"],
+    ["9", "TRACE", "trace"],
+    ["9", "NUMTOKEN", "1"],
+    ["9", "TRUE", "true"],
+    ["9", "SEMICOLON", ";"],
+    ["10", "TRACE", "trace"],
+    ["10", "NUMTOKEN", "1"],
+    ["10", "TRUE", "true"],
+    ["10", "SEMICOLON", ";"]
 ]

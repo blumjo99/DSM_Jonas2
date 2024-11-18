@@ -2,7 +2,7 @@ import json
 
 def compilerFunction(node):
 
-    print("Nodevalue: " + str(node))
+   # print("Nodevalue: " + str(node))
 
     match node["type"]:
         case "STATEMENTBLOCK":
@@ -24,7 +24,7 @@ def compilerFunction(node):
 
 
         case "VARIABLE":
-            print("variable")
+          #  print("variable")
             return(variables[node["name"]])
 
         case "NUMTOKEN":
@@ -32,11 +32,11 @@ def compilerFunction(node):
             return float(node["value"])
         
         case "VARIABLE_ASSIGN":
-            print("assign")
+          #  print("assign")
             varname = node["varname"]   
-            print("Varname: " + varname) 
+          #  print("Varname: " + varname) 
             value = compilerFunction(node["arg"]) 
-            print("value: " +value)
+         #   print("value: " +value)
             variables[varname] = value   
 
         case "PLUS":
@@ -52,7 +52,7 @@ def compilerFunction(node):
             return str(arg1) + str(arg2)
         
         case "NUMBER":
-            print("NUMBER")
+            #print("NUMBER")
             #print(node)
             #print(node["value"])
             return node["value"] 
