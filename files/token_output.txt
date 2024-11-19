@@ -9,7 +9,7 @@
     ["2", "SEMICOLON", ";"],
     ["3", "IDENTIFIER", "X"],
     ["3", "ASSIGN", ":="],
-    ["3", "NUMTOKEN", "5"],
+    ["3", "NUMTOKEN", "4711"],
     ["3", "SEMICOLON", ";"],
     ["4", "TRACE", "trace"],
     ["4", "IDENTIFIER", "X"],
@@ -26,6 +26,12 @@
     ["7", "SEMICOLON", ";"],
     ["8", "TRACE", "trace"],
     ["8", "NUMTOKEN", "1"],
+    ["8", "PLUS", "+"],
     ["8", "TRUE", "true"],
-    ["8", "SEMICOLON", ";"]
+    ["8", "SEMICOLON", ";"],
+    ["9", "TRACE", "trace"],
+    ["9", "NUMTOKEN", "1"],
+    ["9", "PLUS", "+"],
+    ["9", "STRTOKEN", "1"],
+    ["9", "SEMICOLON", ";"]
 ]

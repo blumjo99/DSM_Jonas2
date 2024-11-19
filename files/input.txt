@@ -1,8 +1,9 @@
 trace "Hallo Welt";
 trace "Hallo " & "Welt" ;
-X := 5;
+X := 4711;
 trace X;
 
 trace 1 & "1" ;
 trace "1" & true;
 trace 1 + true;
+trace 1 + "1";

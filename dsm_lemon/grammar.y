@@ -245,7 +245,7 @@ statement(r) ::= WRITE ex(e) SEMICOLON .
 }
 
 
-statement(r) ::= TRACE(t) ex(e) SEMICOLON . //new 11.14.24
+statement(r) ::= TRACE(t) ex(e) SEMICOLON . //neu 14.11.24
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "TRACE");

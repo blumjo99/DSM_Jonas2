@@ -40,10 +40,17 @@ def compilerFunction(node):
             variables[varname] = value   
 
         case "PLUS":
-            #print("plus")
+           # print("plus")
             arg1 = compilerFunction(node["arg"][0])
             arg2 = compilerFunction(node["arg"][1])
-            return arg1 + arg2
+
+           
+
+            if isinstance(arg1,int) and isinstance(arg2,int) : #and isinstance(arg2,int):
+                result = int(arg1) + int(arg2)
+                return str(result)
+            else:
+                return "null"
         
         case "STR_CONCAT":
             #print("concat")
