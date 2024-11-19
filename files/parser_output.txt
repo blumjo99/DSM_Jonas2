@@ -1,1 +1,1 @@
-{"error" : true, "message": "Syntax Error: Compiler reports unexpected token \"true\" of type \"TRUE\" in line 9"}
+{"error" : true, "message": "Syntax Error: Compiler reports unexpected token \"true\" of type \"TRUE\" in line 8"}

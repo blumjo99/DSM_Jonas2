@@ -24,12 +24,8 @@
     ["7", "AMPERSAND", "&"],
     ["7", "TRUE", "true"],
     ["7", "SEMICOLON", ";"],
-    ["9", "TRACE", "trace"],
-    ["9", "NUMTOKEN", "1"],
-    ["9", "TRUE", "true"],
-    ["9", "SEMICOLON", ";"],
-    ["10", "TRACE", "trace"],
-    ["10", "NUMTOKEN", "1"],
-    ["10", "TRUE", "true"],
-    ["10", "SEMICOLON", ";"]
+    ["8", "TRACE", "trace"],
+    ["8", "NUMTOKEN", "1"],
+    ["8", "TRUE", "true"],
+    ["8", "SEMICOLON", ";"]
 ]
