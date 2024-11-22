@@ -291,6 +291,12 @@ ex(r) ::= STRTOKEN (a).
 	r = res; 
 }
 
+ex(r) ::= NULL .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "NULL");
+	r = res;
+}
 
 ex(r) ::= IDENTIFIER(a) .      
 { 

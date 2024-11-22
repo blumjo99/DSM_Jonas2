@@ -1,9 +1,1 @@
-trace "Hallo Welt";
-trace "Hallo " & "Welt" ;
-X := 4711;
-trace X;
-
-trace 1 & "1" ;
-trace "1" & true;
-trace 1 + true;
-trace 1 + "1";
+testlist := [1,2,"Hallo",4,5,null,false,true];
