@@ -122,6 +122,27 @@ int get_token_id (char *token) {
 	if (strcmp(token, "ASSIGN") == 0) return ASSIGN;
 	if (strcmp(token, "TRUE") == 0) return TRUE;
 	if (strcmp(token, "FALSE") == 0) return FALSE;
+	if (strcmp(token, "NULL") == 0) return NULL1;
+
+	if (strcmp(token, "RSPAR") == 0) return RSPAR;
+	if (strcmp(token, "LSPAR") == 0) return LSPAR;
+	if (strcmp(token, "COMMA") == 0) return COMMA;
+
+	if (strcmp(token, "IS") == 0) return IS;
+	if (strcmp(token, "NUMBER") == 0) return NUMBER;
+	if (strcmp(token, "STRING") == 0) return STRING;
+
+	if (strcmp(token, "LIST") == 0) return LIST;
+	if (strcmp(token, "COUNT") == 0) return COUNT;
+	if (strcmp(token, "FIRST") == 0) return FIRST;
+
+	if (strcmp(token, "NOT") == 0) return NOT;
+
+
+
+
+
+
 
 
 
@@ -191,7 +212,8 @@ cJSON* ternary (char *fname, cJSON *a, cJSON *b, cJSON *c)
 %left 	   PLUS MINUS .
 %left 	   TIMES DIVIDE .
 %right     POWER .
-
+%right 	   NOT .
+%left 	   IS .
 
 
 
@@ -291,12 +313,8 @@ ex(r) ::= STRTOKEN (a).
 	r = res; 
 }
 
-ex(r) ::= NULL .
-{
-	cJSON *res = cJSON_CreateObject();
-	cJSON_AddStringToObject(res, "type", "NULL");
-	r = res;
-}
+
+
 
 ex(r) ::= IDENTIFIER(a) .      
 { 
@@ -322,6 +340,15 @@ ex(r) ::= FALSE .
 }
 
 
+
+ex(r) ::= NULL1 .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "NULL");
+	r = res;
+}
+
+
 ex(r) ::= ex(a) PLUS ex(b) .                                
 {r = binary ("PLUS", a, b); }
 
@@ -341,4 +368,61 @@ ex(r) ::= ex(a) POWER ex(b) .
 ex(r) ::= ex(a) AMPERSAND ex(b) .
 { r = binary ("STR_CONCAT", a, b); }
 
-                                           
+
+ex(r) ::= ex(a) IS NUMBER .
+{ r = unary ("IS_NUMBER", a); }
+
+ex(r) ::= ex(a) IS STRING .
+{ r = unary ("IS_STRING", a); }
+
+ex(r) ::= ex(a) IS LIST .
+{ r = unary ("IS_LIST", a); }
+
+ex(r) ::= ex(a) IS NOT LIST .
+{ r = unary ("IS_NOT_LIST", a); }
+
+
+
+
+
+
+
+
+ex(r) ::= jsonarray (a) .
+{ r = a; }
+
+jsonarray(r) ::= LSPAR RSPAR .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "EMPTY_LIST");
+	r = res;
+}
+
+jsonarray(r) ::= LSPAR exlist(a) RSPAR .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "LIST");
+	cJSON_AddItemToObject(res, "items", a);
+	cJSON_AddNumberToObject(res,"code", 1016);
+	r = res;
+}
+
+exlist(r) ::= ex(a) .
+{
+	cJSON *arg = cJSON_CreateArray();
+	cJSON_AddItemToArray(arg, a);
+	r = arg;
+}
+
+exlist(r) ::= exlist(a) COMMA ex(b) .
+{
+	cJSON_AddItemToArray(a,b);
+	r = a;
+}
+
+ex(r) ::= COUNT ex(a) .
+{ r = unary ("COUNT", a); }
+
+ex(r) ::= FIRST ex(a) .
+{ r = unary ("FIRST", a); }
+
