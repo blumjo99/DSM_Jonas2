@@ -1,18 +1,21 @@
 import json
 from symbol_table import SymbolTable
 
+from datetime import datetime
+
+
 from operators import (
     add,
     minus,
     str_concat,
-    is_number,
-    is_string,
+    #is_number,
+    #is_string,
     count,
     first
 )
 
 from datatypes import(
-    DataType,
+#    DataType,
     TimeType,
     ListType,
     NumType,
@@ -25,13 +28,11 @@ from inspect import signature
 class Interpreter:
 
     __symbol_table: SymbolTable #attribut der Klasse, das eine INsatz der Smyboltabele enthält. Speichert variablen und die Werte darin
-    __start_time: TimeType #startzeitpunkt des Interpreters
-    __it: DataType | None # 
+
 
     def __init__(self) -> None:
         self.__symbol_table = SymbolTable()
-        self.__start_time = TimeType.now()
-        self.__it = None
+
 
     def interpreterFunction(self, node):
 
@@ -88,11 +89,11 @@ class Interpreter:
             
             case "STRTOKEN":
                # print("case strtoken")
-                return StrType(node["value"])
+                return StrType(node["value"], datetime.now())
             
             case "NUMBER":
                # print("case NUMBER")
-                return NumType(node["value"])
+                return NumType(node["value"], datetime.now())
             
             case "TIMETOKEN":
                 return TimeType(node["value"])
@@ -153,7 +154,7 @@ class Interpreter:
                     list_items.append(self.interpreterFunction(item))
                  #   print(self.interpreterFunction(item))
                 
-                return ListType(list_items)   
+                return ListType(list_items, datetime.now())   
 
 
 
