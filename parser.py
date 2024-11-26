@@ -2,16 +2,12 @@ import subprocess
 import json
 
 
-# Textdatei öfnnen und auslesen
 with open('C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/files/token_output.txt', 'r') as file:
-
-   
     tokenized_input = json.load(file)  
 
 # erstelle Json
 json_input = json.dumps(tokenized_input)
 
-#stdin = Standardeingabekanal
 try:
     process = subprocess.Popen( #popen = starten vom externen parser
         ['C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/dsm_lemon/parse'],  # externer parser
@@ -23,7 +19,6 @@ try:
 
     # JSON werte an parser senden
     output = process.communicate(input=json_input)
-    #print(output)
 
     stdout = output[0]  # Ausgabe der Executable
     stderr = output[1]  # Fehler der Executable
@@ -41,4 +36,6 @@ try:
         output_file.write(stdout)
 
 except Exception as e:
-    print(f"Es gab einen Fehler: {e}")
+    print("Error: {e}")
+
+

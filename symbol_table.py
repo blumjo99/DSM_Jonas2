@@ -1,6 +1,4 @@
-from datetime import datetime
-from datatypes import DataType , ListType , NullType, NumType
-#, TimeType, TimedDataType
+from datatypes import DataType , ListType , NullType
 
 
 class SymbolTable:
@@ -13,6 +11,7 @@ class SymbolTable:
         if symbol is None:
             return NullType() 
         return symbol
+
 
     def set_variable_value(self, variable_name: str, value: DataType | ListType) -> None:
         self.__symbols[variable_name] = value

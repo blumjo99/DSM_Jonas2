@@ -18,13 +18,15 @@ class SimpleTokenizer:
         tokens = []
         line_number = 0
 
-        reserved_list = ["COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
+        reserved_list = ["TIME", "COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
         
         for line in self.lines:
             line_number += 1
 
             # parts = line.split()
-            parts = re.findall(r"""\".*?\"  # Für Wörte rin Anführungszeichen
+            parts = re.findall(r"""
+                     \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2} # ISO 8601 time format
+                     |".*?\"  # Für Wörte rin Anführungszeichen
                      |\w+      # --> wörter ohne Anführungszeichen
                      |:=        
                      |;         
@@ -51,10 +53,10 @@ class SimpleTokenizer:
        
             for part in parts:
 
-                print("moin")
+                #print(part)
                 if part == ':=':
                     tokens.append(Token(line_number, 'ASSIGN', part))
-                elif re.match(r'\d{4}-\d{2}-\d{2}', part) or re.match(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?', part):
+                elif re.match(r'\d{4}-\d{2}-\d{2}', part) or re.match(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?', part)or re.match(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?$', part):
                     tokens.append(Token(line_number, 'TIMETOKEN', part))
                 elif part == ';':
                     tokens.append(Token(line_number, 'SEMICOLON', part))
@@ -104,8 +106,6 @@ class SimpleTokenizer:
                     tokens.append(Token(line_number, 'ERROR', part))
                     
         return tokens
-
-
 
 
 

@@ -1,21 +1,12 @@
-trace "Hallo Welt";
-trace "Hallo " & "Welt" ;
-X := 4711;
-trace X;
-
 trace 1 + true;
-trace 1 + 5;
+trace 1 + 1;
 trace 1 & "1" ;
 trace "1" & true;
 
-Testlist := [1,2,"Hallo",4,5,null,false,true];
-trace Testlist;
-trace Testlist is number;
-trace Testlist is list;
-trace Testlist is not list;
-trace count Testlist;
-trace first Testlist;
-
-A := 4711;
-trace A;
-B := 2020-01-01T12:00:00;
+Testliste := [1,2,"Hallo",4,5,null,false,true];
+trace Testliste;
+trace Testliste is number;
+trace Testliste is list;
+trace Testliste is not list;
+trace count Testliste;
+trace first Testliste;

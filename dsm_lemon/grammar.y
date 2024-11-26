@@ -138,6 +138,9 @@ int get_token_id (char *token) {
 
 	if (strcmp(token, "NOT") == 0) return NOT;
 
+	if (strcmp(token, "TIMETOKEN") == 0) return TIMETOKEN;
+
+
 
 
 
@@ -290,6 +293,8 @@ statement(r) ::= IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 
 
 
+
+
 ex(r) ::= LPAR ex(a) RPAR .    
 { 
 	r = a; 
@@ -311,6 +316,14 @@ ex(r) ::= STRTOKEN (a).
 	cJSON_AddStringToObject(res, "type", "STRTOKEN"); 
 	cJSON_AddStringToObject(res, "value", getValue(a)); 
 	r = res; 
+}
+
+ex(r) ::= TIMETOKEN (a).
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "TIMETOKEN");
+	cJSON_AddStringToObject(res, "value", getValue(a));
+	r = res;
 }
 
 
@@ -425,4 +438,5 @@ ex(r) ::= COUNT ex(a) .
 
 ex(r) ::= FIRST ex(a) .
 { r = unary ("FIRST", a); }
+
 

@@ -4,13 +4,14 @@ State 0:
           statementblock ::= * statementblock statement
 
                           code accept
-                statementblock shift        15     
+                statementblock shift        16     
                      {default} reduce       1      statementblock ::=
 
 State 1:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -35,26 +36,68 @@ State 1:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         RSPAR shift-reduce 24     jsonarray ::= LSPAR RSPAR
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        23     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
-                        exlist shift        31     
+                         RSPAR shift-reduce 26     jsonarray ::= LSPAR RSPAR
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        26     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
+                        exlist shift        34     
 
 State 2:
+          statement ::= TIME of IDENTIFIER ASSIGN * ex SEMICOLON
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * NULL1
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          ex ::= * COUNT ex
+          ex ::= * FIRST ex
+
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
+                         LSPAR shift        1      
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        18     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
+
+State 3:
           statement ::= IDENTIFIER ASSIGN * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -75,24 +118,26 @@ State 2:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        16     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        19     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 3:
+State 4:
           statement ::= TRACE * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -113,23 +158,25 @@ State 3:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        17     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        20     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 4:
+State 5:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -151,23 +198,25 @@ State 4:
           ex ::= * FIRST ex
           ex ::= FIRST * ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        20     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        23     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 5:
+State 6:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -189,23 +238,25 @@ State 5:
           ex ::= COUNT * ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        21     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        24     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 6:
+State 7:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -227,23 +278,25 @@ State 6:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        22     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        25     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 7:
+State 8:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -265,23 +318,25 @@ State 7:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        24     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        27     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 8:
+State 9:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -303,23 +358,25 @@ State 8:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        28     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        31     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 9:
+State 10:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -341,23 +398,25 @@ State 9:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        29     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        32     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 10:
+State 11:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -379,23 +438,25 @@ State 10:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        30     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        33     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 11:
+State 12:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -417,24 +478,26 @@ State 11:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        26     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        29     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 12:
+State 13:
           ex ::= * LPAR ex RPAR
           ex ::= LPAR * ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -455,23 +518,25 @@ State 12:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        18     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        21     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 13:
+State 14:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -493,24 +558,26 @@ State 13:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        25     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        28     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 14:
+State 15:
           statement ::= WRITE * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * STRTOKEN
+          ex ::= * TIMETOKEN
           ex ::= * IDENTIFIER
           ex ::= * TRUE
           ex ::= * FALSE
@@ -531,33 +598,63 @@ State 14:
           ex ::= * COUNT ex
           ex ::= * FIRST ex
 
-                    IDENTIFIER shift-reduce 9      ex ::= IDENTIFIER
-                          LPAR shift        12     
-                      NUMTOKEN shift-reduce 7      ex ::= NUMTOKEN
-                      STRTOKEN shift-reduce 8      ex ::= STRTOKEN
-                          TRUE shift-reduce 10     ex ::= TRUE
-                         FALSE shift-reduce 11     ex ::= FALSE
-                         NULL1 shift-reduce 12     ex ::= NULL1
+                    IDENTIFIER shift-reduce 11     ex ::= IDENTIFIER
+                          LPAR shift        13     
+                      NUMTOKEN shift-reduce 8      ex ::= NUMTOKEN
+                      STRTOKEN shift-reduce 9      ex ::= STRTOKEN
+                     TIMETOKEN shift-reduce 10     ex ::= TIMETOKEN
+                          TRUE shift-reduce 12     ex ::= TRUE
+                         FALSE shift-reduce 13     ex ::= FALSE
+                         NULL1 shift-reduce 14     ex ::= NULL1
                          LSPAR shift        1      
-                         COUNT shift        5      
-                         FIRST shift        4      
-                            ex shift        19     
-                     jsonarray shift-reduce 23     ex ::= jsonarray
+                         COUNT shift        6      
+                         FIRST shift        5      
+                            ex shift        22     
+                     jsonarray shift-reduce 25     ex ::= jsonarray
 
-State 15:
+State 16:
       (0) code ::= statementblock *
           statementblock ::= statementblock * statement
           statement ::= * WRITE ex SEMICOLON
           statement ::= * TRACE ex SEMICOLON
           statement ::= * IDENTIFIER ASSIGN ex SEMICOLON
+          statement ::= * TIME of IDENTIFIER ASSIGN ex SEMICOLON
 
                              $ reduce       0      code ::= statementblock
-                         WRITE shift        14     
-                         TRACE shift        3      
-                    IDENTIFIER shift        32     
+                         WRITE shift        15     
+                         TRACE shift        4      
+                    IDENTIFIER shift        37     
+                          TIME shift        17     
                      statement shift-reduce 2      statementblock ::= statementblock statement
 
-State 16:
+State 17:
+          statement ::= TIME * of IDENTIFIER ASSIGN ex SEMICOLON
+
+                            of shift        36     
+
+State 18:
+          statement ::= TIME of IDENTIFIER ASSIGN ex * SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+
+                          PLUS shift        14     
+                         MINUS shift        12     
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
+                     SEMICOLON shift-reduce 6      statement ::= TIME of IDENTIFIER ASSIGN ex SEMICOLON
+                     AMPERSAND shift        8      
+
+State 19:
           statement ::= IDENTIFIER ASSIGN ex * SEMICOLON
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -570,16 +667,16 @@ State 16:
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
 
-                          PLUS shift        13     
-                         MINUS shift        11     
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
+                          PLUS shift        14     
+                         MINUS shift        12     
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
                      SEMICOLON shift-reduce 5      statement ::= IDENTIFIER ASSIGN ex SEMICOLON
-                     AMPERSAND shift        7      
+                     AMPERSAND shift        8      
 
-State 17:
+State 20:
           statement ::= TRACE ex * SEMICOLON
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -592,16 +689,16 @@ State 17:
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
 
-                          PLUS shift        13     
-                         MINUS shift        11     
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
+                          PLUS shift        14     
+                         MINUS shift        12     
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
                      SEMICOLON shift-reduce 4      statement ::= TRACE ex SEMICOLON
-                     AMPERSAND shift        7      
+                     AMPERSAND shift        8      
 
-State 18:
+State 21:
           ex ::= LPAR ex * RPAR
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -614,16 +711,16 @@ State 18:
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
 
-                          PLUS shift        13     
-                         MINUS shift        11     
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
-                          RPAR shift-reduce 6      ex ::= LPAR ex RPAR
-                     AMPERSAND shift        7      
+                          PLUS shift        14     
+                         MINUS shift        12     
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
+                          RPAR shift-reduce 7      ex ::= LPAR ex RPAR
+                     AMPERSAND shift        8      
 
-State 19:
+State 22:
           statement ::= WRITE ex * SEMICOLON
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -636,94 +733,14 @@ State 19:
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
 
-                          PLUS shift        13     
-                         MINUS shift        11     
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
+                          PLUS shift        14     
+                         MINUS shift        12     
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
                      SEMICOLON shift-reduce 3      statement ::= WRITE ex SEMICOLON
-                     AMPERSAND shift        7      
-
-State 20:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-     (29) ex ::= FIRST ex *
-
-                          PLUS shift        13     
-                          PLUS reduce       29      ** Parsing conflict **
-                         MINUS shift        11     
-                         MINUS reduce       29      ** Parsing conflict **
-                         TIMES shift        10     
-                         TIMES reduce       29      ** Parsing conflict **
-                        DIVIDE shift        9      
-                        DIVIDE reduce       29      ** Parsing conflict **
-                         POWER shift        8      
-                         POWER reduce       29      ** Parsing conflict **
-                            IS shift        27     
-                            IS reduce       29      ** Parsing conflict **
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       29      ** Parsing conflict **
-                     {default} reduce       29     ex ::= FIRST ex
-
-State 21:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-     (28) ex ::= COUNT ex *
-
-                          PLUS shift        13     
-                          PLUS reduce       28      ** Parsing conflict **
-                         MINUS shift        11     
-                         MINUS reduce       28      ** Parsing conflict **
-                         TIMES shift        10     
-                         TIMES reduce       28      ** Parsing conflict **
-                        DIVIDE shift        9      
-                        DIVIDE reduce       28      ** Parsing conflict **
-                         POWER shift        8      
-                         POWER reduce       28      ** Parsing conflict **
-                            IS shift        27     
-                            IS reduce       28      ** Parsing conflict **
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       28      ** Parsing conflict **
-                     {default} reduce       28     ex ::= COUNT ex
-
-State 22:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-     (27) exlist ::= exlist COMMA ex *
-
-                          PLUS shift        13     
-                         MINUS shift        11     
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
-                     AMPERSAND shift        7      
-                     {default} reduce       27     exlist ::= exlist COMMA ex
+                     AMPERSAND shift        8      
 
 State 23:
           ex ::= ex * PLUS ex
@@ -736,16 +753,23 @@ State 23:
           ex ::= ex * IS STRING
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
-     (26) exlist ::= ex *
+     (31) ex ::= FIRST ex *
 
-                          PLUS shift        13     
-                         MINUS shift        11     
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
-                     AMPERSAND shift        7      
-                     {default} reduce       26     exlist ::= ex
+                          PLUS shift        14     
+                          PLUS reduce       31      ** Parsing conflict **
+                         MINUS shift        12     
+                         MINUS reduce       31      ** Parsing conflict **
+                         TIMES shift        11     
+                         TIMES reduce       31      ** Parsing conflict **
+                        DIVIDE shift        10     
+                        DIVIDE reduce       31      ** Parsing conflict **
+                         POWER shift        9      
+                         POWER reduce       31      ** Parsing conflict **
+                            IS shift        30     
+                            IS reduce       31      ** Parsing conflict **
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       31      ** Parsing conflict **
+                     {default} reduce       31     ex ::= FIRST ex
 
 State 24:
           ex ::= ex * PLUS ex
@@ -754,31 +778,30 @@ State 24:
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
           ex ::= ex * AMPERSAND ex
-     (18) ex ::= ex AMPERSAND ex *
           ex ::= ex * IS NUMBER
           ex ::= ex * IS STRING
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
+     (30) ex ::= COUNT ex *
 
-                          PLUS shift        13     
-                          PLUS reduce       18      ** Parsing conflict **
-                         MINUS shift        11     
-                         MINUS reduce       18      ** Parsing conflict **
-                         TIMES shift        10     
-                         TIMES reduce       18      ** Parsing conflict **
-                        DIVIDE shift        9      
-                        DIVIDE reduce       18      ** Parsing conflict **
-                         POWER shift        8      
-                         POWER reduce       18      ** Parsing conflict **
-                            IS shift        27     
-                            IS reduce       18      ** Parsing conflict **
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       18      ** Parsing conflict **
-                     {default} reduce       18     ex ::= ex AMPERSAND ex
+                          PLUS shift        14     
+                          PLUS reduce       30      ** Parsing conflict **
+                         MINUS shift        12     
+                         MINUS reduce       30      ** Parsing conflict **
+                         TIMES shift        11     
+                         TIMES reduce       30      ** Parsing conflict **
+                        DIVIDE shift        10     
+                        DIVIDE reduce       30      ** Parsing conflict **
+                         POWER shift        9      
+                         POWER reduce       30      ** Parsing conflict **
+                            IS shift        30     
+                            IS reduce       30      ** Parsing conflict **
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       30      ** Parsing conflict **
+                     {default} reduce       30     ex ::= COUNT ex
 
 State 25:
           ex ::= ex * PLUS ex
-     (13) ex ::= ex PLUS ex *
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
@@ -788,19 +811,72 @@ State 25:
           ex ::= ex * IS STRING
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
+     (29) exlist ::= exlist COMMA ex *
 
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       13      ** Parsing conflict **
-                     {default} reduce       13     ex ::= ex PLUS ex
+                          PLUS shift        14     
+                         MINUS shift        12     
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
+                     AMPERSAND shift        8      
+                     {default} reduce       29     exlist ::= exlist COMMA ex
 
 State 26:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
-     (14) ex ::= ex MINUS ex *
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+     (28) exlist ::= ex *
+
+                          PLUS shift        14     
+                         MINUS shift        12     
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
+                     AMPERSAND shift        8      
+                     {default} reduce       28     exlist ::= ex
+
+State 27:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+     (20) ex ::= ex AMPERSAND ex *
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+
+                          PLUS shift        14     
+                          PLUS reduce       20      ** Parsing conflict **
+                         MINUS shift        12     
+                         MINUS reduce       20      ** Parsing conflict **
+                         TIMES shift        11     
+                         TIMES reduce       20      ** Parsing conflict **
+                        DIVIDE shift        10     
+                        DIVIDE reduce       20      ** Parsing conflict **
+                         POWER shift        9      
+                         POWER reduce       20      ** Parsing conflict **
+                            IS shift        30     
+                            IS reduce       20      ** Parsing conflict **
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       20      ** Parsing conflict **
+                     {default} reduce       20     ex ::= ex AMPERSAND ex
+
+State 28:
+          ex ::= ex * PLUS ex
+     (15) ex ::= ex PLUS ex *
+          ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
           ex ::= ex * DIVIDE ex
           ex ::= ex * POWER ex
@@ -810,98 +886,129 @@ State 26:
           ex ::= ex * IS LIST
           ex ::= ex * IS NOT LIST
 
-                         TIMES shift        10     
-                        DIVIDE shift        9      
-                         POWER shift        8      
-                            IS shift        27     
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       14      ** Parsing conflict **
-                     {default} reduce       14     ex ::= ex MINUS ex
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       15      ** Parsing conflict **
+                     {default} reduce       15     ex ::= ex PLUS ex
 
-State 27:
+State 29:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+     (16) ex ::= ex MINUS ex *
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+
+                         TIMES shift        11     
+                        DIVIDE shift        10     
+                         POWER shift        9      
+                            IS shift        30     
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       16      ** Parsing conflict **
+                     {default} reduce       16     ex ::= ex MINUS ex
+
+State 30:
           ex ::= ex IS * NUMBER
           ex ::= ex IS * STRING
           ex ::= ex IS * LIST
           ex ::= ex IS * NOT LIST
 
-                           NOT shift        33     
-                        NUMBER shift-reduce 19     ex ::= ex IS NUMBER
-                        STRING shift-reduce 20     ex ::= ex IS STRING
-                          LIST shift-reduce 21     ex ::= ex IS LIST
-
-State 28:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-     (17) ex ::= ex POWER ex *
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-
-                         POWER shift        8      
-                            IS shift        27     
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       17      ** Parsing conflict **
-                     {default} reduce       17     ex ::= ex POWER ex
-
-State 29:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-     (16) ex ::= ex DIVIDE ex *
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-
-                         POWER shift        8      
-                            IS shift        27     
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       16      ** Parsing conflict **
-                     {default} reduce       16     ex ::= ex DIVIDE ex
-
-State 30:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-     (15) ex ::= ex TIMES ex *
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-
-                         POWER shift        8      
-                            IS shift        27     
-                     AMPERSAND shift        7      
-                     AMPERSAND reduce       15      ** Parsing conflict **
-                     {default} reduce       15     ex ::= ex TIMES ex
+                           NOT shift        38     
+                        NUMBER shift-reduce 21     ex ::= ex IS NUMBER
+                        STRING shift-reduce 22     ex ::= ex IS STRING
+                          LIST shift-reduce 23     ex ::= ex IS LIST
 
 State 31:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+     (19) ex ::= ex POWER ex *
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+
+                         POWER shift        9      
+                            IS shift        30     
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       19      ** Parsing conflict **
+                     {default} reduce       19     ex ::= ex POWER ex
+
+State 32:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+     (18) ex ::= ex DIVIDE ex *
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+
+                         POWER shift        9      
+                            IS shift        30     
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       18      ** Parsing conflict **
+                     {default} reduce       18     ex ::= ex DIVIDE ex
+
+State 33:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+     (17) ex ::= ex TIMES ex *
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+
+                         POWER shift        9      
+                            IS shift        30     
+                     AMPERSAND shift        8      
+                     AMPERSAND reduce       17      ** Parsing conflict **
+                     {default} reduce       17     ex ::= ex TIMES ex
+
+State 34:
           jsonarray ::= LSPAR exlist * RSPAR
           exlist ::= exlist * COMMA ex
 
-                         RSPAR shift-reduce 25     jsonarray ::= LSPAR exlist RSPAR
-                         COMMA shift        6      
+                         RSPAR shift-reduce 27     jsonarray ::= LSPAR exlist RSPAR
+                         COMMA shift        7      
 
-State 32:
-          statement ::= IDENTIFIER * ASSIGN ex SEMICOLON
+State 35:
+          statement ::= TIME of IDENTIFIER * ASSIGN ex SEMICOLON
 
                         ASSIGN shift        2      
 
-State 33:
+State 36:
+          statement ::= TIME of * IDENTIFIER ASSIGN ex SEMICOLON
+
+                    IDENTIFIER shift        35     
+
+State 37:
+          statement ::= IDENTIFIER * ASSIGN ex SEMICOLON
+
+                        ASSIGN shift        3      
+
+State 38:
           ex ::= ex IS NOT * LIST
 
-                          LIST shift-reduce 22     ex ::= ex IS NOT LIST
+                          LIST shift-reduce 24     ex ::= ex IS NOT LIST
 
 ----------------------------------------------------
 Symbols:
@@ -918,26 +1025,29 @@ Symbols:
    10: TRACE
    11: IDENTIFIER
    12: ASSIGN
-   13: LPAR
-   14: RPAR
-   15: NUMTOKEN
-   16: STRTOKEN
-   17: TRUE
-   18: FALSE
-   19: NULL1
-   20: AMPERSAND
-   21: NUMBER
-   22: STRING
-   23: LIST
-   24: LSPAR
-   25: RSPAR
-   26: COMMA
-   27: COUNT
-   28: FIRST
-   29: error:
-   30: code: <lambda> WRITE TRACE IDENTIFIER
-   31: statementblock: <lambda> WRITE TRACE IDENTIFIER
-   32: statement: WRITE TRACE IDENTIFIER
-   33: ex: IDENTIFIER LPAR NUMTOKEN STRTOKEN TRUE FALSE NULL1 LSPAR COUNT FIRST
-   34: jsonarray: LSPAR
-   35: exlist: IDENTIFIER LPAR NUMTOKEN STRTOKEN TRUE FALSE NULL1 LSPAR COUNT FIRST
+   13: TIME
+   14: LPAR
+   15: RPAR
+   16: NUMTOKEN
+   17: STRTOKEN
+   18: TIMETOKEN
+   19: TRUE
+   20: FALSE
+   21: NULL1
+   22: AMPERSAND
+   23: NUMBER
+   24: STRING
+   25: LIST
+   26: LSPAR
+   27: RSPAR
+   28: COMMA
+   29: COUNT
+   30: FIRST
+   31: error:
+   32: code: <lambda> WRITE TRACE IDENTIFIER TIME
+   33: statementblock: <lambda> WRITE TRACE IDENTIFIER TIME
+   34: statement: WRITE TRACE IDENTIFIER TIME
+   35: ex: IDENTIFIER LPAR NUMTOKEN STRTOKEN TIMETOKEN TRUE FALSE NULL1 LSPAR COUNT FIRST
+   36: of:
+   37: jsonarray: LSPAR
+   38: exlist: IDENTIFIER LPAR NUMTOKEN STRTOKEN TIMETOKEN TRUE FALSE NULL1 LSPAR COUNT FIRST

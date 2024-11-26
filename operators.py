@@ -33,6 +33,16 @@ def minus(left_arg, right_arg):
 def str_concat(left_arg, right_arg):
     return str(str(left_arg) + str(right_arg))
 
+def count(arg: DataType) -> DataType:
+   # print(len(arg.items))
+    return NumType(len(arg.items))
+
+def first(arg: DataType) -> DataType:
+  #  print(len(arg.items))
+    return arg.items[0]
+
+
+
 
 def is_number(arg: DataType) -> BoolType: #nicht aktiv aktuell
     print("is number?")
@@ -59,11 +69,5 @@ def is_string(arg: DataType) -> BoolType: ##nicht aktiv aktuell
 
 
 
-def count(arg: DataType) -> DataType:
-   # print(len(arg.items))
-    return NumType(len(arg.items))
 
-def first(arg: DataType) -> DataType:
-  #  print(len(arg.items))
-    return arg.items[0]
 

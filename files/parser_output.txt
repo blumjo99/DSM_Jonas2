@@ -4,79 +4,44 @@
 			"type":	"TRACE",
 			"line":	"1",
 			"arg":	{
-				"type":	"STRTOKEN",
-				"value":	"Hallo Welt"
+				"type":	"PLUS",
+				"arg":	[{
+						"type":	"NUMBER",
+						"value":	"1"
+					}, {
+						"type":	"TRUE"
+					}]
 			}
 		}, {
 			"type":	"TRACE",
 			"line":	"2",
 			"arg":	{
-				"type":	"STR_CONCAT",
+				"type":	"PLUS",
 				"arg":	[{
-						"type":	"STRTOKEN",
-						"value":	"Hallo "
+						"type":	"NUMBER",
+						"value":	"1"
 					}, {
-						"type":	"STRTOKEN",
-						"value":	"Welt"
+						"type":	"NUMBER",
+						"value":	"1"
 					}]
 			}
 		}, {
-			"type":	"VARIABLE_ASSIGN",
-			"varname":	"X",
+			"type":	"TRACE",
+			"line":	"3",
 			"arg":	{
-				"type":	"NUMBER",
-				"value":	"4711"
+				"type":	"STR_CONCAT",
+				"arg":	[{
+						"type":	"NUMBER",
+						"value":	"1"
+					}, {
+						"type":	"STRTOKEN",
+						"value":	"1"
+					}]
 			}
 		}, {
 			"type":	"TRACE",
 			"line":	"4",
 			"arg":	{
-				"type":	"VARIABLE",
-				"name":	"X",
-				"line":	"4"
-			}
-		}, {
-			"type":	"TRACE",
-			"line":	"6",
-			"arg":	{
-				"type":	"PLUS",
-				"arg":	[{
-						"type":	"NUMBER",
-						"value":	"1"
-					}, {
-						"type":	"TRUE"
-					}]
-			}
-		}, {
-			"type":	"TRACE",
-			"line":	"7",
-			"arg":	{
-				"type":	"PLUS",
-				"arg":	[{
-						"type":	"NUMBER",
-						"value":	"1"
-					}, {
-						"type":	"NUMBER",
-						"value":	"5"
-					}]
-			}
-		}, {
-			"type":	"TRACE",
-			"line":	"8",
-			"arg":	{
-				"type":	"STR_CONCAT",
-				"arg":	[{
-						"type":	"NUMBER",
-						"value":	"1"
-					}, {
-						"type":	"STRTOKEN",
-						"value":	"1"
-					}]
-			}
-		}, {
-			"type":	"TRACE",
-			"line":	"9",
-			"arg":	{
 				"type":	"STR_CONCAT",
 				"arg":	[{
 						"type":	"STRTOKEN",
@@ -87,7 +52,7 @@
 			}
 		}, {
 			"type":	"VARIABLE_ASSIGN",
-			"varname":	"Testlist",
+			"varname":	"Testliste",
 			"arg":	{
 				"type":	"LIST",
 				"items":	[{
@@ -116,81 +81,66 @@
 			}
 		}, {
 			"type":	"TRACE",
-			"line":	"12",
+			"line":	"7",
 			"arg":	{
 				"type":	"VARIABLE",
-				"name":	"Testlist",
-				"line":	"12"
+				"name":	"Testliste",
+				"line":	"7"
 			}
 		}, {
 			"type":	"TRACE",
-			"line":	"13",
+			"line":	"8",
 			"arg":	{
 				"type":	"IS_NUMBER",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
-						"line":	"13"
+						"name":	"Testliste",
+						"line":	"8"
 					}]
 			}
 		}, {
 			"type":	"TRACE",
-			"line":	"14",
+			"line":	"9",
 			"arg":	{
 				"type":	"IS_LIST",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
-						"line":	"14"
+						"name":	"Testliste",
+						"line":	"9"
 					}]
 			}
 		}, {
 			"type":	"TRACE",
-			"line":	"15",
+			"line":	"10",
 			"arg":	{
 				"type":	"IS_NOT_LIST",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
-						"line":	"15"
+						"name":	"Testliste",
+						"line":	"10"
 					}]
 			}
 		}, {
 			"type":	"TRACE",
-			"line":	"16",
+			"line":	"11",
 			"arg":	{
 				"type":	"COUNT",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
-						"line":	"16"
+						"name":	"Testliste",
+						"line":	"11"
 					}]
 			}
 		}, {
 			"type":	"TRACE",
-			"line":	"17",
+			"line":	"12",
 			"arg":	{
 				"type":	"FIRST",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
-						"line":	"17"
+						"name":	"Testliste",
+						"line":	"12"
 					}]
-			}
-		}, {
-			"type":	"VARIABLE_ASSIGN",
-			"varname":	"A",
-			"arg":	{
-				"type":	"NUMBER",
-				"value":	"4711"
-			}
-		}, {
-			"type":	"TRACE",
-			"line":	"20",
-			"arg":	{
-				"type":	"VARIABLE",
-				"name":	"A",
-				"line":	"20"
 			}
 		}]
 }
