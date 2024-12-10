@@ -1,12 +1,5 @@
-trace 1 + true;
-trace 1 + 1;
-trace 1 & "1" ;
-trace "1" & true;
+Testlist := [100, 200, 50, 120, 150, 90] ;
 
-Testliste := [1,2,"Hallo",4,5,null,false,true];
-trace Testliste;
-trace Testliste is number;
-trace Testliste is list;
-trace Testliste is not list;
-trace count Testliste;
-trace first Testliste;
+trace Testlist where [true, false, false, true, true, false];
+trace Testlist where it is less than or equal 100;
+trace Testlist where it is within 80 to 120;

@@ -11,7 +11,7 @@ from datatypes import(
 
 def add(left_arg, right_arg):
     try:
-        return NumType(str(float(left_arg.value) + float(right_arg.value)), datetime.now())
+        return NumType(str(float(left_arg.value) + float(right_arg.value)))
 
 
     except:
@@ -21,7 +21,7 @@ def add(left_arg, right_arg):
 
 def minus(left_arg, right_arg):
     try:
-        return NumType(str(float(left_arg.value) - float(right_arg.value)), datetime.now())
+        return NumType(str(float(left_arg.value) - float(right_arg.value)))
 
 
     except:
@@ -33,11 +33,21 @@ def str_concat(left_arg, right_arg):
 
 def count(arg: ListType) -> NumType:
    # print(len(arg.items))
-    return NumType(len(arg.items), datetime.now())
+    return NumType(len(arg.items))
 
 def first(arg: ListType):
   #  print(len(arg.items))
     return arg.items[0]
+
+def less_than(left_arg, right_arg):
+    return BoolType(float(left_arg.value) < float(right_arg.value))
+
+
+def less_than_or_equal(left_arg, right_arg):
+    return BoolType(float(left_arg.value) <= float(right_arg.value))
+
+
+
 
 
 

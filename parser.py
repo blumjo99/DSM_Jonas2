@@ -5,12 +5,11 @@ import json
 with open('C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/files/token_output.txt', 'r') as file:
     tokenized_input = json.load(file)  
 
-# erstelle Json
 json_input = json.dumps(tokenized_input)
 
 try:
     process = subprocess.Popen( #popen = starten vom externen parser
-        ['C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/dsm_lemon/parse'],  # externer parser
+        ['C:/Users/Jonas/Documents/Masterstudium/Masterstudiengang/3. Semester/DSM/GIT/dsm_lemon/parse'], 
         stdin=subprocess.PIPE,  # Schreiben in stdin
         stdout=subprocess.PIPE,  # lesen vom Rückgabewert
         stderr=subprocess.PIPE,  # error output

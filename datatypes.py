@@ -2,53 +2,65 @@ from datetime import datetime
 
 
 class BoolType():
-    def __init__(self, value: bool, timestamp: datetime) -> None:
+    def __init__(self, value: bool) -> None:
         self.value = value
-        self.timestamp = timestamp
+        self.timestamp = datetime.now()
 
     def __str__(self) -> str:
         return str(self.value).lower()
 
     
 class StrType():
-    def __init__(self, value: str, timestamp: datetime) -> None:
+    def __init__(self, value: str) -> None:
         self.value = value
-        self.timestamp = timestamp
+        self.timestamp = datetime.now()
 
     def __str__(self) -> str:
         return str(self.value).lower() 
 
 
 class NumType():
-    def __init__(self, value: int | float, timestamp: datetime) -> None:
+    def __init__(self, value: int | float) -> None:
         self.value = value
-        self.timestamp = timestamp
+        self.timestamp = datetime.now()
 
     def __str__(self) -> str:
         return str(self.value)
     
 
 class TimeType():
-    def __init__(self, value: datetime, timestamp: datetime) -> None:
+    def __init__(self, value: datetime) -> None:
         self.value = value
-        self.timestamp = timestamp
+        self.timestamp = datetime.now()
 
+    def now():
+        return TimeType(datetime.now())
+    
     def __str__(self) -> str:
         return str(self.value)
 
 
 class ListType:
 
-    def __init__(self, items: list, timestamp: datetime) -> None:
+    def __init__(self, items: list) -> None:
         if items is None:
             self.items = []
         else:
             self.items = items
 
-        self.timestamp = timestamp
+        self.timestamp = datetime.now()
 
     def __str__(self) -> str:
         return f"[{', '.join([str(x) for x in self.items])}]"
+    
+    def length(self) -> int:
+        return len(self.items)
+    
+    def __getitem__(self, index: int):
+        return self.items[index]
+    
+    def append(self, item) -> None:
+        self.items.append(item)
     
     
 

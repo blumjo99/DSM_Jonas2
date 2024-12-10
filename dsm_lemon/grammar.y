@@ -139,6 +139,32 @@ int get_token_id (char *token) {
 	if (strcmp(token, "NOT") == 0) return NOT;
 
 	if (strcmp(token, "TIMETOKEN") == 0) return TIMETOKEN;
+	if (strcmp(token, "TIME") == 0) return TIME;
+	if (strcmp(token, "TIMES") == 0) return TIMES;
+	if (strcmp(token, "CURRENTTIME") == 0) return CURRENTTIME;
+
+	if (strcmp(token, "NOW") == 0) return NOW;
+
+	if (strcmp(token, "WHERE") == 0) return WHERE;
+	if (strcmp(token, "LESS") == 0) return LESS;
+
+	if (strcmp(token, "IS") == 0) return IS;
+	if (strcmp(token, "IT") == 0) return IT;
+
+	if (strcmp(token, "THAN") == 0) return THAN;
+
+	if (strcmp(token, "EQUAL") == 0) return EQUAL;
+	if (strcmp(token, "OR") == 0) return OR;
+
+	if (strcmp(token, "TO") == 0) return TO;
+
+
+
+
+
+
+
+
 
 
 
@@ -211,12 +237,19 @@ cJSON* ternary (char *fname, cJSON *a, cJSON *b, cJSON *c)
 ///////////////////////
 /////////////////////// 
 
+%right 	   WHERE.
 
 %left 	   PLUS MINUS .
-%left 	   TIMES DIVIDE .
+%right	   		TIME .
+
+%left 	   TIMES DIVIDE EQUAL .
 %right     POWER .
 %right 	   NOT .
 %left 	   IS .
+%left  	   LESS THAN .
+
+%right		  IT .
+
 
 
 
@@ -270,7 +303,7 @@ statement(r) ::= WRITE ex(e) SEMICOLON .
 }
 
 
-statement(r) ::= TRACE(t) ex(e) SEMICOLON . //neu 14.11.24
+statement(r) ::= TRACE(t) ex(e) SEMICOLON .
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "TRACE");
@@ -283,6 +316,15 @@ statement(r) ::= IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "VARIABLE_ASSIGN");
+	cJSON_AddStringToObject(res, "varname", getValue(i));
+	cJSON_AddItemToObject(res, "arg", e);
+	r = res;
+}
+
+statement(r) ::= TIME IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "TIME_ASSIGN");
 	cJSON_AddStringToObject(res, "varname", getValue(i));
 	cJSON_AddItemToObject(res, "arg", e);
 	r = res;
@@ -309,6 +351,13 @@ ex(r) ::= NUMTOKEN (a).
 	r = res; 
 } 
 
+ex(r) ::= TIMETOKEN (a).
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "TIMETOKEN");
+	cJSON_AddStringToObject(res, "value", getValue(a));
+	r = res;
+}
 
 ex(r) ::= STRTOKEN (a).        
 { 
@@ -318,13 +367,7 @@ ex(r) ::= STRTOKEN (a).
 	r = res; 
 }
 
-ex(r) ::= TIMETOKEN (a).
-{
-	cJSON *res = cJSON_CreateObject();
-	cJSON_AddStringToObject(res, "type", "TIMETOKEN");
-	cJSON_AddStringToObject(res, "value", getValue(a));
-	r = res;
-}
+
 
 
 
@@ -352,6 +395,19 @@ ex(r) ::= FALSE .
 	r = res;
 }
 
+ex(r) ::= CURRENTTIME .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "CURRENT_TIME");
+	r = res;
+}
+
+ex(r) ::= NOW .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "NOW");
+	r = res;
+}
 
 
 ex(r) ::= NULL1 .
@@ -361,6 +417,12 @@ ex(r) ::= NULL1 .
 	r = res;
 }
 
+
+of::= .
+of::= OF.
+
+ex(r) ::= TIME of ex(a) .
+{ r = unary ("TIME_READ", a); }
 
 ex(r) ::= ex(a) PLUS ex(b) .                                
 {r = binary ("PLUS", a, b); }
@@ -440,3 +502,44 @@ ex(r) ::= FIRST ex(a) .
 { r = unary ("FIRST", a); }
 
 
+ex(r) ::= ex(a) WHERE ex(b) .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON *arg = cJSON_CreateArray();
+	cJSON *opt = cJSON_CreateArray();
+	cJSON_AddItemToArray(arg, a);
+	cJSON_AddStringToObject(res, "type", "WHERE");
+	cJSON_AddItemToObject(res, "arg", arg);
+	cJSON_AddItemToArray(opt, b);
+	cJSON_AddItemToObject(res, "opt", opt);
+	r = res;
+}
+
+
+
+
+ex(r) ::= ex(a) IS LESS THAN ex(b) .
+{ 
+	r = binary ("LESS_THAN", a, b); 
+}
+
+ex(r) ::= ex(a) IS LESS THAN OR EQUAL ex(b) .
+{ 
+	r = binary ("LESS_OR_EQUAL", a, b); 
+}
+
+ex(r) ::= ex(a) IS WITHIN ex(b) TO ex(c)  .
+{ 
+	r = ternary ("IS_WITHIN", a, b, c); 
+}
+
+
+
+
+
+ex(r) ::= IT .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "IT");
+	r = res;
+}
