@@ -18,13 +18,14 @@ class SimpleTokenizer:
         tokens = []
         line_number = 0
 
-        reserved_list = ["within", "TO", "IT", "IS", "THAN","EQUAL","LESS", "OR", "WHERE", "NOW", "TIME", "COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
+        reserved_list = ["WITHIN", "TO", "IT", "IS", "THAN","EQUAL","LESS", "OR", "WHERE", "NOW", "TIME", "COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
         
         for line in self.lines:
             line_number += 1
 
             # parts = line.split()
             parts = re.findall(r"""
+                     
                      \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2} # ISO 8601 time format
                      |".*?\"  # Für Wörte rin Anführungszeichen
                      |\w+      # --> wörter ohne Anführungszeichen
@@ -33,9 +34,10 @@ class SimpleTokenizer:
                      |\[
                      |\]       
                      |\*\*     
-                     |\*       
+                     |\*      
                      |,       
                      |\(
+                     |\/          
                      |\)
                      |\&
                      |\+

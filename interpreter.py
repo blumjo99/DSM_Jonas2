@@ -13,7 +13,10 @@ from operators import (
     count,
     first,
     less_than,
-    less_than_or_equal
+    less_than_or_equal,
+    is_within,
+    power,
+    divide
 )
 
 from datatypes import(
@@ -76,6 +79,18 @@ class Interpreter:
                 #print("minus")
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
                 return str(self.run_operator(minus, interpreted_args))
+            
+            case "POWER":
+               # print("case power")
+                interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+                return str(self.run_operator(power, interpreted_args))
+            
+
+            case "DIVIDE":
+            #    print("case DIVIDE")
+                interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+                return str(self.run_operator(divide, interpreted_args))
+
 
             
             case "STR_CONCAT":
@@ -145,7 +160,7 @@ class Interpreter:
             
 
             case "LIST":
-            #    print("case list")
+             #   print("case list")
                 items = node["items"]
                 list_items = []
                 for item in items:
@@ -161,12 +176,9 @@ class Interpreter:
 
             case "TIME_ASSIGN":
                 #print("case time_assign")
-                varname = node["varname"]  
-                #print(varname) 
-                value = self.interpreterFunction(node["arg"])
-                #print(value.value)
-              #  print(value.timestamp)
 
+                varname = node["varname"]  
+                value = self.interpreterFunction(node["arg"])
                 self.symbol_table.set_variable_value(varname, value)
 
             case "NOW":
@@ -183,16 +195,24 @@ class Interpreter:
             
                 return str(self.run_operator(less_than_or_equal, interpreted_args))
             
+            case "IS_WITHIN":
+             #   print("case is within")
+                interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
 
+                return str(self.run_operator(is_within, interpreted_args))
+            
+
+
+            
             case "IT":
-              #  print("case it")
+             #   print("case it")
                # if self.__it is None:
                 #    return NullType()
-               # print(self.it)
+               #print(self.it)
                 return self.it
             
             case "WHERE":
-               # print("case where")
+              #  print("case where")
                 list_values = self.interpreterFunction(node["arg"][0]) #value: [100, 200, 50, 120, 150, 90]
 
                 #bool_values = self.interpreterFunction(node["opt"][0]) # value: [TRUE, FALSE, FALSE, TRUE, TRUE, FALSE]
@@ -203,10 +223,13 @@ class Interpreter:
                    
                   # print("value:")
                  #  print(list_values[i])
+                 #  print("self:")
+                 #  print(str(list_values[i]))
                    self.it = list_values[i]
+
                  #  print("operator:")
                  #  print(self.interpreterFunction(node["opt"][0])) #~berechnugsoperator
-
+                  # print("get true or false")
                    var1 = self.interpreterFunction(node["opt"][0])
 
                    #print("var1")
@@ -219,12 +242,12 @@ class Interpreter:
 
 
                    if isinstance(var1, ListType):
-                       #print("list")
+                     #  print("list")
                     #   print(var1[i])
                        if str(var1[i]) == "TRUE":
                            new_list.append(list_values[i])
                    else:
-                     #  print("hello2")
+                      # print("hello2")
                        if str(var1) == "true":
                            new_list.append(list_values[i])
 #               
@@ -247,6 +270,49 @@ class Interpreter:
             case "TIME_READ":
                 value = self.interpreterFunction(node["arg"][0])
                 return value
+            
+
+            case "LIST_ASSIGN":
+              #  print("case list_assign")
+
+            
+                value = self.interpreterFunction(node["arg"])
+                index = self.interpreterFunction(node["list_index"])
+
+                variable_name = node["varname"]
+                list =  self.symbol_table.get_variable_value(variable_name)
+
+              #  print(value)
+              #  print(index)
+              #  print(list)
+
+
+                list.changeEntry(index, value)
+
+               # print("gehts weiter?")
+
+
+                variable_name = node["varname"]
+                list =  self.symbol_table.get_variable_value(variable_name)
+               # print(list)
+
+
+
+               # list_values = self.interpreterFunction(node["arg"][0]) #value: [100, 200, 50, 120, 150, 90]
+
+
+                #print()
+
+               # self.symbol_table.set_variable_value(varname, value)
+
+
+                
+            
+
+
+            
+
+            
 
 
 

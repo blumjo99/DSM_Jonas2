@@ -13,7 +13,6 @@ def add(left_arg, right_arg):
     try:
         return NumType(str(float(left_arg.value) + float(right_arg.value)))
 
-
     except:
        # print("Error: Invalid string format for conversion to double.")
         return "null"
@@ -27,7 +26,25 @@ def minus(left_arg, right_arg):
     except:
       #  print("Invalid string format for conversion to double.")
         return "null"
-    
+
+def power(left_arg, right_arg):
+  #  print("operator power")
+  #  print(left_arg)
+  #  print(right_arg)
+  #  print(str(float(left_arg.value) * float(right_arg.value)))
+    return NumType(str(float(left_arg.value) * float(right_arg.value)))
+
+
+def divide(left_arg, right_arg):
+  #  print("operator divide")
+  #  print(left_arg)
+  #  print(right_arg)
+
+   # print(str(float(left_arg) / float(right_arg.value)))
+    return NumType(str(float(left_arg) / float(right_arg.value)))
+
+
+
 def str_concat(left_arg, right_arg):
     return str(str(left_arg) + str(right_arg))
 
@@ -45,6 +62,22 @@ def less_than(left_arg, right_arg):
 
 def less_than_or_equal(left_arg, right_arg):
     return BoolType(float(left_arg.value) <= float(right_arg.value))
+
+
+def is_within(arg1, argMin, argMax):
+   # print("operator is_within")
+
+   # print(arg1)
+    #print(argMin)
+   # print(argMax)
+
+    try:
+        return BoolType((float(arg1.value) >= float(argMin.value)) & (float(arg1.value) <= float(argMax.value)) )
+    except:
+        return BoolType((float(arg1) >= float(argMin.value)) & (float(arg1) <= float(argMax.value)) )
+
+
+
 
 
 

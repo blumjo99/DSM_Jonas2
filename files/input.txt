@@ -1,5 +1,8 @@
 Testlist := [100, 200, 50, 120, 150, 90] ;
-
 trace Testlist where [true, false, false, true, true, false];
 trace Testlist where it is less than or equal 100;
 trace Testlist where it is within 80 to 120;
+trace Testlist where 2 ** it / 3 is within 80 to 120;
+
+Testlist[2] := 199;
+trace Testlist;

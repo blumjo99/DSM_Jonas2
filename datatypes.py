@@ -61,6 +61,10 @@ class ListType:
     
     def append(self, item) -> None:
         self.items.append(item)
+
+    def changeEntry(self, index, newValue) -> None:
+        self.items[int(str(index))-1] = newValue
+       # self.items.append(item)
     
     
 

@@ -157,6 +157,10 @@ int get_token_id (char *token) {
 	if (strcmp(token, "OR") == 0) return OR;
 
 	if (strcmp(token, "TO") == 0) return TO;
+	if (strcmp(token, "WITHIN") == 0) return WITHIN;
+
+
+	
 
 
 
@@ -238,19 +242,17 @@ cJSON* ternary (char *fname, cJSON *a, cJSON *b, cJSON *c)
 /////////////////////// 
 
 %right 	   WHERE.
+%right 	   NOT .
 
-%left 	   PLUS MINUS .
+%left 	   PLUS MINUS EQUAL LESS THAN .
 %right	   		TIME .
 
-%left 	   TIMES DIVIDE EQUAL .
-%right     POWER .
-%right 	   NOT .
 %left 	   IS .
-%left  	   LESS THAN .
+%left 	   TIMES DIVIDE  .
+%right     POWER .
+%right		IT .
 
-%right		  IT .
-
-
+%nonassoc LSPAR .
 
 
 /////////////////////// 
@@ -312,6 +314,17 @@ statement(r) ::= TRACE(t) ex(e) SEMICOLON .
 	r = res;
 }
 
+
+statement(r) ::= IDENTIFIER(i) LSPAR ex(index) RSPAR ASSIGN ex(e) SEMICOLON .
+{
+    cJSON *res = cJSON_CreateObject();
+    cJSON_AddStringToObject(res, "type", "LIST_ASSIGN");
+    cJSON_AddStringToObject(res, "varname", getValue(i)); 
+    cJSON_AddItemToObject(res, "list_index", index);     
+    cJSON_AddItemToObject(res, "arg", e); 
+    r = res;
+}
+
 statement(r) ::= IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 {
 	cJSON *res = cJSON_CreateObject();
@@ -320,6 +333,11 @@ statement(r) ::= IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 	cJSON_AddItemToObject(res, "arg", e);
 	r = res;
 }
+
+
+
+
+
 
 statement(r) ::= TIME IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 {
@@ -466,6 +484,8 @@ ex(r) ::= ex(a) IS NOT LIST .
 ex(r) ::= jsonarray (a) .
 { r = a; }
 
+
+
 jsonarray(r) ::= LSPAR RSPAR .
 {
 	cJSON *res = cJSON_CreateObject();
@@ -500,6 +520,8 @@ ex(r) ::= COUNT ex(a) .
 
 ex(r) ::= FIRST ex(a) .
 { r = unary ("FIRST", a); }
+
+
 
 
 ex(r) ::= ex(a) WHERE ex(b) .
