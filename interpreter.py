@@ -16,7 +16,9 @@ from operators import (
     less_than_or_equal,
     is_within,
     power,
-    divide
+    divide,
+    occurs_before,
+    occured_after
 )
 
 from datatypes import(
@@ -44,7 +46,7 @@ class Interpreter:
 
     def interpreterFunction(self, node):
 
-    # print("Nodevalue: " + str(node))
+       # print("Nodevalue: " + str(node))
         match node["type"]:
             case "STATEMENTBLOCK":
                 #print("case statementblock")
@@ -56,7 +58,7 @@ class Interpreter:
                 print(self.interpreterFunction(node["arg"]))
 
             case "TRACE":
-             #   print("case trace")
+            #    print("case trace")
                 value = self.interpreterFunction(node["arg"])
                 print("Line " + str(node["line"]) + ": " + str(value))
 
@@ -181,6 +183,15 @@ class Interpreter:
                 value = self.interpreterFunction(node["arg"])
                 self.symbol_table.set_variable_value(varname, value)
 
+            case "TIME_OF":
+              #  print(" case time of")
+
+                varname = node["varname"]  
+              #  print(varname)
+                timeValue = self.interpreterFunction(node["arg"])
+              #  print(timeValue)
+                self.symbol_table.set_variable_timestamp(varname, timeValue)
+
             case "NOW":
                 #print("case now")
                 return TimeType.now()
@@ -296,14 +307,31 @@ class Interpreter:
                 list =  self.symbol_table.get_variable_value(variable_name)
                # print(list)
 
+            case "OCCURS_BEFORE":
+               # interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+
+                interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+            
+                return str(self.run_operator(occurs_before, interpreted_args))
+
+               # value = self.interpreterFunction(node["opt"])
+               # print(value)
+
+            case "OCCURRED_AFTER":
+              #  print("case ocurred after")
+
+                interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+            
+                return str(self.run_operator(occured_after, interpreted_args))
+
+               # value = self.interpreterFunction(node["opt"])
+               # print(value)
 
 
-               # list_values = self.interpreterFunction(node["arg"][0]) #value: [100, 200, 50, 120, 150, 90]
+               
 
 
-                #print()
 
-               # self.symbol_table.set_variable_value(varname, value)
 
 
                 

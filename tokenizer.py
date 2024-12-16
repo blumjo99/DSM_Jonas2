@@ -18,7 +18,7 @@ class SimpleTokenizer:
         tokens = []
         line_number = 0
 
-        reserved_list = ["WITHIN", "TO", "IT", "IS", "THAN","EQUAL","LESS", "OR", "WHERE", "NOW", "TIME", "COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
+        reserved_list = ["OCCURRED", "AFTER", "THEY", "BEFORE", "OCCURS", "OF", "WITHIN", "TO", "IT", "IS", "THAN","EQUAL","LESS", "OR", "WHERE", "NOW", "TIME", "COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
         
         for line in self.lines:
             line_number += 1
@@ -102,8 +102,12 @@ class SimpleTokenizer:
                     tokens.append(Token(line_number, 'STRTOKEN', str(part).replace('"','')))
                 elif str(part).upper() in reserved_list:
                      tokens.append(Token(line_number, str(part).upper(), part))
-                elif re.match(r'^[A-Z]\w*$', part):
+                #elif re.match(r'^[A-Z]\w*$', part):
+                   # tokens.append(Token(line_number, 'IDENTIFIER', part))
+
+                elif re.match(r'^[A-Za-z_]\w*$', part):
                     tokens.append(Token(line_number, 'IDENTIFIER', part))
+                    
                 else:
                     tokens.append(Token(line_number, 'ERROR', part))
                     

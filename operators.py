@@ -41,7 +41,8 @@ def divide(left_arg, right_arg):
   #  print(right_arg)
 
    # print(str(float(left_arg) / float(right_arg.value)))
-    return NumType(str(float(left_arg) / float(right_arg.value)))
+
+     return NumType(str(float(left_arg) / float(right_arg.value)))
 
 
 
@@ -58,6 +59,15 @@ def first(arg: ListType):
 
 def less_than(left_arg, right_arg):
     return BoolType(float(left_arg.value) < float(right_arg.value))
+
+def occurs_before(left_arg, right_arg):
+    return BoolType((left_arg.value) <(right_arg.value))
+
+def occured_after(left_arg, right_arg):
+
+    return BoolType((left_arg.value) >(right_arg.value))
+
+
 
 
 def less_than_or_equal(left_arg, right_arg):

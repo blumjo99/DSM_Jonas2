@@ -2,7 +2,7 @@
 	"type":	"STATEMENTBLOCK",
 	"statements":	[{
 			"type":	"VARIABLE_ASSIGN",
-			"varname":	"Testlist",
+			"varname":	"testlist",
 			"arg":	{
 				"type":	"LIST",
 				"items":	[{
@@ -33,7 +33,7 @@
 				"type":	"WHERE",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
+						"name":	"testlist",
 						"line":	"2"
 					}],
 				"opt":	[{
@@ -61,7 +61,7 @@
 				"type":	"WHERE",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
+						"name":	"testlist",
 						"line":	"3"
 					}],
 				"opt":	[{
@@ -81,7 +81,7 @@
 				"type":	"WHERE",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
+						"name":	"testlist",
 						"line":	"4"
 					}],
 				"opt":	[{
@@ -104,7 +104,7 @@
 				"type":	"WHERE",
 				"arg":	[{
 						"type":	"VARIABLE",
-						"name":	"Testlist",
+						"name":	"testlist",
 						"line":	"5"
 					}],
 				"opt":	[{
@@ -134,7 +134,7 @@
 			}
 		}, {
 			"type":	"LIST_ASSIGN",
-			"varname":	"Testlist",
+			"varname":	"testlist",
 			"list_index":	{
 				"type":	"NUMBER",
 				"value":	"2"
@@ -145,11 +145,11 @@
 			}
 		}, {
 			"type":	"TRACE",
-			"line":	"8",
+			"line":	"7",
 			"arg":	{
 				"type":	"VARIABLE",
-				"name":	"Testlist",
-				"line":	"8"
+				"name":	"testlist",
+				"line":	"7"
 			}
 		}]
 }

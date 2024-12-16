@@ -159,6 +159,19 @@ int get_token_id (char *token) {
 	if (strcmp(token, "TO") == 0) return TO;
 	if (strcmp(token, "WITHIN") == 0) return WITHIN;
 
+	if (strcmp(token, "OF") == 0) return OF;
+
+	if (strcmp(token, "OCCURS") == 0) return OCCURS;
+	if (strcmp(token, "OCCURRED") == 0) return OCCURRED;
+	if (strcmp(token, "AFTER") == 0) return AFTER;
+
+
+	if (strcmp(token, "BEFORE") == 0) return BEFORE;
+
+	if (strcmp(token, "THEY") == 0) return IT;
+
+
+
 
 	
 
@@ -348,6 +361,15 @@ statement(r) ::= TIME IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 	r = res;
 }
 
+
+statement(r) ::= TIME OF IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "TIME_OF");
+	cJSON_AddStringToObject(res, "varname", getValue(i));
+	cJSON_AddItemToObject(res, "arg", e);
+	r = res;
+}
 
 
 
@@ -565,3 +587,14 @@ ex(r) ::= IT .
 	cJSON_AddStringToObject(res, "type", "IT");
 	r = res;
 }
+
+
+
+
+ex(r) ::= ex(a) OCCURS BEFORE ex(b) .
+{ r = binary ("OCCURS_BEFORE", a, b); }
+
+
+
+ex(r) ::= ex(a) OCCURRED AFTER ex(b) .
+{ r = binary ("OCCURRED_AFTER", a, b); }

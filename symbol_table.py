@@ -1,3 +1,4 @@
+from datetime import datetime
 from datatypes import BoolType, StrType, NumType, TimeType, ListType, NullType
 
 
@@ -14,6 +15,10 @@ class SymbolTable:
 
     def set_variable_value(self, variable_name: str, value: BoolType | StrType | NumType | TimeType | ListType | NullType) -> None:
         self.symbols[variable_name] = value
+
+    def set_variable_timestamp(self, variable_name: str, timestamp: datetime) -> None:
+        variable = self.get_variable_value(variable_name)
+        variable.timestamp = timestamp
 
 
 
