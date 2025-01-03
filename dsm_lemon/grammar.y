@@ -171,6 +171,18 @@ int get_token_id (char *token) {
 	if (strcmp(token, "THEY") == 0) return IT;
 
 
+	if (strcmp(token, "FOR") == 0) return FOR;
+	if (strcmp(token, "IN") == 0) return IN;
+	if (strcmp(token, "DO") == 0) return DO;
+	if (strcmp(token, "ENDDO") == 0) return ENDDO;
+
+	if (strcmp(token, "FORRANGE") == 0) return FORRANGE;
+
+
+
+
+
+
 
 
 	
@@ -598,3 +610,16 @@ ex(r) ::= ex(a) OCCURS BEFORE ex(b) .
 
 ex(r) ::= ex(a) OCCURRED AFTER ex(b) .
 { r = binary ("OCCURRED_AFTER", a, b); }
+
+
+statement(r) ::= FOR IDENTIFIER(i) IN ex(e) FORRANGE ex(e2) DO statementblock(sb) ENDDO SEMICOLON .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "FOR_LOOP");
+	cJSON_AddStringToObject(res, "varname", getValue(i));
+	cJSON_AddItemToObject(res, "expression", e);
+	cJSON_AddItemToObject(res, "expression2", e2);
+
+	cJSON_AddItemToObject(res, "statements", sb);
+	r = res;
+}

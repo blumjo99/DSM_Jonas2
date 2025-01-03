@@ -1,7 +1,20 @@
 [
-    ["1", "TRACE", "trace"],
-    ["1", "MINUS", "-"],
-    ["1", "NUMTOKEN", "1"],
-    ["1", "POWER", "**"],
-    ["1", "NUMTOKEN", "4"]
+    ["1", "FOR", "for"],
+    ["1", "IDENTIFIER", "varx"],
+    ["1", "IN", "in"],
+    ["1", "NUMTOKEN", "12"],
+    ["1", "FORRANGE", "..."],
+    ["1", "NUMTOKEN", "18"],
+    ["1", "DO", "do"],
+    ["2", "IDENTIFIER", "bmi"],
+    ["2", "ASSIGN", ":="],
+    ["2", "IDENTIFIER", "varx"],
+    ["2", "POWER", "**"],
+    ["2", "NUMTOKEN", "5"],
+    ["2", "SEMICOLON", ";"],
+    ["3", "TRACE", "trace"],
+    ["3", "IDENTIFIER", "bmi"],
+    ["3", "SEMICOLON", ";"],
+    ["4", "ENDDO", "enddo"],
+    ["4", "SEMICOLON", ";"]
 ]

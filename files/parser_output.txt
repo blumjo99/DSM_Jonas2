@@ -1,1 +1,41 @@
-{"error" : true, "message": "Syntax Error: Compiler reports unexpected token \"-\" of type \"MINUS\" in line 1"}
+{
+	"type":	"STATEMENTBLOCK",
+	"statements":	[{
+			"type":	"FOR_LOOP",
+			"varname":	"varx",
+			"expression":	{
+				"type":	"NUMBER",
+				"value":	"12"
+			},
+			"expression2":	{
+				"type":	"NUMBER",
+				"value":	"18"
+			},
+			"statements":	{
+				"type":	"STATEMENTBLOCK",
+				"statements":	[{
+						"type":	"VARIABLE_ASSIGN",
+						"varname":	"bmi",
+						"arg":	{
+							"type":	"POWER",
+							"arg":	[{
+									"type":	"VARIABLE",
+									"name":	"varx",
+									"line":	"2"
+								}, {
+									"type":	"NUMBER",
+									"value":	"5"
+								}]
+						}
+					}, {
+						"type":	"TRACE",
+						"line":	"3",
+						"arg":	{
+							"type":	"VARIABLE",
+							"name":	"bmi",
+							"line":	"3"
+						}
+					}]
+			}
+		}]
+}

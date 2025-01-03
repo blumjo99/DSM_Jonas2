@@ -6,14 +6,20 @@ class SymbolTable:
     symbols: dict[str, BoolType | StrType | NumType | TimeType | ListType | NullType] = {}
 
     def get_variable_value(self, variable_name: str) -> BoolType | StrType | NumType | TimeType | ListType | NullType:
+        
+       # print("hallo1")
 
         symbol = self.symbols.get(variable_name) #veruscht Wert von angegeben Variabele aus dem dict von der classe SymbolTable zu lesen
+        #print("hallo")
+        #print(symbol)
         if symbol is None:
             return NullType() 
         return symbol
 
 
     def set_variable_value(self, variable_name: str, value: BoolType | StrType | NumType | TimeType | ListType | NullType) -> None:
+        #print("moin")
+
         self.symbols[variable_name] = value
 
     def set_variable_timestamp(self, variable_name: str, timestamp: datetime) -> None:

@@ -1,1 +1,4 @@
-trace -1**4
+for varx in 12 ... 18 do
+bmi := varx ** 5;
+trace bmi;
+enddo;

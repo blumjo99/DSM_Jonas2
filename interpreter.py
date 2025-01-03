@@ -64,8 +64,11 @@ class Interpreter:
 
 
             case "VARIABLE":
-               #print("case variable")
+              # print("case variable")
                variable_name = node["name"]
+               #print(variable_name)
+               #print(self.symbol_table.get_variable_value(variable_name).value)
+
                return self.symbol_table.get_variable_value(variable_name)
 
             
@@ -84,6 +87,8 @@ class Interpreter:
             
             case "POWER":
                # print("case power")
+
+
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
                 return str(self.run_operator(power, interpreted_args))
             
@@ -283,17 +288,10 @@ class Interpreter:
                 variable_name = node["varname"]
                 list =  self.symbol_table.get_variable_value(variable_name)
 
-      
-
-
                 list.changeEntry(index, value)
-
-               # print("gehts weiter?")
-
 
                 variable_name = node["varname"]
                 list =  self.symbol_table.get_variable_value(variable_name)
-               # print(list)
 
             case "OCCURS_BEFORE":
 
@@ -309,6 +307,55 @@ class Interpreter:
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
             
                 return str(self.run_operator(occured_after, interpreted_args))
+            
+
+            case "FOR_LOOP":
+                print("case fore_loop")
+
+
+                      
+                variable_name = StrType(node["varname"])
+                print(variable_name)
+
+                 # Extract and evaluate the loop expression
+                expression = node["expression"]
+                expression2 = node["expression2"]
+
+                loop_start = int(str(self.interpreterFunction(expression)))
+                loop_end = int(str(self.interpreterFunction(expression2)))
+                #print(f"Loop end value: {loop_end}")
+
+                
+             
+                for i in range(loop_start, loop_end):
+                    #print(variable_name)
+                   # print(i+1)
+                 #   self.symbol_table.set_variable_value(variable_name, NumType(i+1))
+                  #  print(self.symbol_table.get_variable_value(variable_name))
+
+                    self.symbol_table.set_variable_value(str(variable_name), NumType(i + 1))
+                  #  self.symbol_table.get_variable_value(variable_name)
+                   # print(f"Variable '{variable_name}' set to: {self.symbol_table.get_variable_value(str(variable_name)).value}")
+
+                
+                 
+                    self.interpreterFunction(node["statements"])
+
+                #for_loop_statement = data['statements'][0]  # Access the first statement
+                #expression_value = for_loop_statement['expression']['value'] 
+
+                #value = self.interpreterFunction(node["expression"][1])
+               # print(expression_value)
+
+              #  interpreted_args = [self.interpreterFunction(arg) for arg in node["expression"]]
+               # print(interpreted_args)
+
+               # interpreted_arg = self.interpret(load_json_dict(json_node, "expression"))
+
+
+              #  interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+            
+               # return str(self.run_operator(occured_after, interpreted_args))
 
             
 

@@ -43,3 +43,8 @@
 #define BEFORE                          43
 #define OCCURRED                        44
 #define AFTER                           45
+#define FOR                             46
+#define IN                              47
+#define FORRANGE                        48
+#define DO                              49
+#define ENDDO                           50

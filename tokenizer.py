@@ -30,7 +30,8 @@ class SimpleTokenizer:
                      |".*?\"  # Für Wörte rin Anführungszeichen
                      |\w+      # --> wörter ohne Anführungszeichen
                      |:=        
-                     |;         
+                     |;  
+                     |\.\.\.                 
                      |\[
                      |\]       
                      |\*\*     
@@ -62,6 +63,8 @@ class SimpleTokenizer:
                     tokens.append(Token(line_number, 'TIMETOKEN', part))
                 elif part == ';':
                     tokens.append(Token(line_number, 'SEMICOLON', part))
+                elif part == '...':
+                    tokens.append(Token(line_number, 'FORRANGE', part))
                 elif part == '[':
                     tokens.append(Token(line_number, 'LSPAR', part))
                 elif part == ']':

@@ -29,8 +29,8 @@ def minus(left_arg, right_arg):
 
 def power(left_arg, right_arg):
   #  print("operator power")
-  #  print(left_arg)
-  #  print(right_arg)
+   # print(left_arg)
+    #print(right_arg)
   #  print(str(float(left_arg.value) * float(right_arg.value)))
     return NumType(str(float(left_arg.value) * float(right_arg.value)))
 
