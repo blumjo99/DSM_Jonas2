@@ -347,29 +347,7 @@ class Interpreter:
               
 
 
-                #for_loop_statement = data['statements'][0]  # Access the first statement
-                #expression_value = for_loop_statement['expression']['value'] 
-
-                #value = self.interpreterFunction(node["expression"][1])
-               # print(expression_value)
-
-              #  interpreted_args = [self.interpreterFunction(arg) for arg in node["expression"]]
-               # print(interpreted_args)
-
-               # interpreted_arg = self.interpret(load_json_dict(json_node, "expression"))
-
-
-              #  interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
-            
-               # return str(self.run_operator(occured_after, interpreted_args))
-
-            
-
-               
-
-
-
-
+          
 
                 
             
@@ -387,6 +365,8 @@ class Interpreter:
 
 
     def run_operator(self, operator_func: Callable, args: list[Any]) -> Any:
+        
+
         
         # Sicherstellen, dass die Anzahl der Argumente passt
         func_signature = signature(operator_func)
@@ -414,78 +394,3 @@ interpreter.interpreterFunction(node)
 
 
 
-
-
-
-###old code
-
-
-##case plus
-# arg1 = interpreterFunction(node["arg"][0])
-           # print("break")
-            # arg2 = interpreterFunction(node["arg"][1])
-            #arg3 = interpreterFunction(node["arg"][2])
- # return str(run_operator(add, [arg1,arg2]))
-
-           
-
-# if isinstance(arg1,int) and isinstance(arg2,int) : #and isinstance(arg2,int):
-#     result = int(arg1) + int(arg2)
-#     return str(result)
-# else:
-#     return "null"
-
-##case STR_CONCAT
-            #arg1 = interpreterFunction(node["arg"][0])
-            #arg2 = interpreterFunction(node["arg"][1])
-
-            #return str(run_operator(str_concat, [arg1,arg2]))
-        
-
-
-           # arg1 = interpreterFunction(node["arg"][0])
-            #arg2 = interpreterFunction(node["arg"][1])
-            #return str(arg1) + str(arg2)
-
-
-######
-
-
- # case "IS_STRING":
- #               print("case is_string")
-
-                #print(f"Der Datentyp von arg ist: {type(self.__symbol_table.get_variable_value(variable_name))}")
-                
-               # print(type(self.__symbol_table.get_variable_value(variable_name)))
-
-                #print(node)
-                #print(node["arg"])
-
-                #var1 = node["arg"]
-                #var2 = str(var1[0]['name'])
- 
-#                interpreted_args = node["arg"]
-
- #               print(f"Der Datentyp von arg ist: {type(self.__symbol_table.get_variable_value(var2))}")
-  #              print("JO")
-                
-   #             return(isinstance(self.__symbol_table.get_variable_value(var2), NumType))
-
-
-               # if type(self.__symbol_table.get_variable_value(var2)) == datatypes.StrType:
-                #    return True
-               # else:
-    #            return False
-#
-
-
-               # return self.run_operator(is_string, interpreted_args)
-
-
-  #  case "IS_STRING":
-             #   print("case is_string")
-          
-
-                #var2=str(node["arg"][0]['name'])
-               # interpreted_args = node["arg"]
-                #print(f"Der Datentyp von arg ist: {type(self.__symbol_table.get_variable_value(var2))}")

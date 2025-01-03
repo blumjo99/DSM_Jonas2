@@ -98,11 +98,11 @@ int main(int argc, char* argv[]) {
 
 
 
-/////////////////////// 
+ 
 /////////////////////// 
 // TOKENS
 ///////////////////////
-/////////////////////// 
+ 
 
 int get_token_id (char *token) {
 	if (strcmp(token, "DIVIDE") == 0) return DIVIDE;
@@ -184,35 +184,6 @@ int get_token_id (char *token) {
 	if (strcmp(token, "ELSEIF") == 0) return ELSEIF;
 	if (strcmp(token, "ELSE") == 0) return ELSE;
 	if (strcmp(token, "ENDIF") == 0) return ENDIF;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	
 	printf ("{\"error\" : true, \"message\": \"UNKNOWN TOKEN TYPE %s\"}\n", token);
@@ -369,11 +340,6 @@ statement(r) ::= IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 	r = res;
 }
 
-
-
-
-
-
 statement(r) ::= TIME IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 {
 	cJSON *res = cJSON_CreateObject();
@@ -382,7 +348,6 @@ statement(r) ::= TIME IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 	cJSON_AddItemToObject(res, "arg", e);
 	r = res;
 }
-
 
 statement(r) ::= TIME OF IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 {
@@ -393,16 +358,55 @@ statement(r) ::= TIME OF IDENTIFIER(i) ASSIGN ex(e) SEMICOLON .
 	r = res;
 }
 
+statement(r) ::= FOR IDENTIFIER(i) IN ex(e) FORRANGE ex(e2) DO statementblock(sb) ENDDO SEMICOLON .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "FOR_LOOP");
+	cJSON_AddStringToObject(res, "varname", getValue(i));
+	cJSON_AddItemToObject(res, "expression", e);
+	cJSON_AddItemToObject(res, "expression2", e2);
 
-
-
-
-
-
-ex(r) ::= LPAR ex(a) RPAR .    
-{ 
-	r = a; 
+	cJSON_AddItemToObject(res, "statements", sb);
+	r = res;
 }
+
+
+statement(r) ::= IF if_then_else(a) .
+{ r = a; }
+
+if_then_else(r) ::= ex(a) THEN statementblock(b) elseif(c) .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "IF");
+	cJSON_AddItemToObject(res, "condition", a);
+	cJSON_AddItemToObject(res, "thenbranch", (b));
+	cJSON_AddItemToObject(res, "elsebranch", (c));
+	r = res;
+}
+
+elseif(r) ::= ENDIF SEMICOLON .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "STATEMENT_BLOCK");
+	cJSON *arg = cJSON_CreateArray();
+	cJSON_AddItemToObject(res, "statements", arg);
+	r = res;
+}
+
+elseif(r) ::= ELSE statementblock(a) ENDIF SEMICOLON .
+{ r = a; }
+
+elseif(r) ::= ELSEIF if_then_else(a) .
+{ r = a; }
+
+
+
+
+
+///////////////////////////
+// EXPRESSION
+///////////////////////////
+
 
 
 ex(r) ::= NUMTOKEN (a).        
@@ -428,11 +432,6 @@ ex(r) ::= STRTOKEN (a).
 	cJSON_AddStringToObject(res, "value", getValue(a)); 
 	r = res; 
 }
-
-
-
-
-
 
 ex(r) ::= IDENTIFIER(a) .      
 { 
@@ -471,14 +470,12 @@ ex(r) ::= NOW .
 	r = res;
 }
 
-
 ex(r) ::= NULL1 .
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "NULL");
 	r = res;
 }
-
 
 of::= .
 of::= OF.
@@ -501,10 +498,8 @@ ex(r) ::= ex(a) DIVIDE ex(b) .
 ex(r) ::= ex(a) POWER ex(b) .                               
 {r = binary ("POWER", a, b); }
 
-
 ex(r) ::= ex(a) AMPERSAND ex(b) .
 { r = binary ("STR_CONCAT", a, b); }
-
 
 ex(r) ::= ex(a) IS NUMBER .
 { r = unary ("IS_NUMBER", a); }
@@ -518,8 +513,10 @@ ex(r) ::= ex(a) IS LIST .
 ex(r) ::= ex(a) IS NOT LIST .
 { r = unary ("IS_NOT_LIST", a); }
 
-
-
+ex(r) ::= LPAR ex(a) RPAR .    
+{ 
+	r = a; 
+}
 
 
 
@@ -527,8 +524,6 @@ ex(r) ::= ex(a) IS NOT LIST .
 
 ex(r) ::= jsonarray (a) .
 { r = a; }
-
-
 
 jsonarray(r) ::= LSPAR RSPAR .
 {
@@ -565,9 +560,6 @@ ex(r) ::= COUNT ex(a) .
 ex(r) ::= FIRST ex(a) .
 { r = unary ("FIRST", a); }
 
-
-
-
 ex(r) ::= ex(a) WHERE ex(b) .
 {
 	cJSON *res = cJSON_CreateObject();
@@ -580,9 +572,6 @@ ex(r) ::= ex(a) WHERE ex(b) .
 	cJSON_AddItemToObject(res, "opt", opt);
 	r = res;
 }
-
-
-
 
 ex(r) ::= ex(a) IS LESS THAN ex(b) .
 { 
@@ -609,10 +598,6 @@ ex(r) ::= ex(a) IS WITHIN ex(b) TO ex(c)  .
 	r = ternary ("IS_WITHIN", a, b, c); 
 }
 
-
-
-
-
 ex(r) ::= IT .
 {
 	cJSON *res = cJSON_CreateObject();
@@ -620,57 +605,8 @@ ex(r) ::= IT .
 	r = res;
 }
 
-
-
-
 ex(r) ::= ex(a) OCCURS BEFORE ex(b) .
 { r = binary ("OCCURS_BEFORE", a, b); }
 
-
-
 ex(r) ::= ex(a) OCCURRED AFTER ex(b) .
 { r = binary ("OCCURRED_AFTER", a, b); }
-
-
-statement(r) ::= FOR IDENTIFIER(i) IN ex(e) FORRANGE ex(e2) DO statementblock(sb) ENDDO SEMICOLON .
-{
-	cJSON *res = cJSON_CreateObject();
-	cJSON_AddStringToObject(res, "type", "FOR_LOOP");
-	cJSON_AddStringToObject(res, "varname", getValue(i));
-	cJSON_AddItemToObject(res, "expression", e);
-	cJSON_AddItemToObject(res, "expression2", e2);
-
-	cJSON_AddItemToObject(res, "statements", sb);
-	r = res;
-}
-
-
-
-
-statement(r) ::= IF if_then_else(a) .
-{ r = a; }
-
-if_then_else(r) ::= ex(a) THEN statementblock(b) elseif(c) .
-{
-	cJSON *res = cJSON_CreateObject();
-	cJSON_AddStringToObject(res, "type", "IF");
-	cJSON_AddItemToObject(res, "condition", a);
-	cJSON_AddItemToObject(res, "thenbranch", (b));
-	cJSON_AddItemToObject(res, "elsebranch", (c));
-	r = res;
-}
-
-elseif(r) ::= ENDIF SEMICOLON .
-{
-	cJSON *res = cJSON_CreateObject();
-	cJSON_AddStringToObject(res, "type", "STATEMENT_BLOCK");
-	cJSON *arg = cJSON_CreateArray();
-	cJSON_AddItemToObject(res, "statements", arg);
-	r = res;
-}
-
-elseif(r) ::= ELSE statementblock(a) ENDIF SEMICOLON .
-{ r = a; }
-
-elseif(r) ::= ELSEIF if_then_else(a) .
-{ r = a; }
