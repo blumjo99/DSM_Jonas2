@@ -1,7 +1,5 @@
 for x in 12 ... 18 do
-
  bmi := x * 2.3;
- 
  if bmi is greater than or equal 40 then
  trace "Adipositas III";
  elseif bmi is greater than or equal 35 then
@@ -10,6 +8,5 @@ for x in 12 ... 18 do
  trace "Adipositas I";
  else
  trace "Keine Adipositas";
-
  endif;
 enddo; 

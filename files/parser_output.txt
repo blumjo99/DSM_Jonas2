@@ -21,7 +21,7 @@
 							"arg":	[{
 									"type":	"VARIABLE",
 									"name":	"x",
-									"line":	"3"
+									"line":	"2"
 								}, {
 									"type":	"NUMBER",
 									"value":	"2.3"
@@ -34,7 +34,7 @@
 							"arg":	[{
 									"type":	"VARIABLE",
 									"name":	"bmi",
-									"line":	"5"
+									"line":	"3"
 								}, {
 									"type":	"NUMBER",
 									"value":	"40"
@@ -44,7 +44,7 @@
 							"type":	"STATEMENTBLOCK",
 							"statements":	[{
 									"type":	"TRACE",
-									"line":	"6",
+									"line":	"4",
 									"arg":	{
 										"type":	"STRTOKEN",
 										"value":	"Adipositas III"
@@ -58,7 +58,7 @@
 								"arg":	[{
 										"type":	"VARIABLE",
 										"name":	"bmi",
-										"line":	"7"
+										"line":	"5"
 									}, {
 										"type":	"NUMBER",
 										"value":	"35"
@@ -68,7 +68,7 @@
 								"type":	"STATEMENTBLOCK",
 								"statements":	[{
 										"type":	"TRACE",
-										"line":	"8",
+										"line":	"6",
 										"arg":	{
 											"type":	"STRTOKEN",
 											"value":	"Adipositas II"
@@ -82,7 +82,7 @@
 									"arg":	[{
 											"type":	"VARIABLE",
 											"name":	"bmi",
-											"line":	"9"
+											"line":	"7"
 										}, {
 											"type":	"NUMBER",
 											"value":	"30"
@@ -92,7 +92,7 @@
 									"type":	"STATEMENTBLOCK",
 									"statements":	[{
 											"type":	"TRACE",
-											"line":	"10",
+											"line":	"8",
 											"arg":	{
 												"type":	"STRTOKEN",
 												"value":	"Adipositas I"
@@ -103,7 +103,7 @@
 									"type":	"STATEMENTBLOCK",
 									"statements":	[{
 											"type":	"TRACE",
-											"line":	"12",
+											"line":	"10",
 											"arg":	{
 												"type":	"STRTOKEN",
 												"value":	"Keine Adipositas"
