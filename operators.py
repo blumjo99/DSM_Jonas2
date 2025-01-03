@@ -60,8 +60,11 @@ def first(arg: ListType):
 def less_than(left_arg, right_arg):
     return BoolType(float(left_arg.value) < float(right_arg.value))
 
+
+
 def occurs_before(left_arg, right_arg):
     return BoolType((left_arg.value) <(right_arg.value))
+
 
 def occured_after(left_arg, right_arg):
 

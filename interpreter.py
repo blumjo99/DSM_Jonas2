@@ -266,17 +266,7 @@ class Interpreter:
                 return ListType(new_list)
             
 
-               # print(print([str(item) for item in new_list]))
-
-               # for entry in value.items:
-                   # value1 = self.interpreterFunction(node["opt"][0])
-
-                   # for entry2 in value1.items:
-                     #   print(entry2)
-                        #print(entry)
-
-                    
-                  #  print("next")
+        
             
             case "TIME_READ":
                 value = self.interpreterFunction(node["arg"][0])
@@ -293,9 +283,7 @@ class Interpreter:
                 variable_name = node["varname"]
                 list =  self.symbol_table.get_variable_value(variable_name)
 
-              #  print(value)
-              #  print(index)
-              #  print(list)
+      
 
 
                 list.changeEntry(index, value)
@@ -308,14 +296,12 @@ class Interpreter:
                # print(list)
 
             case "OCCURS_BEFORE":
-               # interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
 
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
             
                 return str(self.run_operator(occurs_before, interpreted_args))
 
-               # value = self.interpreterFunction(node["opt"])
-               # print(value)
+    
 
             case "OCCURRED_AFTER":
               #  print("case ocurred after")
@@ -324,9 +310,7 @@ class Interpreter:
             
                 return str(self.run_operator(occured_after, interpreted_args))
 
-               # value = self.interpreterFunction(node["opt"])
-               # print(value)
-
+            
 
                
 
