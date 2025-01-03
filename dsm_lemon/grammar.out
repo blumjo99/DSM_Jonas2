@@ -4,7 +4,7 @@ State 0:
           statementblock ::= * statementblock statement
 
                           code accept
-                statementblock shift        30     
+                statementblock shift        36     
                      {default} reduce       1      statementblock ::=
 
 State 1:
@@ -41,17 +41,19 @@ State 1:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
                          RSPAR shift-reduce 31     jsonarray ::= LSPAR RSPAR
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -60,11 +62,11 @@ State 1:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        47     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        56     
                      jsonarray shift-reduce 30     ex ::= jsonarray
-                        exlist shift        64     
+                        exlist shift        75     
 
 State 2:
           ex ::= * LPAR ex RPAR
@@ -95,19 +97,21 @@ State 2:
           ex ::= * FIRST ex
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
-          ex ::= ex IS LESS THAN * ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
-          ex ::= ex IS LESS THAN * OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
+          if_then_else ::= * ex THEN statementblock elseif
+          elseif ::= ELSEIF * if_then_else
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -116,11 +120,11 @@ State 2:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            OR shift        72     
-                            ex shift        57     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        41     
                      jsonarray shift-reduce 30     ex ::= jsonarray
+                  if_then_else shift-reduce 51     elseif ::= ELSEIF if_then_else
 
 State 3:
           ex ::= * LPAR ex RPAR
@@ -152,17 +156,20 @@ State 3:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
-          statement ::= FOR IDENTIFIER IN ex FORRANGE * ex DO statementblock ENDDO SEMICOLON
+          statement ::= IF * if_then_else
+          if_then_else ::= * ex THEN statementblock elseif
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -171,10 +178,11 @@ State 3:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        33     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        41     
                      jsonarray shift-reduce 30     ex ::= jsonarray
+                  if_then_else shift-reduce 47     statement ::= IF if_then_else
 
 State 4:
           ex ::= * LPAR ex RPAR
@@ -206,17 +214,20 @@ State 4:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= ex IS GREATER THAN * ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= ex IS GREATER THAN * OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
-          statement ::= FOR IDENTIFIER IN * ex FORRANGE ex DO statementblock ENDDO SEMICOLON
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -225,12 +236,183 @@ State 4:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        34     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            OR shift        85     
+                            ex shift        67     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
 State 5:
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * CURRENTTIME
+          ex ::= * NOW
+          ex ::= * NULL1
+          ex ::= * TIME of ex
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          ex ::= * COUNT ex
+          ex ::= * FIRST ex
+          ex ::= * ex WHERE ex
+          ex ::= * ex IS LESS THAN ex
+          ex ::= ex IS LESS THAN * ex
+          ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= ex IS LESS THAN * OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= * ex IS WITHIN ex TO ex
+          ex ::= * IT
+          ex ::= * ex OCCURS BEFORE ex
+          ex ::= * ex OCCURRED AFTER ex
+
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
+                         LSPAR shift        1      
+                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
+                          LPAR shift        30     
+                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
+                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
+                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
+                          TRUE shift-reduce 14     ex ::= TRUE
+                         FALSE shift-reduce 15     ex ::= FALSE
+                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
+                           NOW shift-reduce 17     ex ::= NOW
+                         NULL1 shift-reduce 18     ex ::= NULL1
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            OR shift        87     
+                            ex shift        69     
+                     jsonarray shift-reduce 30     ex ::= jsonarray
+
+State 6:
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * CURRENTTIME
+          ex ::= * NOW
+          ex ::= * NULL1
+          ex ::= * TIME of ex
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          ex ::= * COUNT ex
+          ex ::= * FIRST ex
+          ex ::= * ex WHERE ex
+          ex ::= * ex IS LESS THAN ex
+          ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= * ex IS WITHIN ex TO ex
+          ex ::= * IT
+          ex ::= * ex OCCURS BEFORE ex
+          ex ::= * ex OCCURRED AFTER ex
+          statement ::= FOR IDENTIFIER IN ex FORRANGE * ex DO statementblock ENDDO SEMICOLON
+
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
+                         LSPAR shift        1      
+                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
+                          LPAR shift        30     
+                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
+                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
+                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
+                          TRUE shift-reduce 14     ex ::= TRUE
+                         FALSE shift-reduce 15     ex ::= FALSE
+                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
+                           NOW shift-reduce 17     ex ::= NOW
+                         NULL1 shift-reduce 18     ex ::= NULL1
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        42     
+                     jsonarray shift-reduce 30     ex ::= jsonarray
+
+State 7:
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * CURRENTTIME
+          ex ::= * NOW
+          ex ::= * NULL1
+          ex ::= * TIME of ex
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          ex ::= * COUNT ex
+          ex ::= * FIRST ex
+          ex ::= * ex WHERE ex
+          ex ::= * ex IS LESS THAN ex
+          ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= * ex IS WITHIN ex TO ex
+          ex ::= * IT
+          ex ::= * ex OCCURS BEFORE ex
+          ex ::= * ex OCCURRED AFTER ex
+          statement ::= FOR IDENTIFIER IN * ex FORRANGE ex DO statementblock ENDDO SEMICOLON
+
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
+                         LSPAR shift        1      
+                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
+                          LPAR shift        30     
+                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
+                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
+                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
+                          TRUE shift-reduce 14     ex ::= TRUE
+                         FALSE shift-reduce 15     ex ::= FALSE
+                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
+                           NOW shift-reduce 17     ex ::= NOW
+                         NULL1 shift-reduce 18     ex ::= NULL1
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        43     
+                     jsonarray shift-reduce 30     ex ::= jsonarray
+
+State 8:
           statement ::= TIME OF IDENTIFIER ASSIGN * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -261,16 +443,18 @@ State 5:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -279,12 +463,12 @@ State 5:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        35     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        44     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 6:
+State 9:
           statement ::= TIME IDENTIFIER ASSIGN * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -315,16 +499,18 @@ State 6:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -333,12 +519,12 @@ State 6:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        36     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        45     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 7:
+State 10:
           statement ::= IDENTIFIER ASSIGN * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -369,16 +555,18 @@ State 7:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -387,12 +575,12 @@ State 7:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        37     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        46     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 8:
+State 11:
           statement ::= IDENTIFIER LSPAR ex RSPAR ASSIGN * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -423,16 +611,18 @@ State 8:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -441,12 +631,12 @@ State 8:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        38     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        47     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 9:
+State 12:
           statement ::= IDENTIFIER LSPAR * ex RSPAR ASSIGN ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -477,16 +667,18 @@ State 9:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -495,12 +687,12 @@ State 9:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        39     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        48     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 10:
+State 13:
           statement ::= TRACE * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -531,16 +723,18 @@ State 10:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -549,171 +743,9 @@ State 10:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        40     
-                     jsonarray shift-reduce 30     ex ::= jsonarray
-
-State 11:
-          ex ::= * LPAR ex RPAR
-          ex ::= * NUMTOKEN
-          ex ::= * TIMETOKEN
-          ex ::= * STRTOKEN
-          ex ::= * IDENTIFIER
-          ex ::= * TRUE
-          ex ::= * FALSE
-          ex ::= * CURRENTTIME
-          ex ::= * NOW
-          ex ::= * NULL1
-          ex ::= * TIME of ex
-          ex ::= * ex PLUS ex
-          ex ::= * ex MINUS ex
-          ex ::= * ex TIMES ex
-          ex ::= * ex DIVIDE ex
-          ex ::= * ex POWER ex
-          ex ::= * ex AMPERSAND ex
-          ex ::= * ex IS NUMBER
-          ex ::= * ex IS STRING
-          ex ::= * ex IS LIST
-          ex ::= * ex IS NOT LIST
-          ex ::= * jsonarray
-          jsonarray ::= * LSPAR RSPAR
-          jsonarray ::= * LSPAR exlist RSPAR
-          ex ::= * COUNT ex
-          ex ::= * FIRST ex
-          ex ::= * ex WHERE ex
-          ex ::= * ex IS LESS THAN ex
-          ex ::= * ex IS LESS THAN OR EQUAL ex
-          ex ::= * ex IS WITHIN ex TO ex
-          ex ::= ex IS WITHIN ex TO * ex
-          ex ::= * IT
-          ex ::= * ex OCCURS BEFORE ex
-          ex ::= * ex OCCURRED AFTER ex
-
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
-                         LSPAR shift        1      
-                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
-                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
-                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
-                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
-                          TRUE shift-reduce 14     ex ::= TRUE
-                         FALSE shift-reduce 15     ex ::= FALSE
-                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
-                           NOW shift-reduce 17     ex ::= NOW
-                         NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        55     
-                     jsonarray shift-reduce 30     ex ::= jsonarray
-
-State 12:
-          ex ::= * LPAR ex RPAR
-          ex ::= * NUMTOKEN
-          ex ::= * TIMETOKEN
-          ex ::= * STRTOKEN
-          ex ::= * IDENTIFIER
-          ex ::= * TRUE
-          ex ::= * FALSE
-          ex ::= * CURRENTTIME
-          ex ::= * NOW
-          ex ::= * NULL1
-          ex ::= * TIME of ex
-          ex ::= * ex PLUS ex
-          ex ::= * ex MINUS ex
-          ex ::= * ex TIMES ex
-          ex ::= * ex DIVIDE ex
-          ex ::= * ex POWER ex
-          ex ::= * ex AMPERSAND ex
-          ex ::= * ex IS NUMBER
-          ex ::= * ex IS STRING
-          ex ::= * ex IS LIST
-          ex ::= * ex IS NOT LIST
-          ex ::= * jsonarray
-          jsonarray ::= * LSPAR RSPAR
-          jsonarray ::= * LSPAR exlist RSPAR
-          ex ::= * COUNT ex
-          ex ::= * FIRST ex
-          ex ::= * ex WHERE ex
-          ex ::= * ex IS LESS THAN ex
-          ex ::= * ex IS LESS THAN OR EQUAL ex
-          ex ::= * ex IS WITHIN ex TO ex
-          ex ::= ex IS WITHIN * ex TO ex
-          ex ::= * IT
-          ex ::= * ex OCCURS BEFORE ex
-          ex ::= * ex OCCURRED AFTER ex
-
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
-                         LSPAR shift        1      
-                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
-                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
-                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
-                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
-                          TRUE shift-reduce 14     ex ::= TRUE
-                         FALSE shift-reduce 15     ex ::= FALSE
-                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
-                           NOW shift-reduce 17     ex ::= NOW
-                         NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        41     
-                     jsonarray shift-reduce 30     ex ::= jsonarray
-
-State 13:
-          ex ::= * LPAR ex RPAR
-          ex ::= * NUMTOKEN
-          ex ::= * TIMETOKEN
-          ex ::= * STRTOKEN
-          ex ::= * IDENTIFIER
-          ex ::= * TRUE
-          ex ::= * FALSE
-          ex ::= * CURRENTTIME
-          ex ::= * NOW
-          ex ::= * NULL1
-          ex ::= * TIME of ex
-          ex ::= * ex PLUS ex
-          ex ::= * ex MINUS ex
-          ex ::= * ex TIMES ex
-          ex ::= * ex DIVIDE ex
-          ex ::= * ex POWER ex
-          ex ::= * ex AMPERSAND ex
-          ex ::= * ex IS NUMBER
-          ex ::= * ex IS STRING
-          ex ::= * ex IS LIST
-          ex ::= * ex IS NOT LIST
-          ex ::= * jsonarray
-          jsonarray ::= * LSPAR RSPAR
-          jsonarray ::= * LSPAR exlist RSPAR
-          ex ::= * COUNT ex
-          ex ::= * FIRST ex
-          ex ::= * ex WHERE ex
-          ex ::= * ex IS LESS THAN ex
-          ex ::= * ex IS LESS THAN OR EQUAL ex
-          ex ::= ex IS LESS THAN OR EQUAL * ex
-          ex ::= * ex IS WITHIN ex TO ex
-          ex ::= * IT
-          ex ::= * ex OCCURS BEFORE ex
-          ex ::= * ex OCCURRED AFTER ex
-
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
-                         LSPAR shift        1      
-                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
-                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
-                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
-                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
-                          TRUE shift-reduce 14     ex ::= TRUE
-                         FALSE shift-reduce 15     ex ::= FALSE
-                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
-                           NOW shift-reduce 17     ex ::= NOW
-                         NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        56     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        49     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
 State 14:
@@ -743,20 +775,22 @@ State 14:
           jsonarray ::= * LSPAR exlist RSPAR
           ex ::= * COUNT ex
           ex ::= * FIRST ex
-          ex ::= FIRST * ex
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
+          ex ::= ex IS WITHIN ex TO * ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -765,9 +799,9 @@ State 14:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        44     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        65     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
 State 15:
@@ -796,21 +830,23 @@ State 15:
           jsonarray ::= * LSPAR RSPAR
           jsonarray ::= * LSPAR exlist RSPAR
           ex ::= * COUNT ex
-          ex ::= COUNT * ex
           ex ::= * FIRST ex
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
+          ex ::= ex IS WITHIN * ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -819,9 +855,9 @@ State 15:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        45     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        50     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
 State 16:
@@ -849,22 +885,24 @@ State 16:
           ex ::= * jsonarray
           jsonarray ::= * LSPAR RSPAR
           jsonarray ::= * LSPAR exlist RSPAR
-          exlist ::= exlist COMMA * ex
           ex ::= * COUNT ex
           ex ::= * FIRST ex
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= ex IS GREATER THAN OR EQUAL * ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -873,9 +911,9 @@ State 16:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        46     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        66     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
 State 17:
@@ -908,17 +946,19 @@ State 17:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= ex IS LESS THAN OR EQUAL * ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
-          ex ::= ex OCCURRED AFTER * ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -927,9 +967,9 @@ State 17:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        48     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        68     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
 State 18:
@@ -959,20 +999,22 @@ State 18:
           jsonarray ::= * LSPAR exlist RSPAR
           ex ::= * COUNT ex
           ex ::= * FIRST ex
+          ex ::= FIRST * ex
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
-          ex ::= ex OCCURS BEFORE * ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -981,12 +1023,236 @@ State 18:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        49     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        53     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
 State 19:
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * CURRENTTIME
+          ex ::= * NOW
+          ex ::= * NULL1
+          ex ::= * TIME of ex
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          ex ::= * COUNT ex
+          ex ::= COUNT * ex
+          ex ::= * FIRST ex
+          ex ::= * ex WHERE ex
+          ex ::= * ex IS LESS THAN ex
+          ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= * ex IS WITHIN ex TO ex
+          ex ::= * IT
+          ex ::= * ex OCCURS BEFORE ex
+          ex ::= * ex OCCURRED AFTER ex
+
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
+                         LSPAR shift        1      
+                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
+                          LPAR shift        30     
+                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
+                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
+                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
+                          TRUE shift-reduce 14     ex ::= TRUE
+                         FALSE shift-reduce 15     ex ::= FALSE
+                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
+                           NOW shift-reduce 17     ex ::= NOW
+                         NULL1 shift-reduce 18     ex ::= NULL1
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        54     
+                     jsonarray shift-reduce 30     ex ::= jsonarray
+
+State 20:
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * CURRENTTIME
+          ex ::= * NOW
+          ex ::= * NULL1
+          ex ::= * TIME of ex
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          exlist ::= exlist COMMA * ex
+          ex ::= * COUNT ex
+          ex ::= * FIRST ex
+          ex ::= * ex WHERE ex
+          ex ::= * ex IS LESS THAN ex
+          ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= * ex IS WITHIN ex TO ex
+          ex ::= * IT
+          ex ::= * ex OCCURS BEFORE ex
+          ex ::= * ex OCCURRED AFTER ex
+
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
+                         LSPAR shift        1      
+                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
+                          LPAR shift        30     
+                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
+                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
+                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
+                          TRUE shift-reduce 14     ex ::= TRUE
+                         FALSE shift-reduce 15     ex ::= FALSE
+                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
+                           NOW shift-reduce 17     ex ::= NOW
+                         NULL1 shift-reduce 18     ex ::= NULL1
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        55     
+                     jsonarray shift-reduce 30     ex ::= jsonarray
+
+State 21:
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * CURRENTTIME
+          ex ::= * NOW
+          ex ::= * NULL1
+          ex ::= * TIME of ex
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          ex ::= * COUNT ex
+          ex ::= * FIRST ex
+          ex ::= * ex WHERE ex
+          ex ::= * ex IS LESS THAN ex
+          ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= * ex IS WITHIN ex TO ex
+          ex ::= * IT
+          ex ::= * ex OCCURS BEFORE ex
+          ex ::= * ex OCCURRED AFTER ex
+          ex ::= ex OCCURRED AFTER * ex
+
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
+                         LSPAR shift        1      
+                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
+                          LPAR shift        30     
+                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
+                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
+                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
+                          TRUE shift-reduce 14     ex ::= TRUE
+                         FALSE shift-reduce 15     ex ::= FALSE
+                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
+                           NOW shift-reduce 17     ex ::= NOW
+                         NULL1 shift-reduce 18     ex ::= NULL1
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        57     
+                     jsonarray shift-reduce 30     ex ::= jsonarray
+
+State 22:
+          ex ::= * LPAR ex RPAR
+          ex ::= * NUMTOKEN
+          ex ::= * TIMETOKEN
+          ex ::= * STRTOKEN
+          ex ::= * IDENTIFIER
+          ex ::= * TRUE
+          ex ::= * FALSE
+          ex ::= * CURRENTTIME
+          ex ::= * NOW
+          ex ::= * NULL1
+          ex ::= * TIME of ex
+          ex ::= * ex PLUS ex
+          ex ::= * ex MINUS ex
+          ex ::= * ex TIMES ex
+          ex ::= * ex DIVIDE ex
+          ex ::= * ex POWER ex
+          ex ::= * ex AMPERSAND ex
+          ex ::= * ex IS NUMBER
+          ex ::= * ex IS STRING
+          ex ::= * ex IS LIST
+          ex ::= * ex IS NOT LIST
+          ex ::= * jsonarray
+          jsonarray ::= * LSPAR RSPAR
+          jsonarray ::= * LSPAR exlist RSPAR
+          ex ::= * COUNT ex
+          ex ::= * FIRST ex
+          ex ::= * ex WHERE ex
+          ex ::= * ex IS LESS THAN ex
+          ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
+          ex ::= * ex IS WITHIN ex TO ex
+          ex ::= * IT
+          ex ::= * ex OCCURS BEFORE ex
+          ex ::= ex OCCURS BEFORE * ex
+          ex ::= * ex OCCURRED AFTER ex
+
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
+                         LSPAR shift        1      
+                    IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
+                          LPAR shift        30     
+                      NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
+                     TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
+                      STRTOKEN shift-reduce 12     ex ::= STRTOKEN
+                          TRUE shift-reduce 14     ex ::= TRUE
+                         FALSE shift-reduce 15     ex ::= FALSE
+                   CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
+                           NOW shift-reduce 17     ex ::= NOW
+                         NULL1 shift-reduce 18     ex ::= NULL1
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        58     
+                     jsonarray shift-reduce 30     ex ::= jsonarray
+
+State 23:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1017,16 +1283,18 @@ State 19:
           ex ::= ex WHERE * ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1035,12 +1303,12 @@ State 19:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        50     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        59     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 20:
+State 24:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1071,16 +1339,18 @@ State 20:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1089,12 +1359,12 @@ State 20:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        51     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        60     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 21:
+State 25:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1125,16 +1395,18 @@ State 21:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1143,12 +1415,12 @@ State 21:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        59     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        70     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 22:
+State 26:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1179,16 +1451,18 @@ State 22:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1197,12 +1471,12 @@ State 22:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        60     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        71     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 23:
+State 27:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1233,16 +1507,18 @@ State 23:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1251,12 +1527,12 @@ State 23:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        61     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        72     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 24:
+State 28:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1287,16 +1563,18 @@ State 24:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1305,12 +1583,12 @@ State 24:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        54     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        64     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 25:
+State 29:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1341,16 +1619,18 @@ State 25:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1359,12 +1639,12 @@ State 25:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        53     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        62     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 26:
+State 30:
           ex ::= * LPAR ex RPAR
           ex ::= LPAR * ex RPAR
           ex ::= * NUMTOKEN
@@ -1395,16 +1675,18 @@ State 26:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1413,12 +1695,12 @@ State 26:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        42     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        51     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 27:
+State 31:
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
           ex ::= * TIMETOKEN
@@ -1449,16 +1731,18 @@ State 27:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1467,12 +1751,12 @@ State 27:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        52     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        61     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 28:
+State 32:
           statement ::= WRITE * ex SEMICOLON
           ex ::= * LPAR ex RPAR
           ex ::= * NUMTOKEN
@@ -1503,16 +1787,18 @@ State 28:
           ex ::= * ex WHERE ex
           ex ::= * ex IS LESS THAN ex
           ex ::= * ex IS LESS THAN OR EQUAL ex
+          ex ::= * ex IS GREATER THAN ex
+          ex ::= * ex IS GREATER THAN OR EQUAL ex
           ex ::= * ex IS WITHIN ex TO ex
           ex ::= * IT
           ex ::= * ex OCCURS BEFORE ex
           ex ::= * ex OCCURRED AFTER ex
 
-                          TIME shift        31     
-                            IT shift-reduce 41     ex ::= IT
+                          TIME shift        37     
+                            IT shift-reduce 43     ex ::= IT
                          LSPAR shift        1      
                     IDENTIFIER shift-reduce 13     ex ::= IDENTIFIER
-                          LPAR shift        26     
+                          LPAR shift        30     
                       NUMTOKEN shift-reduce 10     ex ::= NUMTOKEN
                      TIMETOKEN shift-reduce 11     ex ::= TIMETOKEN
                       STRTOKEN shift-reduce 12     ex ::= STRTOKEN
@@ -1521,12 +1807,60 @@ State 28:
                    CURRENTTIME shift-reduce 16     ex ::= CURRENTTIME
                            NOW shift-reduce 17     ex ::= NOW
                          NULL1 shift-reduce 18     ex ::= NULL1
-                         COUNT shift        15     
-                         FIRST shift        14     
-                            ex shift        43     
+                         COUNT shift        19     
+                         FIRST shift        18     
+                            ex shift        52     
                      jsonarray shift-reduce 30     ex ::= jsonarray
 
-State 29:
+State 33:
+          statementblock ::= statementblock * statement
+          statement ::= * WRITE ex SEMICOLON
+          statement ::= * TRACE ex SEMICOLON
+          statement ::= * IDENTIFIER LSPAR ex RSPAR ASSIGN ex SEMICOLON
+          statement ::= * IDENTIFIER ASSIGN ex SEMICOLON
+          statement ::= * TIME IDENTIFIER ASSIGN ex SEMICOLON
+          statement ::= * TIME OF IDENTIFIER ASSIGN ex SEMICOLON
+          statement ::= * FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
+          statement ::= * IF if_then_else
+          if_then_else ::= ex THEN statementblock * elseif
+          elseif ::= * ENDIF SEMICOLON
+          elseif ::= * ELSE statementblock ENDIF SEMICOLON
+          elseif ::= * ELSEIF if_then_else
+
+                          TIME shift        73     
+                         WRITE shift        32     
+                         TRACE shift        13     
+                    IDENTIFIER shift        74     
+                           FOR shift        80     
+                            IF shift        3      
+                         ENDIF shift        77     
+                          ELSE shift        38     
+                        ELSEIF shift        2      
+                     statement shift-reduce 2      statementblock ::= statementblock statement
+                        elseif shift-reduce 48     if_then_else ::= ex THEN statementblock elseif
+
+State 34:
+          statementblock ::= statementblock * statement
+          statement ::= * WRITE ex SEMICOLON
+          statement ::= * TRACE ex SEMICOLON
+          statement ::= * IDENTIFIER LSPAR ex RSPAR ASSIGN ex SEMICOLON
+          statement ::= * IDENTIFIER ASSIGN ex SEMICOLON
+          statement ::= * TIME IDENTIFIER ASSIGN ex SEMICOLON
+          statement ::= * TIME OF IDENTIFIER ASSIGN ex SEMICOLON
+          statement ::= * FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
+          statement ::= * IF if_then_else
+          elseif ::= ELSE statementblock * ENDIF SEMICOLON
+
+                          TIME shift        73     
+                         WRITE shift        32     
+                         TRACE shift        13     
+                    IDENTIFIER shift        74     
+                           FOR shift        80     
+                            IF shift        3      
+                         ENDIF shift        76     
+                     statement shift-reduce 2      statementblock ::= statementblock statement
+
+State 35:
           statementblock ::= statementblock * statement
           statement ::= * WRITE ex SEMICOLON
           statement ::= * TRACE ex SEMICOLON
@@ -1536,16 +1870,18 @@ State 29:
           statement ::= * TIME OF IDENTIFIER ASSIGN ex SEMICOLON
           statement ::= * FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
           statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock * ENDDO SEMICOLON
+          statement ::= * IF if_then_else
 
-                          TIME shift        62     
-                         WRITE shift        28     
-                         TRACE shift        10     
-                    IDENTIFIER shift        63     
-                           FOR shift        67     
-                         ENDDO shift        65     
+                          TIME shift        73     
+                         WRITE shift        32     
+                         TRACE shift        13     
+                    IDENTIFIER shift        74     
+                           FOR shift        80     
+                         ENDDO shift        78     
+                            IF shift        3      
                      statement shift-reduce 2      statementblock ::= statementblock statement
 
-State 30:
+State 36:
       (0) code ::= statementblock *
           statementblock ::= statementblock * statement
           statement ::= * WRITE ex SEMICOLON
@@ -1555,279 +1891,49 @@ State 30:
           statement ::= * TIME IDENTIFIER ASSIGN ex SEMICOLON
           statement ::= * TIME OF IDENTIFIER ASSIGN ex SEMICOLON
           statement ::= * FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
+          statement ::= * IF if_then_else
 
                              $ reduce       0      code ::= statementblock
-                          TIME shift        62     
-                         WRITE shift        28     
-                         TRACE shift        10     
-                    IDENTIFIER shift        63     
-                           FOR shift        67     
+                          TIME shift        73     
+                         WRITE shift        32     
+                         TRACE shift        13     
+                    IDENTIFIER shift        74     
+                           FOR shift        80     
+                            IF shift        3      
                      statement shift-reduce 2      statementblock ::= statementblock statement
 
-State 31:
-     (45) of ::= *
+State 37:
+     (52) of ::= *
           of ::= * OF
           ex ::= TIME * of ex
 
-                            OF shift-reduce 46     of ::= OF
-                            of shift        24     
-                     {default} reduce       45     of ::=
+                            OF shift-reduce 53     of ::= OF
+                            of shift        28     
+                     {default} reduce       52     of ::=
 
-State 32:
+State 38:
+      (1) statementblock ::= *
+          statementblock ::= * statementblock statement
+          elseif ::= ELSE * statementblock ENDIF SEMICOLON
+
+                statementblock shift        34     
+                     {default} reduce       1      statementblock ::=
+
+State 39:
+      (1) statementblock ::= *
+          statementblock ::= * statementblock statement
+          if_then_else ::= ex THEN * statementblock elseif
+
+                statementblock shift        33     
+                     {default} reduce       1      statementblock ::=
+
+State 40:
       (1) statementblock ::= *
           statementblock ::= * statementblock statement
           statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO * statementblock ENDDO SEMICOLON
 
-                statementblock shift        29     
+                statementblock shift        35     
                      {default} reduce       1      statementblock ::=
-
-State 33:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-          statement ::= FOR IDENTIFIER IN ex FORRANGE ex * DO statementblock ENDDO SEMICOLON
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
-                            DO shift        32     
-
-State 34:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-          statement ::= FOR IDENTIFIER IN ex * FORRANGE ex DO statementblock ENDDO SEMICOLON
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
-                      FORRANGE shift        3      
-
-State 35:
-          statement ::= TIME OF IDENTIFIER ASSIGN ex * SEMICOLON
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     SEMICOLON shift-reduce 8      statement ::= TIME OF IDENTIFIER ASSIGN ex SEMICOLON
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
-
-State 36:
-          statement ::= TIME IDENTIFIER ASSIGN ex * SEMICOLON
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     SEMICOLON shift-reduce 7      statement ::= TIME IDENTIFIER ASSIGN ex SEMICOLON
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
-
-State 37:
-          statement ::= IDENTIFIER ASSIGN ex * SEMICOLON
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     SEMICOLON shift-reduce 6      statement ::= IDENTIFIER ASSIGN ex SEMICOLON
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
-
-State 38:
-          statement ::= IDENTIFIER LSPAR ex RSPAR ASSIGN ex * SEMICOLON
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     SEMICOLON shift-reduce 5      statement ::= IDENTIFIER LSPAR ex RSPAR ASSIGN ex SEMICOLON
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
-
-State 39:
-          statement ::= IDENTIFIER LSPAR ex * RSPAR ASSIGN ex SEMICOLON
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                         RSPAR shift        71     
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
-
-State 40:
-          statement ::= TRACE ex * SEMICOLON
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     SEMICOLON shift-reduce 4      statement ::= TRACE ex SEMICOLON
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
 
 State 41:
           ex ::= ex * PLUS ex
@@ -1843,24 +1949,323 @@ State 41:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+          if_then_else ::= ex * THEN statementblock elseif
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+                          THEN shift        39     
+
+State 42:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+          statement ::= FOR IDENTIFIER IN ex FORRANGE ex * DO statementblock ENDDO SEMICOLON
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+                            DO shift        40     
+
+State 43:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+          statement ::= FOR IDENTIFIER IN ex * FORRANGE ex DO statementblock ENDDO SEMICOLON
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+                      FORRANGE shift        6      
+
+State 44:
+          statement ::= TIME OF IDENTIFIER ASSIGN ex * SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     SEMICOLON shift-reduce 8      statement ::= TIME OF IDENTIFIER ASSIGN ex SEMICOLON
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+
+State 45:
+          statement ::= TIME IDENTIFIER ASSIGN ex * SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     SEMICOLON shift-reduce 7      statement ::= TIME IDENTIFIER ASSIGN ex SEMICOLON
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+
+State 46:
+          statement ::= IDENTIFIER ASSIGN ex * SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     SEMICOLON shift-reduce 6      statement ::= IDENTIFIER ASSIGN ex SEMICOLON
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+
+State 47:
+          statement ::= IDENTIFIER LSPAR ex RSPAR ASSIGN ex * SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     SEMICOLON shift-reduce 5      statement ::= IDENTIFIER LSPAR ex RSPAR ASSIGN ex SEMICOLON
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+
+State 48:
+          statement ::= IDENTIFIER LSPAR ex * RSPAR ASSIGN ex SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                         RSPAR shift        84     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+
+State 49:
+          statement ::= TRACE ex * SEMICOLON
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     SEMICOLON shift-reduce 4      statement ::= TRACE ex SEMICOLON
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
+
+State 50:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex IS WITHIN ex * TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                            TO shift        11     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                            TO shift        14     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
 
-State 42:
+State 51:
           ex ::= LPAR ex * RPAR
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -1875,23 +2280,25 @@ State 42:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
                           RPAR shift-reduce 9      ex ::= LPAR ex RPAR
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
 
-State 43:
+State 52:
           statement ::= WRITE ex * SEMICOLON
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
@@ -1906,23 +2313,25 @@ State 43:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
                      SEMICOLON shift-reduce 3      statement ::= WRITE ex SEMICOLON
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
 
-State 44:
+State 53:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
@@ -1937,33 +2346,35 @@ State 44:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         WHERE shift        19     
+                         WHERE shift        23     
                          WHERE reduce       36      ** Parsing conflict **
-                          PLUS shift        27     
+                          PLUS shift        31     
                           PLUS reduce       36      ** Parsing conflict **
-                         MINUS shift        25     
+                         MINUS shift        29     
                          MINUS reduce       36      ** Parsing conflict **
-                            IS shift        58     
+                            IS shift        63     
                             IS reduce       36      ** Parsing conflict **
-                         TIMES shift        23     
+                         TIMES shift        27     
                          TIMES reduce       36      ** Parsing conflict **
-                        DIVIDE shift        22     
+                        DIVIDE shift        26     
                         DIVIDE reduce       36      ** Parsing conflict **
-                         POWER shift        21     
+                         POWER shift        25     
                          POWER reduce       36      ** Parsing conflict **
-                     AMPERSAND shift        20     
+                     AMPERSAND shift        24     
                      AMPERSAND reduce       36      ** Parsing conflict **
-                        OCCURS shift        74     
+                        OCCURS shift        89     
                         OCCURS reduce       36      ** Parsing conflict **
-                      OCCURRED shift        73     
+                      OCCURRED shift        88     
                       OCCURRED reduce       36      ** Parsing conflict **
                      {default} reduce       36     ex ::= FIRST ex
 
-State 45:
+State 54:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
@@ -1978,33 +2389,35 @@ State 45:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         WHERE shift        19     
+                         WHERE shift        23     
                          WHERE reduce       35      ** Parsing conflict **
-                          PLUS shift        27     
+                          PLUS shift        31     
                           PLUS reduce       35      ** Parsing conflict **
-                         MINUS shift        25     
+                         MINUS shift        29     
                          MINUS reduce       35      ** Parsing conflict **
-                            IS shift        58     
+                            IS shift        63     
                             IS reduce       35      ** Parsing conflict **
-                         TIMES shift        23     
+                         TIMES shift        27     
                          TIMES reduce       35      ** Parsing conflict **
-                        DIVIDE shift        22     
+                        DIVIDE shift        26     
                         DIVIDE reduce       35      ** Parsing conflict **
-                         POWER shift        21     
+                         POWER shift        25     
                          POWER reduce       35      ** Parsing conflict **
-                     AMPERSAND shift        20     
+                     AMPERSAND shift        24     
                      AMPERSAND reduce       35      ** Parsing conflict **
-                        OCCURS shift        74     
+                        OCCURS shift        89     
                         OCCURS reduce       35      ** Parsing conflict **
-                      OCCURRED shift        73     
+                      OCCURRED shift        88     
                       OCCURRED reduce       35      ** Parsing conflict **
                      {default} reduce       35     ex ::= COUNT ex
 
-State 46:
+State 55:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
@@ -2019,23 +2432,25 @@ State 46:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
                      {default} reduce       34     exlist ::= exlist COMMA ex
 
-State 47:
+State 56:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
@@ -2050,331 +2465,23 @@ State 47:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                        OCCURS shift        74     
-                      OCCURRED shift        73     
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                        OCCURS shift        89     
+                      OCCURRED shift        88     
                      {default} reduce       33     exlist ::= ex
-
-State 48:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-     (43) ex ::= ex OCCURRED AFTER ex *
-
-                         WHERE shift        19     
-                         WHERE reduce       43      ** Parsing conflict **
-                          PLUS shift        27     
-                          PLUS reduce       43      ** Parsing conflict **
-                         MINUS shift        25     
-                         MINUS reduce       43      ** Parsing conflict **
-                            IS shift        58     
-                            IS reduce       43      ** Parsing conflict **
-                         TIMES shift        23     
-                         TIMES reduce       43      ** Parsing conflict **
-                        DIVIDE shift        22     
-                        DIVIDE reduce       43      ** Parsing conflict **
-                         POWER shift        21     
-                         POWER reduce       43      ** Parsing conflict **
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       43      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       43      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       43      ** Parsing conflict **
-                     {default} reduce       43     ex ::= ex OCCURRED AFTER ex
-
-State 49:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-     (42) ex ::= ex OCCURS BEFORE ex *
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                         WHERE reduce       42      ** Parsing conflict **
-                          PLUS shift        27     
-                          PLUS reduce       42      ** Parsing conflict **
-                         MINUS shift        25     
-                         MINUS reduce       42      ** Parsing conflict **
-                            IS shift        58     
-                            IS reduce       42      ** Parsing conflict **
-                         TIMES shift        23     
-                         TIMES reduce       42      ** Parsing conflict **
-                        DIVIDE shift        22     
-                        DIVIDE reduce       42      ** Parsing conflict **
-                         POWER shift        21     
-                         POWER reduce       42      ** Parsing conflict **
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       42      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       42      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       42      ** Parsing conflict **
-                     {default} reduce       42     ex ::= ex OCCURS BEFORE ex
-
-State 50:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-     (37) ex ::= ex WHERE ex *
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                          PLUS shift        27     
-                         MINUS shift        25     
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       37      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       37      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       37      ** Parsing conflict **
-                     {default} reduce       37     ex ::= ex WHERE ex
-
-State 51:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-     (25) ex ::= ex AMPERSAND ex *
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         WHERE shift        19     
-                         WHERE reduce       25      ** Parsing conflict **
-                          PLUS shift        27     
-                          PLUS reduce       25      ** Parsing conflict **
-                         MINUS shift        25     
-                         MINUS reduce       25      ** Parsing conflict **
-                            IS shift        58     
-                            IS reduce       25      ** Parsing conflict **
-                         TIMES shift        23     
-                         TIMES reduce       25      ** Parsing conflict **
-                        DIVIDE shift        22     
-                        DIVIDE reduce       25      ** Parsing conflict **
-                         POWER shift        21     
-                         POWER reduce       25      ** Parsing conflict **
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       25      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       25      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       25      ** Parsing conflict **
-                     {default} reduce       25     ex ::= ex AMPERSAND ex
-
-State 52:
-          ex ::= ex * PLUS ex
-     (20) ex ::= ex PLUS ex *
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       20      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       20      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       20      ** Parsing conflict **
-                     {default} reduce       20     ex ::= ex PLUS ex
-
-State 53:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-     (21) ex ::= ex MINUS ex *
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       21      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       21      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       21      ** Parsing conflict **
-                     {default} reduce       21     ex ::= ex MINUS ex
-
-State 54:
-     (19) ex ::= TIME of ex *
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                            IS shift        58     
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       19      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       19      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       19      ** Parsing conflict **
-                     {default} reduce       19     ex ::= TIME of ex
-
-State 55:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-          ex ::= ex * IS WITHIN ex TO ex
-     (40) ex ::= ex IS WITHIN ex TO ex *
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       40      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       40      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       40      ** Parsing conflict **
-                     {default} reduce       40     ex ::= ex IS WITHIN ex TO ex
-
-State 56:
-          ex ::= ex * PLUS ex
-          ex ::= ex * MINUS ex
-          ex ::= ex * TIMES ex
-          ex ::= ex * DIVIDE ex
-          ex ::= ex * POWER ex
-          ex ::= ex * AMPERSAND ex
-          ex ::= ex * IS NUMBER
-          ex ::= ex * IS STRING
-          ex ::= ex * IS LIST
-          ex ::= ex * IS NOT LIST
-          ex ::= ex * WHERE ex
-          ex ::= ex * IS LESS THAN ex
-          ex ::= ex * IS LESS THAN OR EQUAL ex
-     (39) ex ::= ex IS LESS THAN OR EQUAL ex *
-          ex ::= ex * IS WITHIN ex TO ex
-          ex ::= ex * OCCURS BEFORE ex
-          ex ::= ex * OCCURRED AFTER ex
-
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       39      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       39      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       39      ** Parsing conflict **
-                     {default} reduce       39     ex ::= ex IS LESS THAN OR EQUAL ex
 
 State 57:
           ex ::= ex * PLUS ex
@@ -2389,40 +2496,437 @@ State 57:
           ex ::= ex * IS NOT LIST
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
-     (38) ex ::= ex IS LESS THAN ex *
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+     (45) ex ::= ex OCCURRED AFTER ex *
+
+                         WHERE shift        23     
+                         WHERE reduce       45      ** Parsing conflict **
+                          PLUS shift        31     
+                          PLUS reduce       45      ** Parsing conflict **
+                         MINUS shift        29     
+                         MINUS reduce       45      ** Parsing conflict **
+                            IS shift        63     
+                            IS reduce       45      ** Parsing conflict **
+                         TIMES shift        27     
+                         TIMES reduce       45      ** Parsing conflict **
+                        DIVIDE shift        26     
+                        DIVIDE reduce       45      ** Parsing conflict **
+                         POWER shift        25     
+                         POWER reduce       45      ** Parsing conflict **
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       45      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       45      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       45      ** Parsing conflict **
+                     {default} reduce       45     ex ::= ex OCCURRED AFTER ex
+
+State 58:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+     (44) ex ::= ex OCCURS BEFORE ex *
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                         WHERE reduce       44      ** Parsing conflict **
+                          PLUS shift        31     
+                          PLUS reduce       44      ** Parsing conflict **
+                         MINUS shift        29     
+                         MINUS reduce       44      ** Parsing conflict **
+                            IS shift        63     
+                            IS reduce       44      ** Parsing conflict **
+                         TIMES shift        27     
+                         TIMES reduce       44      ** Parsing conflict **
+                        DIVIDE shift        26     
+                        DIVIDE reduce       44      ** Parsing conflict **
+                         POWER shift        25     
+                         POWER reduce       44      ** Parsing conflict **
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       44      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       44      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       44      ** Parsing conflict **
+                     {default} reduce       44     ex ::= ex OCCURS BEFORE ex
+
+State 59:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+     (37) ex ::= ex WHERE ex *
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         TIMES shift        23     
-                        DIVIDE shift        22     
-                         POWER shift        21     
-                     AMPERSAND shift        20     
-                     AMPERSAND reduce       38      ** Parsing conflict **
-                        OCCURS shift        74     
-                        OCCURS reduce       38      ** Parsing conflict **
-                      OCCURRED shift        73     
-                      OCCURRED reduce       38      ** Parsing conflict **
-                     {default} reduce       38     ex ::= ex IS LESS THAN ex
+                         WHERE shift        23     
+                          PLUS shift        31     
+                         MINUS shift        29     
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       37      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       37      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       37      ** Parsing conflict **
+                     {default} reduce       37     ex ::= ex WHERE ex
 
-State 58:
+State 60:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+     (25) ex ::= ex AMPERSAND ex *
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         WHERE shift        23     
+                         WHERE reduce       25      ** Parsing conflict **
+                          PLUS shift        31     
+                          PLUS reduce       25      ** Parsing conflict **
+                         MINUS shift        29     
+                         MINUS reduce       25      ** Parsing conflict **
+                            IS shift        63     
+                            IS reduce       25      ** Parsing conflict **
+                         TIMES shift        27     
+                         TIMES reduce       25      ** Parsing conflict **
+                        DIVIDE shift        26     
+                        DIVIDE reduce       25      ** Parsing conflict **
+                         POWER shift        25     
+                         POWER reduce       25      ** Parsing conflict **
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       25      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       25      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       25      ** Parsing conflict **
+                     {default} reduce       25     ex ::= ex AMPERSAND ex
+
+State 61:
+          ex ::= ex * PLUS ex
+     (20) ex ::= ex PLUS ex *
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       20      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       20      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       20      ** Parsing conflict **
+                     {default} reduce       20     ex ::= ex PLUS ex
+
+State 62:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+     (21) ex ::= ex MINUS ex *
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       21      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       21      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       21      ** Parsing conflict **
+                     {default} reduce       21     ex ::= ex MINUS ex
+
+State 63:
           ex ::= ex IS * NUMBER
           ex ::= ex IS * STRING
           ex ::= ex IS * LIST
           ex ::= ex IS * NOT LIST
           ex ::= ex IS * LESS THAN ex
           ex ::= ex IS * LESS THAN OR EQUAL ex
+          ex ::= ex IS * GREATER THAN ex
+          ex ::= ex IS * GREATER THAN OR EQUAL ex
           ex ::= ex IS * WITHIN ex TO ex
 
-                           NOT shift        76     
-                          LESS shift        75     
+                           NOT shift        91     
+                          LESS shift        90     
                         NUMBER shift-reduce 26     ex ::= ex IS NUMBER
                         STRING shift-reduce 27     ex ::= ex IS STRING
                           LIST shift-reduce 28     ex ::= ex IS LIST
-                        WITHIN shift        12     
+                       GREATER shift        86     
+                        WITHIN shift        15     
 
-State 59:
+State 64:
+     (19) ex ::= TIME of ex *
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                            IS shift        63     
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       19      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       19      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       19      ** Parsing conflict **
+                     {default} reduce       19     ex ::= TIME of ex
+
+State 65:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+     (42) ex ::= ex IS WITHIN ex TO ex *
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       42      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       42      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       42      ** Parsing conflict **
+                     {default} reduce       42     ex ::= ex IS WITHIN ex TO ex
+
+State 66:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+     (41) ex ::= ex IS GREATER THAN OR EQUAL ex *
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       41      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       41      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       41      ** Parsing conflict **
+                     {default} reduce       41     ex ::= ex IS GREATER THAN OR EQUAL ex
+
+State 67:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+     (40) ex ::= ex IS GREATER THAN ex *
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       40      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       40      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       40      ** Parsing conflict **
+                     {default} reduce       40     ex ::= ex IS GREATER THAN ex
+
+State 68:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+     (39) ex ::= ex IS LESS THAN OR EQUAL ex *
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       39      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       39      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       39      ** Parsing conflict **
+                     {default} reduce       39     ex ::= ex IS LESS THAN OR EQUAL ex
+
+State 69:
+          ex ::= ex * PLUS ex
+          ex ::= ex * MINUS ex
+          ex ::= ex * TIMES ex
+          ex ::= ex * DIVIDE ex
+          ex ::= ex * POWER ex
+          ex ::= ex * AMPERSAND ex
+          ex ::= ex * IS NUMBER
+          ex ::= ex * IS STRING
+          ex ::= ex * IS LIST
+          ex ::= ex * IS NOT LIST
+          ex ::= ex * WHERE ex
+          ex ::= ex * IS LESS THAN ex
+     (38) ex ::= ex IS LESS THAN ex *
+          ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
+          ex ::= ex * IS WITHIN ex TO ex
+          ex ::= ex * OCCURS BEFORE ex
+          ex ::= ex * OCCURRED AFTER ex
+
+                         TIMES shift        27     
+                        DIVIDE shift        26     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
+                     AMPERSAND reduce       38      ** Parsing conflict **
+                        OCCURS shift        89     
+                        OCCURS reduce       38      ** Parsing conflict **
+                      OCCURRED shift        88     
+                      OCCURRED reduce       38      ** Parsing conflict **
+                     {default} reduce       38     ex ::= ex IS LESS THAN ex
+
+State 70:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
@@ -2437,20 +2941,22 @@ State 59:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         POWER shift        21     
-                     AMPERSAND shift        20     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
                      AMPERSAND reduce       24      ** Parsing conflict **
-                        OCCURS shift        74     
+                        OCCURS shift        89     
                         OCCURS reduce       24      ** Parsing conflict **
-                      OCCURRED shift        73     
+                      OCCURRED shift        88     
                       OCCURRED reduce       24      ** Parsing conflict **
                      {default} reduce       24     ex ::= ex POWER ex
 
-State 60:
+State 71:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
@@ -2465,20 +2971,22 @@ State 60:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         POWER shift        21     
-                     AMPERSAND shift        20     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
                      AMPERSAND reduce       23      ** Parsing conflict **
-                        OCCURS shift        74     
+                        OCCURS shift        89     
                         OCCURS reduce       23      ** Parsing conflict **
-                      OCCURRED shift        73     
+                      OCCURRED shift        88     
                       OCCURRED reduce       23      ** Parsing conflict **
                      {default} reduce       23     ex ::= ex DIVIDE ex
 
-State 61:
+State 72:
           ex ::= ex * PLUS ex
           ex ::= ex * MINUS ex
           ex ::= ex * TIMES ex
@@ -2493,97 +3001,120 @@ State 61:
           ex ::= ex * WHERE ex
           ex ::= ex * IS LESS THAN ex
           ex ::= ex * IS LESS THAN OR EQUAL ex
+          ex ::= ex * IS GREATER THAN ex
+          ex ::= ex * IS GREATER THAN OR EQUAL ex
           ex ::= ex * IS WITHIN ex TO ex
           ex ::= ex * OCCURS BEFORE ex
           ex ::= ex * OCCURRED AFTER ex
 
-                         POWER shift        21     
-                     AMPERSAND shift        20     
+                         POWER shift        25     
+                     AMPERSAND shift        24     
                      AMPERSAND reduce       22      ** Parsing conflict **
-                        OCCURS shift        74     
+                        OCCURS shift        89     
                         OCCURS reduce       22      ** Parsing conflict **
-                      OCCURRED shift        73     
+                      OCCURRED shift        88     
                       OCCURRED reduce       22      ** Parsing conflict **
                      {default} reduce       22     ex ::= ex TIMES ex
 
-State 62:
+State 73:
           statement ::= TIME * IDENTIFIER ASSIGN ex SEMICOLON
           statement ::= TIME * OF IDENTIFIER ASSIGN ex SEMICOLON
 
-                    IDENTIFIER shift        70     
-                            OF shift        69     
+                    IDENTIFIER shift        83     
+                            OF shift        82     
 
-State 63:
+State 74:
           statement ::= IDENTIFIER * LSPAR ex RSPAR ASSIGN ex SEMICOLON
           statement ::= IDENTIFIER * ASSIGN ex SEMICOLON
 
-                         LSPAR shift        9      
-                        ASSIGN shift        7      
+                         LSPAR shift        12     
+                        ASSIGN shift        10     
 
-State 64:
+State 75:
           jsonarray ::= LSPAR exlist * RSPAR
           exlist ::= exlist * COMMA ex
 
                          RSPAR shift-reduce 32     jsonarray ::= LSPAR exlist RSPAR
-                         COMMA shift        16     
+                         COMMA shift        20     
 
-State 65:
+State 76:
+          elseif ::= ELSE statementblock ENDIF * SEMICOLON
+
+                     SEMICOLON shift-reduce 50     elseif ::= ELSE statementblock ENDIF SEMICOLON
+
+State 77:
+          elseif ::= ENDIF * SEMICOLON
+
+                     SEMICOLON shift-reduce 49     elseif ::= ENDIF SEMICOLON
+
+State 78:
           statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO * SEMICOLON
 
-                     SEMICOLON shift-reduce 44     statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
+                     SEMICOLON shift-reduce 46     statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
 
-State 66:
+State 79:
           statement ::= FOR IDENTIFIER * IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
 
-                            IN shift        4      
+                            IN shift        7      
 
-State 67:
+State 80:
           statement ::= FOR * IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON
 
-                    IDENTIFIER shift        66     
+                    IDENTIFIER shift        79     
 
-State 68:
+State 81:
           statement ::= TIME OF IDENTIFIER * ASSIGN ex SEMICOLON
-
-                        ASSIGN shift        5      
-
-State 69:
-          statement ::= TIME OF * IDENTIFIER ASSIGN ex SEMICOLON
-
-                    IDENTIFIER shift        68     
-
-State 70:
-          statement ::= TIME IDENTIFIER * ASSIGN ex SEMICOLON
-
-                        ASSIGN shift        6      
-
-State 71:
-          statement ::= IDENTIFIER LSPAR ex RSPAR * ASSIGN ex SEMICOLON
 
                         ASSIGN shift        8      
 
-State 72:
+State 82:
+          statement ::= TIME OF * IDENTIFIER ASSIGN ex SEMICOLON
+
+                    IDENTIFIER shift        81     
+
+State 83:
+          statement ::= TIME IDENTIFIER * ASSIGN ex SEMICOLON
+
+                        ASSIGN shift        9      
+
+State 84:
+          statement ::= IDENTIFIER LSPAR ex RSPAR * ASSIGN ex SEMICOLON
+
+                        ASSIGN shift        11     
+
+State 85:
+          ex ::= ex IS GREATER THAN OR * EQUAL ex
+
+                         EQUAL shift        16     
+
+State 86:
+          ex ::= ex IS GREATER * THAN ex
+          ex ::= ex IS GREATER * THAN OR EQUAL ex
+
+                          THAN shift        4      
+
+State 87:
           ex ::= ex IS LESS THAN OR * EQUAL ex
 
-                         EQUAL shift        13     
+                         EQUAL shift        17     
 
-State 73:
+State 88:
           ex ::= ex OCCURRED * AFTER ex
 
-                         AFTER shift        17     
+                         AFTER shift        21     
 
-State 74:
+State 89:
           ex ::= ex OCCURS * BEFORE ex
 
-                        BEFORE shift        18     
+                        BEFORE shift        22     
 
-State 75:
+State 90:
           ex ::= ex IS LESS * THAN ex
           ex ::= ex IS LESS * THAN OR EQUAL ex
 
-                          THAN shift        2      
+                          THAN shift        5      
 
-State 76:
+State 91:
           ex ::= ex IS NOT * LIST
 
                           LIST shift-reduce 29     ex ::= ex IS NOT LIST
@@ -2630,22 +3161,30 @@ Symbols:
    37: COUNT
    38: FIRST
    39: OR
-   40: WITHIN
-   41: TO
-   42: OCCURS
-   43: BEFORE
-   44: OCCURRED
-   45: AFTER
-   46: FOR
-   47: IN
-   48: FORRANGE
-   49: DO
-   50: ENDDO
-   51: error:
-   52: code: <lambda> TIME WRITE TRACE IDENTIFIER FOR
-   53: statementblock: <lambda> TIME WRITE TRACE IDENTIFIER FOR
-   54: statement: TIME WRITE TRACE IDENTIFIER FOR
-   55: ex: TIME IT LSPAR IDENTIFIER LPAR NUMTOKEN TIMETOKEN STRTOKEN TRUE FALSE CURRENTTIME NOW NULL1 COUNT FIRST
-   56: of: <lambda> OF
-   57: jsonarray: LSPAR
-   58: exlist: TIME IT LSPAR IDENTIFIER LPAR NUMTOKEN TIMETOKEN STRTOKEN TRUE FALSE CURRENTTIME NOW NULL1 COUNT FIRST
+   40: GREATER
+   41: WITHIN
+   42: TO
+   43: OCCURS
+   44: BEFORE
+   45: OCCURRED
+   46: AFTER
+   47: FOR
+   48: IN
+   49: FORRANGE
+   50: DO
+   51: ENDDO
+   52: IF
+   53: THEN
+   54: ENDIF
+   55: ELSE
+   56: ELSEIF
+   57: error:
+   58: code: <lambda> TIME WRITE TRACE IDENTIFIER FOR IF
+   59: statementblock: <lambda> TIME WRITE TRACE IDENTIFIER FOR IF
+   60: statement: TIME WRITE TRACE IDENTIFIER FOR IF
+   61: ex: TIME IT LSPAR IDENTIFIER LPAR NUMTOKEN TIMETOKEN STRTOKEN TRUE FALSE CURRENTTIME NOW NULL1 COUNT FIRST
+   62: of: <lambda> OF
+   63: jsonarray: LSPAR
+   64: exlist: TIME IT LSPAR IDENTIFIER LPAR NUMTOKEN TIMETOKEN STRTOKEN TRUE FALSE CURRENTTIME NOW NULL1 COUNT FIRST
+   65: if_then_else: TIME IT LSPAR IDENTIFIER LPAR NUMTOKEN TIMETOKEN STRTOKEN TRUE FALSE CURRENTTIME NOW NULL1 COUNT FIRST
+   66: elseif: ENDIF ELSE ELSEIF

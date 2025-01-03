@@ -14,6 +14,8 @@ from operators import (
     first,
     less_than,
     less_than_or_equal,
+    greater_than,
+    greater_than_or_equal,
     is_within,
     power,
     divide,
@@ -86,7 +88,7 @@ class Interpreter:
                 return str(self.run_operator(minus, interpreted_args))
             
             case "POWER":
-               # print("case power")
+             #   print("case power")
 
 
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
@@ -203,13 +205,20 @@ class Interpreter:
             
             case "LESS_THAN":
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
-            
                 return str(self.run_operator(less_than, interpreted_args))
             
             case "LESS_OR_EQUAL":
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
-            
                 return str(self.run_operator(less_than_or_equal, interpreted_args))
+            
+
+            case "GREATER_THAN":
+                interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+                return str(self.run_operator(greater_than, interpreted_args))
+            
+            case "GREATER_OR_EQUAL":
+                interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
+                return str(self.run_operator(greater_than_or_equal, interpreted_args))
             
             case "IS_WITHIN":
              #   print("case is within")
@@ -294,52 +303,49 @@ class Interpreter:
                 list =  self.symbol_table.get_variable_value(variable_name)
 
             case "OCCURS_BEFORE":
-
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
-            
                 return str(self.run_operator(occurs_before, interpreted_args))
 
     
 
             case "OCCURRED_AFTER":
-              #  print("case ocurred after")
-
                 interpreted_args = [self.interpreterFunction(arg) for arg in node["arg"]]
-            
                 return str(self.run_operator(occured_after, interpreted_args))
             
 
             case "FOR_LOOP":
-                print("case fore_loop")
-
-
-                      
                 variable_name = StrType(node["varname"])
-                print(variable_name)
+                #print(variable_name)
 
                  # Extract and evaluate the loop expression
                 expression = node["expression"]
                 expression2 = node["expression2"]
 
                 loop_start = int(str(self.interpreterFunction(expression)))
-                loop_end = int(str(self.interpreterFunction(expression2)))
-                #print(f"Loop end value: {loop_end}")
-
-                
+                loop_end = int(str(self.interpreterFunction(expression2)))                
              
-                for i in range(loop_start, loop_end):
-                    #print(variable_name)
-                   # print(i+1)
-                 #   self.symbol_table.set_variable_value(variable_name, NumType(i+1))
-                  #  print(self.symbol_table.get_variable_value(variable_name))
-
-                    self.symbol_table.set_variable_value(str(variable_name), NumType(i + 1))
-                  #  self.symbol_table.get_variable_value(variable_name)
-                   # print(f"Variable '{variable_name}' set to: {self.symbol_table.get_variable_value(str(variable_name)).value}")
-
-                
-                 
+                for i in range(loop_start, loop_end+1):
+                   
+                    self.symbol_table.set_variable_value(str(variable_name), NumType(i))
                     self.interpreterFunction(node["statements"])
+
+            case "IF":
+                #print("case if")
+
+                condition = node["condition"]
+              #  print(condition)
+               # print(condition["type"])
+                #print(self.interpreterFunction(condition))
+
+                if self.interpreterFunction(condition) == "true":
+                    then = node["thenbranch"]
+                    self.interpreterFunction(then)
+                else:
+                    elseVar = node["elsebranch"]
+                    self.interpreterFunction(elseVar)
+
+              
+
 
                 #for_loop_statement = data['statements'][0]  # Access the first statement
                 #expression_value = for_loop_statement['expression']['value'] 

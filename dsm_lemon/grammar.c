@@ -106,7 +106,7 @@ char *curtype;
 #endif
 /************* Begin control #defines *****************************************/
 #define YYCODETYPE unsigned char
-#define YYNOCODE 60
+#define YYNOCODE 68
 #define YYACTIONTYPE unsigned char
 #define ParseTOKENTYPE cJSON *
 typedef union {
@@ -120,16 +120,16 @@ typedef union {
 #define ParseARG_PDECL
 #define ParseARG_FETCH
 #define ParseARG_STORE
-#define YYNSTATE             77
-#define YYNRULE              47
-#define YY_MAX_SHIFT         76
-#define YY_MIN_SHIFTREDUCE   104
-#define YY_MAX_SHIFTREDUCE   150
-#define YY_MIN_REDUCE        151
-#define YY_MAX_REDUCE        197
-#define YY_ERROR_ACTION      198
-#define YY_ACCEPT_ACTION     199
-#define YY_NO_ACTION         200
+#define YYNSTATE             92
+#define YYNRULE              54
+#define YY_MAX_SHIFT         91
+#define YY_MIN_SHIFTREDUCE   124
+#define YY_MAX_SHIFTREDUCE   177
+#define YY_MIN_REDUCE        178
+#define YY_MAX_REDUCE        231
+#define YY_ERROR_ACTION      232
+#define YY_ACCEPT_ACTION     233
+#define YY_NO_ACTION         234
 /************* End control #defines *******************************************/
 
 /* Define the yytestcase() macro to be a no-op if is not already defined
@@ -197,126 +197,143 @@ typedef union {
 **  yy_default[]       Default action for each state.
 **
 *********** Begin parsing tables **********************************************/
-#define YY_ACTTAB_COUNT (405)
+#define YY_ACTTAB_COUNT (467)
 static const YYACTIONTYPE yy_action[] = {
- /*     0 */    31,   47,  106,  134,   64,  145,    1,   21,  199,   30,
- /*    10 */   117,  135,  150,   57,   26,  134,  114,  115,  116,  118,
- /*    20 */   119,  120,  121,  122,   24,   70,   31,   20,   69,   15,
- /*    30 */    14,  145,    1,   33,  136,  134,  117,   74,   29,   73,
- /*    40 */    26,  148,  114,  115,  116,  118,  119,  120,  121,  122,
- /*    50 */     4,   16,   34,   31,  134,   15,   14,   72,  145,    1,
- /*    60 */    35,   66,  134,  117,   36,   13,  134,   26,    5,  114,
- /*    70 */   115,  116,  118,  119,  120,  121,  122,   19,    9,   27,
- /*    80 */    25,   68,   15,   14,    7,   58,   23,   22,   21,   37,
- /*    90 */    19,  134,   27,   25,    6,   38,   17,  134,   58,   23,
- /*   100 */    22,   21,   39,   19,  134,   27,   25,    8,   20,  151,
- /*   110 */    18,   58,   23,   22,   21,    2,  153,   62,   74,  133,
- /*   120 */    73,   20,  153,  153,   28,   32,   10,   63,   40,  153,
- /*   130 */   134,   74,  153,   73,   20,  153,   55,    3,  134,   19,
- /*   140 */   153,   27,   25,   11,   74,  153,   73,   58,   23,   22,
- /*   150 */    21,   41,  153,  134,  112,   67,   19,  153,   27,   25,
- /*   160 */    58,   23,   22,   21,   58,   23,   22,   21,  153,  153,
- /*   170 */    20,  111,  153,  153,   23,   22,   21,   56,  153,  134,
- /*   180 */    74,  153,   73,   20,   44,  153,  134,   20,  153,   45,
- /*   190 */    46,  134,  134,   74,  153,   73,   20,   74,   48,   73,
- /*   200 */   134,   19,  153,   27,   25,   49,   74,  134,   73,   58,
- /*   210 */    23,   22,   21,  153,  153,   50,  110,  134,   19,  153,
- /*   220 */    27,   25,   51,   59,  134,  134,   58,   23,   22,   21,
- /*   230 */   153,  153,   20,  109,  153,   60,   61,  134,  134,  153,
- /*   240 */   153,   62,   74,   54,   73,  134,  153,  153,   28,   20,
- /*   250 */    10,   63,   53,   76,  134,  153,   42,   75,  134,   74,
- /*   260 */    52,   73,  134,   19,  153,   27,   25,   19,  153,   27,
- /*   270 */    25,   58,   23,   22,   21,   58,   23,   22,   21,   67,
- /*   280 */   153,   71,  108,   65,  130,  131,  132,  153,  153,  153,
- /*   290 */   153,   12,  153,   43,   20,  134,  153,  153,   20,  153,
- /*   300 */   153,  153,  153,  153,   74,  153,   73,  153,   74,  153,
- /*   310 */    73,  153,   19,  153,   27,   25,   19,  153,   27,   25,
- /*   320 */    58,   23,   22,   21,   58,   23,   22,   21,  153,  153,
- /*   330 */   153,  107,  153,  153,  113,  153,  153,  153,  153,  153,
- /*   340 */   153,  153,  153,   20,  153,  153,  153,   20,  153,  153,
- /*   350 */   153,  153,  153,   74,  153,   73,  153,   74,  153,   73,
- /*   360 */   153,   19,  153,   27,   25,  153,  153,  153,  153,   58,
- /*   370 */    23,   22,   21,  153,  153,  153,  153,  153,  153,  153,
- /*   380 */   153,  153,  153,  153,  153,  153,  153,  153,  153,  153,
- /*   390 */   153,  153,   20,  153,  153,  153,  153,  153,  153,  153,
- /*   400 */   153,  153,   74,  153,   73,
+ /*     0 */    37,   56,  126,  154,   75,  167,    1,   67,   25,  154,
+ /*    10 */   137,  155,  233,   36,   30,  177,  134,  135,  136,  138,
+ /*    20 */   139,  140,  141,  142,   28,   69,   37,  154,   24,   19,
+ /*    30 */    18,  167,    1,   41,  156,  154,  137,  175,   34,   89,
+ /*    40 */    30,   88,  134,  135,  136,  138,  139,  140,  141,  142,
+ /*    50 */    41,   20,  154,   37,  171,   19,   18,   85,  167,    1,
+ /*    60 */    42,   83,  154,  137,   82,   33,   43,   30,  154,  134,
+ /*    70 */   135,  136,  138,  139,  140,  141,  142,  174,   35,  173,
+ /*    80 */    37,  170,   19,   18,   87,  167,    1,   44,    7,  154,
+ /*    90 */   137,   45,   79,  154,   30,    8,  134,  135,  136,  138,
+ /*   100 */   139,  140,  141,  142,   23,   81,   31,   29,    9,   19,
+ /*   110 */    18,  126,   63,   27,   26,   25,   23,  172,   31,   29,
+ /*   120 */    23,   11,   31,   29,   63,   27,   26,   25,   63,   27,
+ /*   130 */    26,   25,   46,   16,  154,   24,   17,   12,   63,   27,
+ /*   140 */    26,   25,   47,   10,  154,    4,   89,   24,   88,   22,
+ /*   150 */    21,   24,   48,   49,  154,  154,   39,    5,   89,  153,
+ /*   160 */    88,   24,   89,  180,   88,   40,  180,   23,    6,   31,
+ /*   170 */    29,   65,   89,  154,   88,   63,   27,   26,   25,  180,
+ /*   180 */   180,   50,  132,  154,   23,  180,   31,   29,   27,   26,
+ /*   190 */    25,  180,   63,   27,   26,   25,  180,  180,   24,  131,
+ /*   200 */    66,   68,  154,  154,   53,  180,  154,   73,  180,   89,
+ /*   210 */    24,   88,  180,  180,   32,   24,   13,   74,   54,  180,
+ /*   220 */   154,   89,   55,   88,  154,  180,   89,  180,   88,   57,
+ /*   230 */    23,  154,   31,   29,   58,   59,  154,  154,   63,   27,
+ /*   240 */    26,   25,  180,  180,  180,  130,   80,   23,  180,   31,
+ /*   250 */    29,    3,   60,   76,  154,   63,   27,   26,   25,  180,
+ /*   260 */   180,   24,  129,   70,   71,  154,  154,  180,  180,   72,
+ /*   270 */    73,  154,   89,   64,   88,  154,  180,   32,   24,   13,
+ /*   280 */    74,  180,   62,   51,  154,  154,   61,  180,  154,   89,
+ /*   290 */   180,   88,   52,   23,  154,   31,   29,   23,  180,   31,
+ /*   300 */    29,   63,   27,   26,   25,   63,   27,   26,   25,   80,
+ /*   310 */   180,   84,  128,  180,    3,  180,   77,   38,    2,  180,
+ /*   320 */    73,  180,  180,  180,   24,  180,  180,   32,   24,   13,
+ /*   330 */    74,  180,  180,  180,  180,   89,  180,   88,  180,   89,
+ /*   340 */   180,   88,  180,   23,  180,   31,   29,   23,  180,   31,
+ /*   350 */    29,   63,   27,   26,   25,   63,   27,   26,   25,   80,
+ /*   360 */   180,  180,  180,   78,    3,  180,  180,   91,  180,  133,
+ /*   370 */   180,   90,  180,  180,   24,  180,  180,  180,   24,  180,
+ /*   380 */   180,  180,  180,  180,   14,   89,  180,   88,  180,   89,
+ /*   390 */   180,   88,  180,   23,  180,   31,   29,  180,  150,  151,
+ /*   400 */   152,   63,   27,   26,   25,   86,   15,  180,  127,  180,
+ /*   410 */    23,  180,   31,   29,  178,  180,  180,  180,   63,   27,
+ /*   420 */    26,   25,   73,  180,   24,  180,  180,  180,  180,   32,
+ /*   430 */   180,   13,   74,  180,  180,   89,  180,   88,  180,  180,
+ /*   440 */   180,   24,  180,  180,  180,  180,  180,  180,  180,  180,
+ /*   450 */   180,  180,   89,  180,   88,  180,  180,  180,  180,  180,
+ /*   460 */   180,   80,  180,  180,  180,  180,    3,
 };
 static const YYCODETYPE yy_lookahead[] = {
- /*     0 */     8,   55,   54,   57,   58,   13,   14,   12,   52,   53,
- /*    10 */    18,   19,   21,   55,   22,   57,   24,   25,   26,   27,
- /*    20 */    28,   29,   30,   31,   56,   18,    8,   32,   21,   37,
- /*    30 */    38,   13,   14,   55,   19,   57,   18,   42,   53,   44,
- /*    40 */    22,   16,   24,   25,   26,   27,   28,   29,   30,   31,
- /*    50 */    47,   36,   55,    8,   57,   37,   38,   39,   13,   14,
- /*    60 */    55,   18,   57,   18,   55,    5,   57,   22,   20,   24,
- /*    70 */    25,   26,   27,   28,   29,   30,   31,    1,   14,    3,
- /*    80 */     4,   18,   37,   38,   20,    9,   10,   11,   12,   55,
- /*    90 */     1,   57,    3,    4,   20,   55,   45,   57,    9,   10,
- /*   100 */    11,   12,   55,    1,   57,    3,    4,   20,   32,    0,
- /*   110 */    43,    9,   10,   11,   12,    7,   59,    8,   42,   35,
- /*   120 */    44,   32,   59,   59,   15,   49,   17,   18,   55,   59,
- /*   130 */    57,   42,   59,   44,   32,   59,   55,   48,   57,    1,
- /*   140 */    59,    3,    4,   41,   42,   59,   44,    9,   10,   11,
- /*   150 */    12,   55,   59,   57,   16,   46,    1,   59,    3,    4,
- /*   160 */     9,   10,   11,   12,    9,   10,   11,   12,   59,   59,
- /*   170 */    32,   16,   59,   59,   10,   11,   12,   55,   59,   57,
- /*   180 */    42,   59,   44,   32,   55,   59,   57,   32,   59,   55,
- /*   190 */    55,   57,   57,   42,   59,   44,   32,   42,   55,   44,
- /*   200 */    57,    1,   59,    3,    4,   55,   42,   57,   44,    9,
- /*   210 */    10,   11,   12,   59,   59,   55,   16,   57,    1,   59,
- /*   220 */     3,    4,   55,   55,   57,   57,    9,   10,   11,   12,
- /*   230 */    59,   59,   32,   16,   59,   55,   55,   57,   57,   59,
- /*   240 */    59,    8,   42,   55,   44,   57,   59,   59,   15,   32,
- /*   250 */    17,   18,   55,    2,   57,   59,   55,    6,   57,   42,
- /*   260 */    55,   44,   57,    1,   59,    3,    4,    1,   59,    3,
- /*   270 */     4,    9,   10,   11,   12,    9,   10,   11,   12,   46,
- /*   280 */    59,   19,   16,   50,   33,   34,   35,   59,   59,   59,
- /*   290 */    59,   40,   59,   55,   32,   57,   59,   59,   32,   59,
- /*   300 */    59,   59,   59,   59,   42,   59,   44,   59,   42,   59,
- /*   310 */    44,   59,    1,   59,    3,    4,    1,   59,    3,    4,
- /*   320 */     9,   10,   11,   12,    9,   10,   11,   12,   59,   59,
- /*   330 */    59,   16,   59,   59,   23,   59,   59,   59,   59,   59,
- /*   340 */    59,   59,   59,   32,   59,   59,   59,   32,   59,   59,
- /*   350 */    59,   59,   59,   42,   59,   44,   59,   42,   59,   44,
- /*   360 */    59,    1,   59,    3,    4,   59,   59,   59,   59,    9,
- /*   370 */    10,   11,   12,   59,   59,   59,   59,   59,   59,   59,
- /*   380 */    59,   59,   59,   59,   59,   59,   59,   59,   59,   59,
- /*   390 */    59,   59,   32,   59,   59,   59,   59,   59,   59,   59,
- /*   400 */    59,   59,   42,   59,   44,
+ /*     0 */     8,   61,   60,   63,   64,   13,   14,   61,   12,   63,
+ /*    10 */    18,   19,   58,   59,   22,   21,   24,   25,   26,   27,
+ /*    20 */    28,   29,   30,   31,   62,   61,    8,   63,   32,   37,
+ /*    30 */    38,   13,   14,   61,   19,   63,   18,   65,   59,   43,
+ /*    40 */    22,   45,   24,   25,   26,   27,   28,   29,   30,   31,
+ /*    50 */    61,   36,   63,    8,   65,   37,   38,   39,   13,   14,
+ /*    60 */    61,   18,   63,   18,   21,   59,   61,   22,   63,   24,
+ /*    70 */    25,   26,   27,   28,   29,   30,   31,   16,   59,   16,
+ /*    80 */     8,   16,   37,   38,   39,   13,   14,   61,   48,   63,
+ /*    90 */    18,   61,   18,   63,   22,   20,   24,   25,   26,   27,
+ /*   100 */    28,   29,   30,   31,    1,   18,    3,    4,   20,   37,
+ /*   110 */    38,   60,    9,   10,   11,   12,    1,   66,    3,    4,
+ /*   120 */     1,   20,    3,    4,    9,   10,   11,   12,    9,   10,
+ /*   130 */    11,   12,   61,    5,   63,   32,    5,   14,    9,   10,
+ /*   140 */    11,   12,   61,   20,   63,    7,   43,   32,   45,   44,
+ /*   150 */    46,   32,   61,   61,   63,   63,   53,    7,   43,   35,
+ /*   160 */    45,   32,   43,   67,   45,   50,   67,    1,   49,    3,
+ /*   170 */     4,   61,   43,   63,   45,    9,   10,   11,   12,   67,
+ /*   180 */    67,   61,   16,   63,    1,   67,    3,    4,   10,   11,
+ /*   190 */    12,   67,    9,   10,   11,   12,   67,   67,   32,   16,
+ /*   200 */    61,   61,   63,   63,   61,   67,   63,    8,   67,   43,
+ /*   210 */    32,   45,   67,   67,   15,   32,   17,   18,   61,   67,
+ /*   220 */    63,   43,   61,   45,   63,   67,   43,   67,   45,   61,
+ /*   230 */     1,   63,    3,    4,   61,   61,   63,   63,    9,   10,
+ /*   240 */    11,   12,   67,   67,   67,   16,   47,    1,   67,    3,
+ /*   250 */     4,   52,   61,   54,   63,    9,   10,   11,   12,   67,
+ /*   260 */    67,   32,   16,   61,   61,   63,   63,   67,   67,   61,
+ /*   270 */     8,   63,   43,   61,   45,   63,   67,   15,   32,   17,
+ /*   280 */    18,   67,   61,   61,   63,   63,   61,   67,   63,   43,
+ /*   290 */    67,   45,   61,    1,   63,    3,    4,    1,   67,    3,
+ /*   300 */     4,    9,   10,   11,   12,    9,   10,   11,   12,   47,
+ /*   310 */    67,   19,   16,   67,   52,   67,   54,   55,   56,   67,
+ /*   320 */     8,   67,   67,   67,   32,   67,   67,   15,   32,   17,
+ /*   330 */    18,   67,   67,   67,   67,   43,   67,   45,   67,   43,
+ /*   340 */    67,   45,   67,    1,   67,    3,    4,    1,   67,    3,
+ /*   350 */     4,    9,   10,   11,   12,    9,   10,   11,   12,   47,
+ /*   360 */    67,   67,   67,   51,   52,   67,   67,    2,   67,   23,
+ /*   370 */    67,    6,   67,   67,   32,   67,   67,   67,   32,   67,
+ /*   380 */    67,   67,   67,   67,   42,   43,   67,   45,   67,   43,
+ /*   390 */    67,   45,   67,    1,   67,    3,    4,   67,   33,   34,
+ /*   400 */    35,    9,   10,   11,   12,   40,   41,   67,   16,   67,
+ /*   410 */     1,   67,    3,    4,    0,   67,   67,   67,    9,   10,
+ /*   420 */    11,   12,    8,   67,   32,   67,   67,   67,   67,   15,
+ /*   430 */    67,   17,   18,   67,   67,   43,   67,   45,   67,   67,
+ /*   440 */    67,   32,   67,   67,   67,   67,   67,   67,   67,   67,
+ /*   450 */    67,   67,   43,   67,   45,   67,   67,   67,   67,   67,
+ /*   460 */    67,   47,   67,   67,   67,   67,   52,
 };
-#define YY_SHIFT_USE_DFLT (-10)
-#define YY_SHIFT_COUNT (76)
-#define YY_SHIFT_MIN   (-9)
-#define YY_SHIFT_MAX   (360)
+#define YY_SHIFT_USE_DFLT (-9)
+#define YY_SHIFT_COUNT (91)
+#define YY_SHIFT_MIN   (-8)
+#define YY_SHIFT_MAX   (414)
 static const short yy_shift_ofst[] = {
- /*     0 */   -10,   -8,   18,   45,   45,   45,   45,   45,   45,   45,
- /*    10 */    45,   45,   45,   45,   45,   45,   45,   45,   45,   45,
- /*    20 */    45,   45,   45,   45,   45,   45,   45,   45,   45,  233,
- /*    30 */   109,   -9,  -10,   76,   89,  138,  155,  200,  217,  262,
- /*    40 */   266,  102,  311,  315,  360,  360,  360,  360,  360,  360,
- /*    50 */   360,  360,  151,  151,  151,  164,  164,  164,  251,   -5,
- /*    60 */    -5,   -5,    7,   64,   15,   25,    3,   43,   48,   63,
- /*    70 */    74,   87,   60,   51,   67,  108,   84,
+ /*     0 */    -9,   -8,   72,   72,   18,   45,   72,   72,   72,   72,
+ /*    10 */    72,   72,   72,   72,   72,   72,   72,   72,   72,   72,
+ /*    20 */    72,   72,   72,   72,   72,   72,   72,   72,   72,   72,
+ /*    30 */    72,   72,   72,  262,  199,  312,  414,   -6,   -9,   -9,
+ /*    40 */    -9,  103,  115,  119,  166,  183,  229,  246,  292,  296,
+ /*    50 */   342,  346,  392,  409,  409,  409,  409,  409,  409,  409,
+ /*    60 */   409,  129,  129,  365,  129,  178,  178,  178,  178,  178,
+ /*    70 */    -4,   -4,   -4,   43,  123,   15,   61,   63,   65,   40,
+ /*    80 */    74,   75,   87,   88,  101,  128,  138,  131,  104,  105,
+ /*    90 */   150,  124,
 };
-#define YY_REDUCE_USE_DFLT (-55)
-#define YY_REDUCE_COUNT (32)
-#define YY_REDUCE_MIN   (-54)
-#define YY_REDUCE_MAX   (238)
+#define YY_REDUCE_USE_DFLT (-61)
+#define YY_REDUCE_COUNT (40)
+#define YY_REDUCE_MIN   (-60)
+#define YY_REDUCE_MAX   (231)
 static const short yy_reduce_ofst[] = {
- /*     0 */   -44,  -54,  -42,  -22,   -3,    5,    9,   34,   40,   47,
- /*    10 */    73,   81,   96,  122,  129,  134,  135,  143,  150,  160,
- /*    20 */   167,  168,  180,  181,  188,  197,  201,  205,  238,  -52,
- /*    30 */   -52,  -32,  -15,
+ /*     0 */   -46,  -60,  -28,  -11,  -54,  -36,   -1,    5,   26,   30,
+ /*    10 */    71,   81,   91,   92,  110,  120,  139,  140,  143,  157,
+ /*    20 */   161,  168,  173,  174,  191,  202,  203,  208,  212,  221,
+ /*    30 */   222,  225,  231,   51,  -58,  -58,  -58,  -38,  -21,    6,
+ /*    40 */    19,
 };
 static const YYACTIONTYPE yy_default[] = {
- /*     0 */   152,  198,  198,  198,  198,  198,  198,  198,  198,  198,
- /*    10 */   198,  198,  198,  198,  198,  198,  198,  198,  198,  198,
- /*    20 */   198,  198,  198,  198,  198,  198,  198,  198,  198,  198,
- /*    30 */   198,  196,  152,  198,  198,  198,  198,  198,  198,  198,
- /*    40 */   198,  198,  198,  198,  187,  186,  185,  184,  194,  193,
- /*    50 */   188,  176,  171,  172,  170,  191,  190,  189,  198,  175,
- /*    60 */   174,  173,  198,  198,  198,  198,  198,  198,  198,  198,
- /*    70 */   198,  198,  198,  198,  198,  198,  198,
+ /*     0 */   179,  232,  232,  232,  232,  232,  232,  232,  232,  232,
+ /*    10 */   232,  232,  232,  232,  232,  232,  232,  232,  232,  232,
+ /*    20 */   232,  232,  232,  232,  232,  232,  232,  232,  232,  232,
+ /*    30 */   232,  232,  232,  232,  232,  232,  232,  230,  179,  179,
+ /*    40 */   179,  232,  232,  232,  232,  232,  232,  232,  232,  232,
+ /*    50 */   232,  232,  232,  214,  213,  212,  211,  223,  222,  215,
+ /*    60 */   203,  198,  199,  232,  197,  220,  219,  218,  217,  216,
+ /*    70 */   202,  201,  200,  232,  232,  232,  232,  232,  232,  232,
+ /*    80 */   232,  232,  232,  232,  232,  232,  232,  232,  232,  232,
+ /*    90 */   232,  232,
 };
 /********** End of lemon-generated parsing tables *****************************/
 
@@ -431,11 +448,13 @@ static const char *const yyTokenName[] = {
   "FALSE",         "CURRENTTIME",   "NOW",           "NULL1",       
   "AMPERSAND",     "NUMBER",        "STRING",        "LIST",        
   "COMMA",         "COUNT",         "FIRST",         "OR",          
-  "WITHIN",        "TO",            "OCCURS",        "BEFORE",      
-  "OCCURRED",      "AFTER",         "FOR",           "IN",          
-  "FORRANGE",      "DO",            "ENDDO",         "error",       
-  "code",          "statementblock",  "statement",     "ex",          
-  "of",            "jsonarray",     "exlist",      
+  "GREATER",       "WITHIN",        "TO",            "OCCURS",      
+  "BEFORE",        "OCCURRED",      "AFTER",         "FOR",         
+  "IN",            "FORRANGE",      "DO",            "ENDDO",       
+  "IF",            "THEN",          "ENDIF",         "ELSE",        
+  "ELSEIF",        "error",         "code",          "statementblock",
+  "statement",     "ex",            "of",            "jsonarray",   
+  "exlist",        "if_then_else",  "elseif",      
 };
 #endif /* NDEBUG */
 
@@ -483,13 +502,20 @@ static const char *const yyRuleName[] = {
  /*  37 */ "ex ::= ex WHERE ex",
  /*  38 */ "ex ::= ex IS LESS THAN ex",
  /*  39 */ "ex ::= ex IS LESS THAN OR EQUAL ex",
- /*  40 */ "ex ::= ex IS WITHIN ex TO ex",
- /*  41 */ "ex ::= IT",
- /*  42 */ "ex ::= ex OCCURS BEFORE ex",
- /*  43 */ "ex ::= ex OCCURRED AFTER ex",
- /*  44 */ "statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON",
- /*  45 */ "of ::=",
- /*  46 */ "of ::= OF",
+ /*  40 */ "ex ::= ex IS GREATER THAN ex",
+ /*  41 */ "ex ::= ex IS GREATER THAN OR EQUAL ex",
+ /*  42 */ "ex ::= ex IS WITHIN ex TO ex",
+ /*  43 */ "ex ::= IT",
+ /*  44 */ "ex ::= ex OCCURS BEFORE ex",
+ /*  45 */ "ex ::= ex OCCURRED AFTER ex",
+ /*  46 */ "statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON",
+ /*  47 */ "statement ::= IF if_then_else",
+ /*  48 */ "if_then_else ::= ex THEN statementblock elseif",
+ /*  49 */ "elseif ::= ENDIF SEMICOLON",
+ /*  50 */ "elseif ::= ELSE statementblock ENDIF SEMICOLON",
+ /*  51 */ "elseif ::= ELSEIF if_then_else",
+ /*  52 */ "of ::=",
+ /*  53 */ "of ::= OF",
 };
 #endif /* NDEBUG */
 
@@ -841,53 +867,60 @@ static const struct {
   YYCODETYPE lhs;         /* Symbol on the left-hand side of the rule */
   unsigned char nrhs;     /* Number of right-hand side symbols in the rule */
 } yyRuleInfo[] = {
-  { 52, 1 },
-  { 53, 0 },
-  { 53, 2 },
-  { 54, 3 },
-  { 54, 3 },
-  { 54, 7 },
-  { 54, 4 },
-  { 54, 5 },
-  { 54, 6 },
-  { 55, 3 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 1 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 3 },
-  { 55, 4 },
-  { 55, 1 },
-  { 57, 2 },
-  { 57, 3 },
   { 58, 1 },
-  { 58, 3 },
-  { 55, 2 },
-  { 55, 2 },
-  { 55, 3 },
-  { 55, 5 },
-  { 55, 7 },
-  { 55, 6 },
-  { 55, 1 },
-  { 55, 4 },
-  { 55, 4 },
-  { 54, 10 },
-  { 56, 0 },
-  { 56, 1 },
+  { 59, 0 },
+  { 59, 2 },
+  { 60, 3 },
+  { 60, 3 },
+  { 60, 7 },
+  { 60, 4 },
+  { 60, 5 },
+  { 60, 6 },
+  { 61, 3 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 1 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 3 },
+  { 61, 4 },
+  { 61, 1 },
+  { 63, 2 },
+  { 63, 3 },
+  { 64, 1 },
+  { 64, 3 },
+  { 61, 2 },
+  { 61, 2 },
+  { 61, 3 },
+  { 61, 5 },
+  { 61, 7 },
+  { 61, 5 },
+  { 61, 7 },
+  { 61, 6 },
+  { 61, 1 },
+  { 61, 4 },
+  { 61, 4 },
+  { 60, 10 },
+  { 60, 2 },
+  { 65, 4 },
+  { 66, 2 },
+  { 66, 4 },
+  { 66, 2 },
+  { 62, 0 },
+  { 62, 1 },
 };
 
 static void yy_accept(yyParser*);  /* Forward Declaration */
@@ -952,14 +985,14 @@ static void yy_reduce(
 /********** Begin reduce actions **********************************************/
         YYMINORTYPE yylhsminor;
       case 0: /* code ::= statementblock */
-#line 290 "grammar.y"
+#line 300 "grammar.y"
 {
 	printf (cJSON_Print(yymsp[0].minor.yy0)); 
 }
-#line 960 "grammar.c"
+#line 993 "grammar.c"
         break;
       case 1: /* statementblock ::= */
-#line 302 "grammar.y"
+#line 312 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "STATEMENTBLOCK");
@@ -967,29 +1000,29 @@ static void yy_reduce(
 	cJSON_AddItemToObject(res, "statements", arg); 
 	yymsp[1].minor.yy0 = res;
 }
-#line 971 "grammar.c"
+#line 1004 "grammar.c"
         break;
       case 2: /* statementblock ::= statementblock statement */
-#line 312 "grammar.y"
+#line 322 "grammar.y"
 {
 	cJSON_AddItemToArray(cJSON_GetObjectItem ( yymsp[-1].minor.yy0, "statements"), yymsp[0].minor.yy0);
 	yylhsminor.yy0 = yymsp[-1].minor.yy0;
 }
-#line 979 "grammar.c"
+#line 1012 "grammar.c"
   yymsp[-1].minor.yy0 = yylhsminor.yy0;
         break;
       case 3: /* statement ::= WRITE ex SEMICOLON */
-#line 325 "grammar.y"
+#line 335 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject(); 
 	cJSON_AddStringToObject(res, "type", "WRITE"); 
 	cJSON_AddItemToObject(res, "arg", yymsp[-1].minor.yy0); 
 	yymsp[-2].minor.yy0 = res; 
 }
-#line 990 "grammar.c"
+#line 1023 "grammar.c"
         break;
       case 4: /* statement ::= TRACE ex SEMICOLON */
-#line 334 "grammar.y"
+#line 344 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "TRACE");
@@ -997,11 +1030,11 @@ static void yy_reduce(
 	cJSON_AddItemToObject(res, "arg", yymsp[-1].minor.yy0);
 	yylhsminor.yy0 = res;
 }
-#line 1001 "grammar.c"
+#line 1034 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 5: /* statement ::= IDENTIFIER LSPAR ex RSPAR ASSIGN ex SEMICOLON */
-#line 344 "grammar.y"
+#line 354 "grammar.y"
 {
     cJSON *res = cJSON_CreateObject();
     cJSON_AddStringToObject(res, "type", "LIST_ASSIGN");
@@ -1010,11 +1043,11 @@ static void yy_reduce(
     cJSON_AddItemToObject(res, "arg", yymsp[-1].minor.yy0); 
     yylhsminor.yy0 = res;
 }
-#line 1014 "grammar.c"
+#line 1047 "grammar.c"
   yymsp[-6].minor.yy0 = yylhsminor.yy0;
         break;
       case 6: /* statement ::= IDENTIFIER ASSIGN ex SEMICOLON */
-#line 354 "grammar.y"
+#line 364 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "VARIABLE_ASSIGN");
@@ -1022,11 +1055,11 @@ static void yy_reduce(
 	cJSON_AddItemToObject(res, "arg", yymsp[-1].minor.yy0);
 	yylhsminor.yy0 = res;
 }
-#line 1026 "grammar.c"
+#line 1059 "grammar.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 7: /* statement ::= TIME IDENTIFIER ASSIGN ex SEMICOLON */
-#line 368 "grammar.y"
+#line 378 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "TIME_ASSIGN");
@@ -1034,10 +1067,10 @@ static void yy_reduce(
 	cJSON_AddItemToObject(res, "arg", yymsp[-1].minor.yy0);
 	yymsp[-4].minor.yy0 = res;
 }
-#line 1038 "grammar.c"
+#line 1071 "grammar.c"
         break;
       case 8: /* statement ::= TIME OF IDENTIFIER ASSIGN ex SEMICOLON */
-#line 378 "grammar.y"
+#line 388 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "TIME_OF");
@@ -1045,50 +1078,50 @@ static void yy_reduce(
 	cJSON_AddItemToObject(res, "arg", yymsp[-1].minor.yy0);
 	yymsp[-5].minor.yy0 = res;
 }
-#line 1049 "grammar.c"
+#line 1082 "grammar.c"
         break;
       case 9: /* ex ::= LPAR ex RPAR */
-#line 393 "grammar.y"
+#line 403 "grammar.y"
 { 
 	yymsp[-2].minor.yy0 = yymsp[-1].minor.yy0; 
 }
-#line 1056 "grammar.c"
+#line 1089 "grammar.c"
         break;
       case 10: /* ex ::= NUMTOKEN */
-#line 399 "grammar.y"
+#line 409 "grammar.y"
 { 
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "NUMBER"); 
 	cJSON_AddStringToObject(res, "value", getValue(yymsp[0].minor.yy0)); 
 	yylhsminor.yy0 = res; 
 }
-#line 1066 "grammar.c"
+#line 1099 "grammar.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 11: /* ex ::= TIMETOKEN */
-#line 407 "grammar.y"
+#line 417 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "TIMETOKEN");
 	cJSON_AddStringToObject(res, "value", getValue(yymsp[0].minor.yy0));
 	yylhsminor.yy0 = res;
 }
-#line 1077 "grammar.c"
+#line 1110 "grammar.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 12: /* ex ::= STRTOKEN */
-#line 415 "grammar.y"
+#line 425 "grammar.y"
 { 
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "STRTOKEN"); 
 	cJSON_AddStringToObject(res, "value", getValue(yymsp[0].minor.yy0)); 
 	yylhsminor.yy0 = res; 
 }
-#line 1088 "grammar.c"
+#line 1121 "grammar.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 13: /* ex ::= IDENTIFIER */
-#line 428 "grammar.y"
+#line 438 "grammar.y"
 { 
 	cJSON *res = cJSON_CreateObject(); 
 	cJSON_AddStringToObject(res, "type", "VARIABLE"); 
@@ -1096,136 +1129,136 @@ static void yy_reduce(
 	cJSON_AddStringToObject(res, "line", getLine(yymsp[0].minor.yy0)); 
 	yylhsminor.yy0 = res; 
 }
-#line 1100 "grammar.c"
+#line 1133 "grammar.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 14: /* ex ::= TRUE */
-#line 437 "grammar.y"
+#line 447 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "TRUE");
 	yymsp[0].minor.yy0 = res;
 }
-#line 1110 "grammar.c"
+#line 1143 "grammar.c"
         break;
       case 15: /* ex ::= FALSE */
-#line 444 "grammar.y"
+#line 454 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "FALSE");
 	yymsp[0].minor.yy0 = res;
 }
-#line 1119 "grammar.c"
+#line 1152 "grammar.c"
         break;
       case 16: /* ex ::= CURRENTTIME */
-#line 451 "grammar.y"
+#line 461 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "CURRENT_TIME");
 	yymsp[0].minor.yy0 = res;
 }
-#line 1128 "grammar.c"
+#line 1161 "grammar.c"
         break;
       case 17: /* ex ::= NOW */
-#line 458 "grammar.y"
+#line 468 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "NOW");
 	yymsp[0].minor.yy0 = res;
 }
-#line 1137 "grammar.c"
+#line 1170 "grammar.c"
         break;
       case 18: /* ex ::= NULL1 */
-#line 466 "grammar.y"
+#line 476 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "NULL");
 	yymsp[0].minor.yy0 = res;
 }
-#line 1146 "grammar.c"
+#line 1179 "grammar.c"
         break;
       case 19: /* ex ::= TIME of ex */
-#line 477 "grammar.y"
+#line 487 "grammar.y"
 { yymsp[-2].minor.yy0 = unary ("TIME_READ", yymsp[0].minor.yy0); }
-#line 1151 "grammar.c"
+#line 1184 "grammar.c"
         break;
       case 20: /* ex ::= ex PLUS ex */
-#line 480 "grammar.y"
+#line 490 "grammar.y"
 {yylhsminor.yy0 = binary ("PLUS", yymsp[-2].minor.yy0, yymsp[0].minor.yy0); }
-#line 1156 "grammar.c"
+#line 1189 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 21: /* ex ::= ex MINUS ex */
-#line 483 "grammar.y"
+#line 493 "grammar.y"
 {yylhsminor.yy0 = binary ("MINUS", yymsp[-2].minor.yy0, yymsp[0].minor.yy0); }
-#line 1162 "grammar.c"
+#line 1195 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 22: /* ex ::= ex TIMES ex */
-#line 486 "grammar.y"
+#line 496 "grammar.y"
 {yylhsminor.yy0 = binary ("TIMES", yymsp[-2].minor.yy0, yymsp[0].minor.yy0); }
-#line 1168 "grammar.c"
+#line 1201 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 23: /* ex ::= ex DIVIDE ex */
-#line 489 "grammar.y"
+#line 499 "grammar.y"
 {yylhsminor.yy0 = binary ("DIVIDE", yymsp[-2].minor.yy0, yymsp[0].minor.yy0); }
-#line 1174 "grammar.c"
+#line 1207 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 24: /* ex ::= ex POWER ex */
-#line 492 "grammar.y"
+#line 502 "grammar.y"
 {yylhsminor.yy0 = binary ("POWER", yymsp[-2].minor.yy0, yymsp[0].minor.yy0); }
-#line 1180 "grammar.c"
+#line 1213 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 25: /* ex ::= ex AMPERSAND ex */
-#line 496 "grammar.y"
+#line 506 "grammar.y"
 { yylhsminor.yy0 = binary ("STR_CONCAT", yymsp[-2].minor.yy0, yymsp[0].minor.yy0); }
-#line 1186 "grammar.c"
+#line 1219 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 26: /* ex ::= ex IS NUMBER */
-#line 500 "grammar.y"
+#line 510 "grammar.y"
 { yylhsminor.yy0 = unary ("IS_NUMBER", yymsp[-2].minor.yy0); }
-#line 1192 "grammar.c"
+#line 1225 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 27: /* ex ::= ex IS STRING */
-#line 503 "grammar.y"
+#line 513 "grammar.y"
 { yylhsminor.yy0 = unary ("IS_STRING", yymsp[-2].minor.yy0); }
-#line 1198 "grammar.c"
+#line 1231 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 28: /* ex ::= ex IS LIST */
-#line 506 "grammar.y"
+#line 516 "grammar.y"
 { yylhsminor.yy0 = unary ("IS_LIST", yymsp[-2].minor.yy0); }
-#line 1204 "grammar.c"
+#line 1237 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 29: /* ex ::= ex IS NOT LIST */
-#line 509 "grammar.y"
+#line 519 "grammar.y"
 { yylhsminor.yy0 = unary ("IS_NOT_LIST", yymsp[-3].minor.yy0); }
-#line 1210 "grammar.c"
+#line 1243 "grammar.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
       case 30: /* ex ::= jsonarray */
-#line 519 "grammar.y"
+#line 529 "grammar.y"
 { yylhsminor.yy0 = yymsp[0].minor.yy0; }
-#line 1216 "grammar.c"
+#line 1249 "grammar.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 31: /* jsonarray ::= LSPAR RSPAR */
-#line 524 "grammar.y"
+#line 534 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "EMPTY_LIST");
 	yymsp[-1].minor.yy0 = res;
 }
-#line 1226 "grammar.c"
+#line 1259 "grammar.c"
         break;
       case 32: /* jsonarray ::= LSPAR exlist RSPAR */
-#line 531 "grammar.y"
+#line 541 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "LIST");
@@ -1233,39 +1266,39 @@ static void yy_reduce(
 	cJSON_AddNumberToObject(res,"code", 1016);
 	yymsp[-2].minor.yy0 = res;
 }
-#line 1237 "grammar.c"
+#line 1270 "grammar.c"
         break;
       case 33: /* exlist ::= ex */
-#line 540 "grammar.y"
+#line 550 "grammar.y"
 {
 	cJSON *arg = cJSON_CreateArray();
 	cJSON_AddItemToArray(arg, yymsp[0].minor.yy0);
 	yylhsminor.yy0 = arg;
 }
-#line 1246 "grammar.c"
+#line 1279 "grammar.c"
   yymsp[0].minor.yy0 = yylhsminor.yy0;
         break;
       case 34: /* exlist ::= exlist COMMA ex */
-#line 547 "grammar.y"
+#line 557 "grammar.y"
 {
 	cJSON_AddItemToArray(yymsp[-2].minor.yy0,yymsp[0].minor.yy0);
 	yylhsminor.yy0 = yymsp[-2].minor.yy0;
 }
-#line 1255 "grammar.c"
+#line 1288 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 35: /* ex ::= COUNT ex */
-#line 553 "grammar.y"
+#line 563 "grammar.y"
 { yymsp[-1].minor.yy0 = unary ("COUNT", yymsp[0].minor.yy0); }
-#line 1261 "grammar.c"
+#line 1294 "grammar.c"
         break;
       case 36: /* ex ::= FIRST ex */
-#line 556 "grammar.y"
+#line 566 "grammar.y"
 { yymsp[-1].minor.yy0 = unary ("FIRST", yymsp[0].minor.yy0); }
-#line 1266 "grammar.c"
+#line 1299 "grammar.c"
         break;
       case 37: /* ex ::= ex WHERE ex */
-#line 562 "grammar.y"
+#line 572 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON *arg = cJSON_CreateArray();
@@ -1277,56 +1310,72 @@ static void yy_reduce(
 	cJSON_AddItemToObject(res, "opt", opt);
 	yylhsminor.yy0 = res;
 }
-#line 1281 "grammar.c"
+#line 1314 "grammar.c"
   yymsp[-2].minor.yy0 = yylhsminor.yy0;
         break;
       case 38: /* ex ::= ex IS LESS THAN ex */
-#line 578 "grammar.y"
+#line 588 "grammar.y"
 { 
 	yylhsminor.yy0 = binary ("LESS_THAN", yymsp[-4].minor.yy0, yymsp[0].minor.yy0); 
 }
-#line 1289 "grammar.c"
+#line 1322 "grammar.c"
   yymsp[-4].minor.yy0 = yylhsminor.yy0;
         break;
       case 39: /* ex ::= ex IS LESS THAN OR EQUAL ex */
-#line 583 "grammar.y"
+#line 593 "grammar.y"
 { 
 	yylhsminor.yy0 = binary ("LESS_OR_EQUAL", yymsp[-6].minor.yy0, yymsp[0].minor.yy0); 
 }
-#line 1297 "grammar.c"
+#line 1330 "grammar.c"
   yymsp[-6].minor.yy0 = yylhsminor.yy0;
         break;
-      case 40: /* ex ::= ex IS WITHIN ex TO ex */
-#line 588 "grammar.y"
+      case 40: /* ex ::= ex IS GREATER THAN ex */
+#line 598 "grammar.y"
+{ 
+	yylhsminor.yy0 = binary ("GREATER_THAN", yymsp[-4].minor.yy0, yymsp[0].minor.yy0); 
+}
+#line 1338 "grammar.c"
+  yymsp[-4].minor.yy0 = yylhsminor.yy0;
+        break;
+      case 41: /* ex ::= ex IS GREATER THAN OR EQUAL ex */
+#line 603 "grammar.y"
+{ 
+	yylhsminor.yy0 = binary ("GREATER_OR_EQUAL", yymsp[-6].minor.yy0, yymsp[0].minor.yy0); 
+}
+#line 1346 "grammar.c"
+  yymsp[-6].minor.yy0 = yylhsminor.yy0;
+        break;
+      case 42: /* ex ::= ex IS WITHIN ex TO ex */
+#line 608 "grammar.y"
 { 
 	yylhsminor.yy0 = ternary ("IS_WITHIN", yymsp[-5].minor.yy0, yymsp[-2].minor.yy0, yymsp[0].minor.yy0); 
 }
-#line 1305 "grammar.c"
+#line 1354 "grammar.c"
   yymsp[-5].minor.yy0 = yylhsminor.yy0;
         break;
-      case 41: /* ex ::= IT */
-#line 597 "grammar.y"
+      case 43: /* ex ::= IT */
+#line 617 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "IT");
 	yymsp[0].minor.yy0 = res;
 }
-#line 1315 "grammar.c"
+#line 1364 "grammar.c"
         break;
-      case 42: /* ex ::= ex OCCURS BEFORE ex */
-#line 607 "grammar.y"
+      case 44: /* ex ::= ex OCCURS BEFORE ex */
+#line 627 "grammar.y"
 { yylhsminor.yy0 = binary ("OCCURS_BEFORE", yymsp[-3].minor.yy0, yymsp[0].minor.yy0); }
-#line 1320 "grammar.c"
+#line 1369 "grammar.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
-      case 43: /* ex ::= ex OCCURRED AFTER ex */
-#line 612 "grammar.y"
+      case 45: /* ex ::= ex OCCURRED AFTER ex */
+#line 632 "grammar.y"
 { yylhsminor.yy0 = binary ("OCCURRED_AFTER", yymsp[-3].minor.yy0, yymsp[0].minor.yy0); }
-#line 1326 "grammar.c"
+#line 1375 "grammar.c"
   yymsp[-3].minor.yy0 = yylhsminor.yy0;
         break;
-      case 44: /* statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON */
-#line 616 "grammar.y"
+      case 46: /* statement ::= FOR IDENTIFIER IN ex FORRANGE ex DO statementblock ENDDO SEMICOLON */
+#line 636 "grammar.y"
 {
 	cJSON *res = cJSON_CreateObject();
 	cJSON_AddStringToObject(res, "type", "FOR_LOOP");
@@ -1337,11 +1386,46 @@ static void yy_reduce(
 	cJSON_AddItemToObject(res, "statements", yymsp[-2].minor.yy0);
 	yymsp[-9].minor.yy0 = res;
 }
-#line 1341 "grammar.c"
+#line 1390 "grammar.c"
+        break;
+      case 47: /* statement ::= IF if_then_else */
+      case 51: /* elseif ::= ELSEIF if_then_else */ yytestcase(yyruleno==51);
+#line 651 "grammar.y"
+{ yymsp[-1].minor.yy0 = yymsp[0].minor.yy0; }
+#line 1396 "grammar.c"
+        break;
+      case 48: /* if_then_else ::= ex THEN statementblock elseif */
+#line 654 "grammar.y"
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "IF");
+	cJSON_AddItemToObject(res, "condition", yymsp[-3].minor.yy0);
+	cJSON_AddItemToObject(res, "thenbranch", (yymsp[-1].minor.yy0));
+	cJSON_AddItemToObject(res, "elsebranch", (yymsp[0].minor.yy0));
+	yylhsminor.yy0 = res;
+}
+#line 1408 "grammar.c"
+  yymsp[-3].minor.yy0 = yylhsminor.yy0;
+        break;
+      case 49: /* elseif ::= ENDIF SEMICOLON */
+#line 664 "grammar.y"
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "STATEMENT_BLOCK");
+	cJSON *arg = cJSON_CreateArray();
+	cJSON_AddItemToObject(res, "statements", arg);
+	yymsp[-1].minor.yy0 = res;
+}
+#line 1420 "grammar.c"
+        break;
+      case 50: /* elseif ::= ELSE statementblock ENDIF SEMICOLON */
+#line 673 "grammar.y"
+{ yymsp[-3].minor.yy0 = yymsp[-2].minor.yy0; }
+#line 1425 "grammar.c"
         break;
       default:
-      /* (45) of ::= */ yytestcase(yyruleno==45);
-      /* (46) of ::= OF */ yytestcase(yyruleno==46);
+      /* (52) of ::= */ yytestcase(yyruleno==52);
+      /* (53) of ::= OF */ yytestcase(yyruleno==53);
         break;
 /********** End reduce actions ************************************************/
   };
@@ -1398,11 +1482,11 @@ static void yy_syntax_error(
   ParseARG_FETCH;
 #define TOKEN yyminor
 /************ Begin %syntax_error code ****************************************/
-#line 255 "grammar.y"
+#line 265 "grammar.y"
 
   printf ("{\"error\" : true, \"message\": \"Syntax Error: Compiler reports unexpected token \\\"%s\\\" of type \\\"%s\\\" in line %s\"}\n", curtoken, curtype, linenumber);
   exit(0);
-#line 1406 "grammar.c"
+#line 1490 "grammar.c"
 /************ End %syntax_error code ******************************************/
   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
@@ -1731,6 +1815,8 @@ int get_token_id (char *token) {
 
 	if (strcmp(token, "WHERE") == 0) return WHERE;
 	if (strcmp(token, "LESS") == 0) return LESS;
+	if (strcmp(token, "GREATER") == 0) return GREATER;
+
 
 	if (strcmp(token, "IS") == 0) return IS;
 	if (strcmp(token, "IT") == 0) return IT;
@@ -1759,8 +1845,16 @@ int get_token_id (char *token) {
 	if (strcmp(token, "IN") == 0) return IN;
 	if (strcmp(token, "DO") == 0) return DO;
 	if (strcmp(token, "ENDDO") == 0) return ENDDO;
-
 	if (strcmp(token, "FORRANGE") == 0) return FORRANGE;
+
+	if (strcmp(token, "IF") == 0) return IF;
+	if (strcmp(token, "THEN") == 0) return THEN;
+	if (strcmp(token, "ELSEIF") == 0) return ELSEIF;
+	if (strcmp(token, "ELSE") == 0) return ELSE;
+	if (strcmp(token, "ENDIF") == 0) return ENDIF;
+
+
+
 
 
 
@@ -1834,4 +1928,4 @@ cJSON* ternary (char *fname, cJSON *a, cJSON *b, cJSON *c)
 
 
 
-#line 1838 "grammar.c"
+#line 1932 "grammar.c"

@@ -18,7 +18,7 @@ class SimpleTokenizer:
         tokens = []
         line_number = 0
 
-        reserved_list = ["OCCURRED", "AFTER", "THEY", "BEFORE", "OCCURS", "OF", "WITHIN", "TO", "IT", "IS", "THAN","EQUAL","LESS", "OR", "WHERE", "NOW", "TIME", "COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
+        reserved_list = ["GREATER", "THEN", "OCCURRED", "AFTER", "THEY", "BEFORE", "OCCURS", "OF", "WITHIN", "TO", "IT", "IS", "THAN","EQUAL","LESS", "OR", "WHERE", "NOW", "TIME", "COUNT", "NOT","LIST", "STRING", "IS", "NUMBER", "NULL","FALSE", "TRUE", "TRACE", "EAD", "WRITE", "IF", "THEN", "ELSEIF", "ELSE", "ENDIF", "FOR","IN", "DO", "ENDDO", "D", "CURRENTTIME", "MINIMUM", "MAXIMUM","FIRST", "LAST", "SUM", "AVERAGE", "EARLIEST", "LATEST"]
         
         for line in self.lines:
             line_number += 1
@@ -28,6 +28,7 @@ class SimpleTokenizer:
                      
                      \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2} # ISO 8601 time format
                      |".*?\"  # Für Wörte rin Anführungszeichen
+                     |\d+\.\d+    # Added specific regex for decimals
                      |\w+      # --> wörter ohne Anführungszeichen
                      |:=        
                      |;  
@@ -79,9 +80,9 @@ class SimpleTokenizer:
                     tokens.append(Token(line_number, 'PLUS', part))
                 elif part == '-':
                     tokens.append(Token(line_number, 'MINUS', part))
-                elif part == '**':
-                    tokens.append(Token(line_number, 'POWER', part))
                 elif part == '*':
+                    tokens.append(Token(line_number, 'POWER', part))
+                elif part == '**':
                     tokens.append(Token(line_number, 'TIMES', part))
                 elif part == '/':
                     tokens.append(Token(line_number, 'DIVIDE', part))
@@ -99,8 +100,15 @@ class SimpleTokenizer:
                     tokens.append(Token(line_number, 'EQ', part)) 
                 elif part == '<>':
                     tokens.append(Token(line_number, 'NEQ', part))  
-                elif re.match(r'^\d+(\.\d+)?$', part):
+                
+                elif re.match(r'^\d+\.\d+$', part):  # Match decimal numbers first
                     tokens.append(Token(line_number, 'NUMTOKEN', part))
+                elif re.match(r'^\d+$', part):  # Match integers
+                    tokens.append(Token(line_number, 'NUMTOKEN', part))
+
+
+                    
+
                 elif re.match(r'^".*"$', part):
                     tokens.append(Token(line_number, 'STRTOKEN', str(part).replace('"','')))
                 elif str(part).upper() in reserved_list:

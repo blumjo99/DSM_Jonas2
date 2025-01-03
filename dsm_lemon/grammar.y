@@ -147,6 +147,8 @@ int get_token_id (char *token) {
 
 	if (strcmp(token, "WHERE") == 0) return WHERE;
 	if (strcmp(token, "LESS") == 0) return LESS;
+	if (strcmp(token, "GREATER") == 0) return GREATER;
+
 
 	if (strcmp(token, "IS") == 0) return IS;
 	if (strcmp(token, "IT") == 0) return IT;
@@ -175,8 +177,16 @@ int get_token_id (char *token) {
 	if (strcmp(token, "IN") == 0) return IN;
 	if (strcmp(token, "DO") == 0) return DO;
 	if (strcmp(token, "ENDDO") == 0) return ENDDO;
-
 	if (strcmp(token, "FORRANGE") == 0) return FORRANGE;
+
+	if (strcmp(token, "IF") == 0) return IF;
+	if (strcmp(token, "THEN") == 0) return THEN;
+	if (strcmp(token, "ELSEIF") == 0) return ELSEIF;
+	if (strcmp(token, "ELSE") == 0) return ELSE;
+	if (strcmp(token, "ENDIF") == 0) return ENDIF;
+
+
+
 
 
 
@@ -584,6 +594,16 @@ ex(r) ::= ex(a) IS LESS THAN OR EQUAL ex(b) .
 	r = binary ("LESS_OR_EQUAL", a, b); 
 }
 
+ex(r) ::= ex(a) IS GREATER THAN ex(b) .
+{ 
+	r = binary ("GREATER_THAN", a, b); 
+}
+
+ex(r) ::= ex(a) IS GREATER THAN OR EQUAL ex(b) .
+{ 
+	r = binary ("GREATER_OR_EQUAL", a, b); 
+}
+
 ex(r) ::= ex(a) IS WITHIN ex(b) TO ex(c)  .
 { 
 	r = ternary ("IS_WITHIN", a, b, c); 
@@ -623,3 +643,34 @@ statement(r) ::= FOR IDENTIFIER(i) IN ex(e) FORRANGE ex(e2) DO statementblock(sb
 	cJSON_AddItemToObject(res, "statements", sb);
 	r = res;
 }
+
+
+
+
+statement(r) ::= IF if_then_else(a) .
+{ r = a; }
+
+if_then_else(r) ::= ex(a) THEN statementblock(b) elseif(c) .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "IF");
+	cJSON_AddItemToObject(res, "condition", a);
+	cJSON_AddItemToObject(res, "thenbranch", (b));
+	cJSON_AddItemToObject(res, "elsebranch", (c));
+	r = res;
+}
+
+elseif(r) ::= ENDIF SEMICOLON .
+{
+	cJSON *res = cJSON_CreateObject();
+	cJSON_AddStringToObject(res, "type", "STATEMENT_BLOCK");
+	cJSON *arg = cJSON_CreateArray();
+	cJSON_AddItemToObject(res, "statements", arg);
+	r = res;
+}
+
+elseif(r) ::= ELSE statementblock(a) ENDIF SEMICOLON .
+{ r = a; }
+
+elseif(r) ::= ELSEIF if_then_else(a) .
+{ r = a; }

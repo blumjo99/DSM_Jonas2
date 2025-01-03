@@ -2,7 +2,7 @@
 	"type":	"STATEMENTBLOCK",
 	"statements":	[{
 			"type":	"FOR_LOOP",
-			"varname":	"varx",
+			"varname":	"x",
 			"expression":	{
 				"type":	"NUMBER",
 				"value":	"12"
@@ -20,20 +20,97 @@
 							"type":	"POWER",
 							"arg":	[{
 									"type":	"VARIABLE",
-									"name":	"varx",
-									"line":	"2"
+									"name":	"x",
+									"line":	"3"
 								}, {
 									"type":	"NUMBER",
-									"value":	"5"
+									"value":	"2.3"
 								}]
 						}
 					}, {
-						"type":	"TRACE",
-						"line":	"3",
-						"arg":	{
-							"type":	"VARIABLE",
-							"name":	"bmi",
-							"line":	"3"
+						"type":	"IF",
+						"condition":	{
+							"type":	"GREATER_OR_EQUAL",
+							"arg":	[{
+									"type":	"VARIABLE",
+									"name":	"bmi",
+									"line":	"5"
+								}, {
+									"type":	"NUMBER",
+									"value":	"40"
+								}]
+						},
+						"thenbranch":	{
+							"type":	"STATEMENTBLOCK",
+							"statements":	[{
+									"type":	"TRACE",
+									"line":	"6",
+									"arg":	{
+										"type":	"STRTOKEN",
+										"value":	"Adipositas III"
+									}
+								}]
+						},
+						"elsebranch":	{
+							"type":	"IF",
+							"condition":	{
+								"type":	"GREATER_OR_EQUAL",
+								"arg":	[{
+										"type":	"VARIABLE",
+										"name":	"bmi",
+										"line":	"7"
+									}, {
+										"type":	"NUMBER",
+										"value":	"35"
+									}]
+							},
+							"thenbranch":	{
+								"type":	"STATEMENTBLOCK",
+								"statements":	[{
+										"type":	"TRACE",
+										"line":	"8",
+										"arg":	{
+											"type":	"STRTOKEN",
+											"value":	"Adipositas II"
+										}
+									}]
+							},
+							"elsebranch":	{
+								"type":	"IF",
+								"condition":	{
+									"type":	"GREATER_OR_EQUAL",
+									"arg":	[{
+											"type":	"VARIABLE",
+											"name":	"bmi",
+											"line":	"9"
+										}, {
+											"type":	"NUMBER",
+											"value":	"30"
+										}]
+								},
+								"thenbranch":	{
+									"type":	"STATEMENTBLOCK",
+									"statements":	[{
+											"type":	"TRACE",
+											"line":	"10",
+											"arg":	{
+												"type":	"STRTOKEN",
+												"value":	"Adipositas I"
+											}
+										}]
+								},
+								"elsebranch":	{
+									"type":	"STATEMENTBLOCK",
+									"statements":	[{
+											"type":	"TRACE",
+											"line":	"12",
+											"arg":	{
+												"type":	"STRTOKEN",
+												"value":	"Keine Adipositas"
+											}
+										}]
+								}
+							}
 						}
 					}]
 			}

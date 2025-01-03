@@ -31,7 +31,7 @@ def power(left_arg, right_arg):
   #  print("operator power")
    # print(left_arg)
     #print(right_arg)
-  #  print(str(float(left_arg.value) * float(right_arg.value)))
+    #print(NumType(str(float(left_arg.value) * float(right_arg.value))))
     return NumType(str(float(left_arg.value) * float(right_arg.value)))
 
 
@@ -57,8 +57,6 @@ def first(arg: ListType):
   #  print(len(arg.items))
     return arg.items[0]
 
-def less_than(left_arg, right_arg):
-    return BoolType(float(left_arg.value) < float(right_arg.value))
 
 
 
@@ -67,23 +65,27 @@ def occurs_before(left_arg, right_arg):
 
 
 def occured_after(left_arg, right_arg):
-
     return BoolType((left_arg.value) >(right_arg.value))
 
+def less_than(left_arg, right_arg):
+    return BoolType(float(left_arg.value) < float(right_arg.value))
 
+def greater_than(left_arg, right_arg):
+    return BoolType(float(left_arg.value) > float(right_arg.value))
 
 
 def less_than_or_equal(left_arg, right_arg):
     return BoolType(float(left_arg.value) <= float(right_arg.value))
 
+def greater_than_or_equal(left_arg, right_arg):
+
+    try:
+        return BoolType(float(left_arg.value) >= float(right_arg.value))
+    except:
+        return BoolType(float(left_arg) >= float(right_arg.value))
+
 
 def is_within(arg1, argMin, argMax):
-   # print("operator is_within")
-
-   # print(arg1)
-    #print(argMin)
-   # print(argMax)
-
     try:
         return BoolType((float(arg1.value) >= float(argMin.value)) & (float(arg1.value) <= float(argMax.value)) )
     except:
